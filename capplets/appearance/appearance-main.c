@@ -41,7 +41,9 @@ init_appearance_data (int *argc, char ***argv, GOptionContext *context)
 #if !GLIB_CHECK_VERSION (2, 32, 0)
   g_thread_init (NULL);
 #endif
+#if !GTK_CHECK_VERSION (3, 0, 0)
   gdk_threads_init ();
+#endif
   gdk_threads_enter ();
   theme_thumbnail_factory_init (*argc, *argv);
   capplet_init (context, argc, argv);

@@ -305,7 +305,11 @@ file_transfer_dialog_init (FileTransferDialog *dlg)
 
 	gtk_widget_set_size_request (GTK_WIDGET (dlg), 350, -1);
 
+#if GTK_CHECK_VERSION (3, 0, 0)
+	vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
+#else
 	vbox = gtk_vbox_new (FALSE, 6);
+#endif
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
 	gtk_box_pack_start (GTK_BOX (content_area), vbox, TRUE, TRUE, 0);
 
@@ -318,7 +322,11 @@ file_transfer_dialog_init (FileTransferDialog *dlg)
 
 	gtk_box_pack_start (GTK_BOX (vbox), dlg->priv->status, FALSE, FALSE, 0);
 
+#if GTK_CHECK_VERSION (3, 0, 0)
+	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+#else
 	hbox = gtk_hbox_new (FALSE, 0);
+#endif
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, TRUE, TRUE, 0);
 
 	table = gtk_table_new (2, 2, FALSE);
@@ -327,7 +335,11 @@ file_transfer_dialog_init (FileTransferDialog *dlg)
 
 	gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET (table), FALSE, FALSE, 0);
 
+#if GTK_CHECK_VERSION (3, 0, 0)
+	progress_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+#else
 	progress_vbox = gtk_vbox_new (TRUE, 0);
+#endif
 	gtk_box_pack_start (GTK_BOX (vbox), progress_vbox, FALSE, FALSE, 0);
 
 	dlg->priv->progress = gtk_progress_bar_new ();
@@ -335,7 +347,11 @@ file_transfer_dialog_init (FileTransferDialog *dlg)
 			    dlg->priv->progress, FALSE, FALSE, 0);
 
 	gtk_dialog_add_button (GTK_DIALOG (dlg),
+#if GTK_CHECK_VERSION (3, 10, 0)
+			       _("_Cancel"), GTK_RESPONSE_CANCEL);
+#else
 			       GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
+#endif
 
 	gtk_container_set_border_width (GTK_CONTAINER (dlg), 6);
 
@@ -448,9 +464,11 @@ file_transfer_dialog_overwrite (gpointer user_data)
 		gtk_dialog_add_button (dialog, _("Overwrite _All"), GTK_RESPONSE_APPLY);
 
 		button = gtk_button_new_with_label (_("_Overwrite"));
+#if !GTK_CHECK_VERSION (3, 10, 0)
 		gtk_button_set_image (GTK_BUTTON (button),
 				      gtk_image_new_from_stock (GTK_STOCK_APPLY,
 								GTK_ICON_SIZE_BUTTON));
+#endif
 		gtk_dialog_add_action_widget (dialog, button, GTK_RESPONSE_YES);
 		gtk_widget_show (button);
 

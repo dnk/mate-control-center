@@ -679,7 +679,11 @@ theme_message_area_update (AppearanceData *data)
     gtk_label_set_line_wrap (GTK_LABEL (data->theme_message_label), TRUE);
     gtk_misc_set_alignment (GTK_MISC (data->theme_message_label), 0.0, 0.5);
 
+#if GTK_CHECK_VERSION (3, 0, 0)
+    hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 9);
+#else
     hbox = gtk_hbox_new (FALSE, 9);
+#endif
     gtk_widget_show (hbox);
     data->theme_info_icon = gtk_image_new_from_stock (GTK_STOCK_DIALOG_INFO, GTK_ICON_SIZE_DIALOG);
     data->theme_error_icon = gtk_image_new_from_stock (GTK_STOCK_DIALOG_WARNING, GTK_ICON_SIZE_DIALOG);

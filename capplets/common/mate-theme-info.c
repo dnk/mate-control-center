@@ -1820,7 +1820,11 @@ mate_theme_info_register_theme_change (ThemeChangedCallback func,
 }
 
 gboolean
+#if GTK_CHECK_VERSION (3, 0, 0)
+mate_theme_color_scheme_parse (const gchar *scheme, GdkRGBA *colors)
+#else
 mate_theme_color_scheme_parse (const gchar *scheme, GdkColor *colors)
+#endif
 {
   gchar **color_scheme_strings, **color_scheme_pair, *current_string;
   gint i;
@@ -1829,8 +1833,12 @@ mate_theme_color_scheme_parse (const gchar *scheme, GdkColor *colors)
     return FALSE;
 
   /* initialise the array */
-  for (i = 0; i < NUM_SYMBOLIC_COLORS; i++)
+  for (i = 0; i < NUM_SYMBOLIC_COLORS; i++) {
     colors[i].red = colors[i].green = colors[i].blue = 0;
+#if GTK_CHECK_VERSION (3, 0, 0)
+    colors[i].alpha = 0.0;
+#endif
+  }
 
   /* The color scheme string consists of name:color pairs, separated by
    * newlines, so first we split the string up by new line */
@@ -1847,21 +1855,53 @@ mate_theme_color_scheme_parse (const gchar *scheme, GdkColor *colors)
       g_strstrip (color_scheme_pair[1]);
 
       if (!strcmp ("fg_color", color_scheme_pair[0]))
+#if GTK_CHECK_VERSION (3, 0, 0)
+        gdk_rgba_parse (&colors[COLOR_FG], color_scheme_pair[1]);
+#else
         gdk_color_parse (color_scheme_pair[1], &colors[COLOR_FG]);
+#endif
       else if (!strcmp ("bg_color", color_scheme_pair[0]))
+#if GTK_CHECK_VERSION (3, 0, 0)
+        gdk_rgba_parse (&colors[COLOR_BG], color_scheme_pair[1]);
+#else
         gdk_color_parse (color_scheme_pair[1], &colors[COLOR_BG]);
+#endif
       else if (!strcmp ("text_color", color_scheme_pair[0]))
+#if GTK_CHECK_VERSION (3, 0, 0)
+        gdk_rgba_parse (&colors[COLOR_TEXT], color_scheme_pair[1]);
+#else
         gdk_color_parse (color_scheme_pair[1], &colors[COLOR_TEXT]);
+#endif
       else if (!strcmp ("base_color", color_scheme_pair[0]))
+#if GTK_CHECK_VERSION (3, 0, 0)
+        gdk_rgba_parse (&colors[COLOR_BASE], color_scheme_pair[1]);
+#else
         gdk_color_parse (color_scheme_pair[1], &colors[COLOR_BASE]);
+#endif
       else if (!strcmp ("selected_fg_color", color_scheme_pair[0]))
+#if GTK_CHECK_VERSION (3, 0, 0)
+        gdk_rgba_parse (&colors[COLOR_SELECTED_FG], color_scheme_pair[1]);
+#else
         gdk_color_parse (color_scheme_pair[1], &colors[COLOR_SELECTED_FG]);
+#endif
       else if (!strcmp ("selected_bg_color", color_scheme_pair[0]))
+#if GTK_CHECK_VERSION (3, 0, 0)
+        gdk_rgba_parse (&colors[COLOR_SELECTED_BG], color_scheme_pair[1]);
+#else
         gdk_color_parse (color_scheme_pair[1], &colors[COLOR_SELECTED_BG]);
+#endif
       else if (!strcmp ("tooltip_fg_color", color_scheme_pair[0]))
+#if GTK_CHECK_VERSION (3, 0, 0)
+        gdk_rgba_parse (&colors[COLOR_TOOLTIP_FG], color_scheme_pair[1]);
+#else
         gdk_color_parse (color_scheme_pair[1], &colors[COLOR_TOOLTIP_FG]);
+#endif
       else if (!strcmp ("tooltip_bg_color", color_scheme_pair[0]))
+#if GTK_CHECK_VERSION (3, 0, 0)
+        gdk_rgba_parse (&colors[COLOR_TOOLTIP_BG], color_scheme_pair[1]);
+#else
         gdk_color_parse (color_scheme_pair[1], &colors[COLOR_TOOLTIP_BG]);
+#endif
     }
 
     g_strfreev (color_scheme_pair);
@@ -1875,7 +1915,11 @@ mate_theme_color_scheme_parse (const gchar *scheme, GdkColor *colors)
 gboolean
 mate_theme_color_scheme_equal (const gchar *s1, const gchar *s2)
 {
+#if GTK_CHECK_VERSION (3, 0, 0)
+  GdkRGBA c1[NUM_SYMBOLIC_COLORS], c2[NUM_SYMBOLIC_COLORS];
+#else
   GdkColor c1[NUM_SYMBOLIC_COLORS], c2[NUM_SYMBOLIC_COLORS];
+#endif
   int i;
 
   if (!mate_theme_color_scheme_parse (s1, c1) ||
@@ -1883,7 +1927,11 @@ mate_theme_color_scheme_equal (const gchar *s1, const gchar *s2)
     return FALSE;
 
   for (i = 0; i < NUM_SYMBOLIC_COLORS; ++i) {
+#if GTK_CHECK_VERSION (3, 0, 0)
+    if (!gdk_rgba_equal (&c1[i], &c2[i]))
+#else
     if (!gdk_color_equal (&c1[i], &c2[i]))
+#endif
       return FALSE;
   }
 

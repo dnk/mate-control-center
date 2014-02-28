@@ -236,7 +236,11 @@ static void update_message_area(AppearanceData* data)
 		gtk_label_set_line_wrap (GTK_LABEL (data->style_message_label), TRUE);
 		gtk_misc_set_alignment (GTK_MISC (data->style_message_label), 0.0, 0.5);
 
+#if GTK_CHECK_VERSION (3, 0, 0)
+		hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 9);
+#else
 		hbox = gtk_hbox_new (FALSE, 9);
+#endif
 		icon = gtk_image_new_from_stock (GTK_STOCK_DIALOG_WARNING, GTK_ICON_SIZE_DIALOG);
 		gtk_misc_set_alignment (GTK_MISC (icon), 0.5, 0);
 		gtk_box_pack_start (GTK_BOX (hbox), icon, FALSE, FALSE, 0);
@@ -278,7 +282,11 @@ static void update_message_area(AppearanceData* data)
 static void
 update_color_buttons_from_string (const gchar *color_scheme, AppearanceData *data)
 {
+#if GTK_CHECK_VERSION (3, 0, 0)
+  GdkRGBA colors[NUM_SYMBOLIC_COLORS];
+#else
   GdkColor colors[NUM_SYMBOLIC_COLORS];
+#endif
   GtkWidget *widget;
   gint i;
 
@@ -288,7 +296,13 @@ update_color_buttons_from_string (const gchar *color_scheme, AppearanceData *dat
   /* now set all the buttons to the correct settings */
   for (i = 0; i < NUM_SYMBOLIC_COLORS; ++i) {
     widget = appearance_capplet_get_widget (data, symbolic_names[i]);
+#if GTK_CHECK_VERSION (3, 4, 0)
+    gtk_color_chooser_set_rgba (GTK_COLOR_CHOOSER (widget), &colors[i]);
+#elif GTK_CHECK_VERSION (3, 0, 0)
+    gtk_color_button_set_rgba (GTK_COLOR_BUTTON (widget), &colors[i]);
+#else
     gtk_color_button_set_color (GTK_COLOR_BUTTON (widget), &colors[i]);
+#endif
   }
 }
 
@@ -359,7 +373,11 @@ static void
 color_button_clicked_cb (GtkWidget *colorbutton, AppearanceData *data)
 {
   GtkWidget *widget;
+#if GTK_CHECK_VERSION (3, 0, 0)
+  GdkRGBA color;
+#else
   GdkColor color;
+#endif
   GString *scheme = g_string_new (NULL);
   gchar *colstr;
   gchar *old_scheme = NULL;
@@ -367,9 +385,19 @@ color_button_clicked_cb (GtkWidget *colorbutton, AppearanceData *data)
 
   for (i = 0; i < NUM_SYMBOLIC_COLORS; ++i) {
     widget = appearance_capplet_get_widget (data, symbolic_names[i]);
+#if GTK_CHECK_VERSION (3, 4, 0)
+    gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER (widget), &color);
+#elif GTK_CHECK_VERSION (3, 0, 0)
+    gtk_color_button_get_rgba (GTK_COLOR_BUTTON (widget), &color);
+#else
     gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &color);
+#endif
 
+#if GTK_CHECK_VERSION (3, 0, 0)
+    colstr = gdk_rgba_to_string (&color);
+#else
     colstr = gdk_color_to_string (&color);
+#endif
     g_string_append_printf (scheme, "%s:%s\n", symbolic_names[i], colstr);
     g_free (colstr);
   }

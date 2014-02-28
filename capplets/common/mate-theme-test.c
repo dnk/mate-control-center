@@ -9,7 +9,9 @@ main (int argc, char *argv[])
 {
   GList *themes, *list;
 
+#if !GLIB_CHECK_VERSION (2, 32, 0)
   g_thread_init (NULL);
+#endif
   gtk_init (&argc, &argv);
   mate_theme_init ();
 

@@ -78,15 +78,21 @@ static void sample_expose(GtkWidget* darea, GdkEventExpose* expose)
 {
 	GtkAllocation allocation;
 	GdkPixbuf* pixbuf = g_object_get_data(G_OBJECT(darea), "sample-pixbuf");
+#if !GTK_CHECK_VERSION (3, 0, 0)
 	GdkWindow* window = gtk_widget_get_window(darea);
+#endif
 	GtkStyle* style = gtk_widget_get_style(darea);
+#if !GTK_CHECK_VERSION (3, 0, 0)
 	int width = gdk_pixbuf_get_width(pixbuf);
 	int height = gdk_pixbuf_get_height(pixbuf);
+#endif
 
 	gtk_widget_get_allocation (darea, &allocation);
 
+#if !GTK_CHECK_VERSION (3, 0, 0)
 	int x = (allocation.width - width) / 2;
 	int y = (allocation.height - height) / 2;
+#endif
 
 #if GTK_CHECK_VERSION (3, 0, 0)
 	cairo_set_line_width(cr, 1);
