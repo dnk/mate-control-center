@@ -124,8 +124,13 @@ static void mate_wp_xml_load_xml(AppearanceData* data, const char* filename)
 	xmlNode* wpa;
 	xmlChar* nodelang;
 	const char* const* syslangs;
+#if GTK_CHECK_VERSION (3, 0, 0)
+	GdkRGBA color1;
+	GdkRGBA color2;
+#else
 	GdkColor color1;
 	GdkColor color2;
+#endif
 	gint i;
 
 	wplist = xmlParseFile(filename);
@@ -296,13 +301,23 @@ static void mate_wp_xml_load_xml(AppearanceData* data, const char* filename)
 				wp->artist = g_strdup ("(none)");
 			}
 
+#if GTK_CHECK_VERSION (3, 0, 0)
+			gdk_rgba_parse(&color1, pcolor);
+			gdk_rgba_parse(&color2, scolor);
+#else
 			gdk_color_parse(pcolor, &color1);
 			gdk_color_parse(scolor, &color2);
+#endif
 			g_free(pcolor);
 			g_free(scolor);
 
+#if GTK_CHECK_VERSION (3, 0, 0)
+			wp->pcolor = gdk_rgba_copy(&color1);
+			wp->scolor = gdk_rgba_copy(&color2);
+#else
 			wp->pcolor = gdk_color_copy(&color1);
 			wp->scolor = gdk_color_copy(&color2);
+#endif
 
 			if ((wp->filename != NULL && g_file_test (wp->filename, G_FILE_TEST_EXISTS)) || !strcmp (wp->filename, "(none)"))
 			{
@@ -540,8 +555,13 @@ void mate_wp_xml_save_list(AppearanceData* data)
 			filename = g_filename_to_utf8(wpitem->filename, -1, NULL, NULL, NULL);
 		}
 
+#if GTK_CHECK_VERSION (3, 0, 0)
+		pcolor = gdk_rgba_to_string(wpitem->pcolor);
+		scolor = gdk_rgba_to_string(wpitem->scolor);
+#else
 		pcolor = gdk_color_to_string(wpitem->pcolor);
 		scolor = gdk_color_to_string(wpitem->scolor);
+#endif
 		scale = wp_item_option_to_string(wpitem->options);
 		shade = wp_item_shading_to_string(wpitem->shade_type);
 
