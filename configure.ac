@@ -153,12 +153,12 @@ COMMON_MODULES="gtk+-$GTK_API_VERSION >= $GTK_REQUIRED dnl
  gio-2.0 dnl
  gio-unix-2.0 dnl
  libxml-2.0 dnl
- mate-desktop-2.0 >= $MATE_DESKTOP_REQUIRED"
+ mate-desktop-$GTK_API_VERSION >= $MATE_DESKTOP_REQUIRED"
 PKG_CHECK_MODULES(CAPPLET, $COMMON_MODULES)
 PKG_CHECK_MODULES(MATECC, $COMMON_MODULES libmate-menu >= 1.1.0)
 PKG_CHECK_MODULES(MATECC_SHELL, $COMMON_MODULES libmate-menu unique-$LIBUNIQUE_API_VERSION)
 PKG_CHECK_MODULES(DBUS, dbus-1 dbus-glib-1)
-PKG_CHECK_MODULES(MATE_DESKTOP, mate-desktop-2.0 >= MATE_DESKTOP_REQUIRED)
+PKG_CHECK_MODULES(MATE_DESKTOP, mate-desktop-$GTK_API_VERSION >= MATE_DESKTOP_REQUIRED)
 PKG_CHECK_MODULES(DEFAULT_APPLICATIONS_CAPPLET, libxml-2.0)
 PKG_CHECK_MODULES(MARCO, libmarco-private >= 1.5.0)
 PKG_CHECK_MODULES(TYPING, $GMODULE_ADD glib-2.0 > 2.36 gio-2.0 gtk+-$GTK_API_VERSION)
@@ -185,7 +185,7 @@ dnl
 dnl Check dependencies of libmate-slab
 dnl
 PKG_CHECK_MODULES(LIBSLAB, [
-			   gio-2.0 mate-desktop-2.0 librsvg-2.0 libmate-menu pango
+			   gio-2.0 mate-desktop-$GTK_API_VERSION librsvg-2.0 libmate-menu pango
 			   ],
 			   have_libmateslab=yes,
 			   have_libmateslab=no)
