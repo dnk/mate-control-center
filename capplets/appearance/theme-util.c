@@ -71,7 +71,11 @@ gboolean theme_delete (const gchar *name, ThemeType type)
 						 GTK_MESSAGE_QUESTION,
 						 GTK_BUTTONS_CANCEL,
 						 _("Would you like to delete this theme?"));
+#if GTK_CHECK_VERSION (3, 10, 0)
+  gtk_dialog_add_button (dialog, _("_Delete"), GTK_RESPONSE_ACCEPT);
+#else
   gtk_dialog_add_button (dialog, GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT);
+#endif
   response = gtk_dialog_run (dialog);
   gtk_widget_destroy (GTK_WIDGET (dialog));
   if (response != GTK_RESPONSE_ACCEPT)

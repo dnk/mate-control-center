@@ -368,15 +368,28 @@ wp_color_changed (AppearanceData *data,
   if (item == NULL)
     return;
 
+#if GTK_CHECK_VERSION (3, 4, 0)
+  gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER (data->wp_pcpicker), item->pcolor);
+  gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER (data->wp_scpicker), item->scolor);
+#elif GTK_CHECK_VERSION (3, 0, 0)
+  gtk_color_button_get_rgba (gtk_color_button (data->wp_pcpicker), item->pcolor);
+  gtk_color_button_get_rgba (gtk_color_button (data->wp_scpicker), item->scolor);
+#else
   gtk_color_button_get_color (GTK_COLOR_BUTTON (data->wp_pcpicker), item->pcolor);
   gtk_color_button_get_color (GTK_COLOR_BUTTON (data->wp_scpicker), item->scolor);
+#endif
 
   if (update)
   {
     gchar *pcolor, *scolor;
 
+#if GTK_CHECK_VERSION (3, 0, 0)
+    pcolor = gdk_rgba_to_string (item->pcolor);
+    scolor = gdk_rgba_to_string (item->scolor);
+#else
     pcolor = gdk_color_to_string (item->pcolor);
     scolor = gdk_color_to_string (item->scolor);
+#endif
     g_settings_delay (data->wp_settings);
     g_settings_set_string (data->wp_settings, WP_PCOLOR_KEY, pcolor);
     g_settings_set_string (data->wp_settings, WP_SCOLOR_KEY, scolor);
@@ -499,14 +512,28 @@ wp_color1_changed (GSettings *settings,
                    gchar *key,
                    AppearanceData *data)
 {
+#if GTK_CHECK_VERSION (3, 0, 0)
+  GdkRGBA color;
+#else
   GdkColor color;
+#endif
   gchar *colorhex;
 
   colorhex = g_settings_get_string (settings, key);
 
+#if GTK_CHECK_VERSION (3, 0, 0)
+  gdk_rgba_parse (&color, colorhex);
+#else
   gdk_color_parse (colorhex, &color);
+#endif
 
+#if GTK_CHECK_VERSION (3, 4, 0)
+  gtk_color_chooser_set_rgba (GTK_COLOR_CHOOSER (data->wp_pcpicker), &color);
+#elif GTK_CHECK_VERSION (3, 0, 0)
+  gtk_color_button_set_rgba (GTK_COLOR_BUTTON (data->wp_pcpicker), &color);
+#else
   gtk_color_button_set_color (GTK_COLOR_BUTTON (data->wp_pcpicker), &color);
+#endif
 
   wp_color_changed (data, FALSE);
 
@@ -518,16 +545,30 @@ wp_color2_changed (GSettings *settings,
                    gchar *key,
                    AppearanceData *data)
 {
+#if GTK_CHECK_VERSION (3, 0, 0)
+  GdkRGBA color;
+#else
   GdkColor color;
+#endif
   gchar *colorhex;
 
   wp_set_sensitivities (data);
 
   colorhex = g_settings_get_string (settings, key);
 
+#if GTK_CHECK_VERSION (3, 0, 0)
+  gdk_rgba_parse (&color, colorhex);
+#else
   gdk_color_parse (colorhex, &color);
+#endif
 
+#if GTK_CHECK_VERSION (3, 4, 0)
+  gtk_color_chooser_set_rgba (GTK_COLOR_CHOOSER (data->wp_scpicker), &color);
+#elif GTK_CHECK_VERSION (3, 0, 0)
+  gtk_color_button_set_rgba (GTK_COLOR_BUTTON (data->wp_scpicker), &color);
+#else
   gtk_color_button_set_color (GTK_COLOR_BUTTON (data->wp_scpicker), &color);
+#endif
 
   wp_color_changed (data, FALSE);
 
@@ -567,8 +608,13 @@ wp_props_wp_set (AppearanceData *data, MateWPItem *item)
 
   g_settings_set_enum (data->wp_settings, WP_SHADING_KEY, item->shade_type);
 
+#if GTK_CHECK_VERSION (3, 0, 0)
+  pcolor = gdk_rgba_to_string (item->pcolor);
+  scolor = gdk_rgba_to_string (item->scolor);
+#else
   pcolor = gdk_color_to_string (item->pcolor);
   scolor = gdk_color_to_string (item->scolor);
+#endif
   g_settings_set_string (data->wp_settings, WP_PCOLOR_KEY, pcolor);
   g_settings_set_string (data->wp_settings, WP_SCOLOR_KEY, scolor);
   g_free (pcolor);
@@ -596,10 +642,22 @@ wp_props_wp_selected (GtkTreeSelection *selection,
 
     wp_option_menu_set (data, item->shade_type, TRUE);
 
+#if GTK_CHECK_VERSION (3, 4, 0)
+    gtk_color_chooser_set_rgba (GTK_COLOR_CHOOSER (data->wp_pcpicker),
+                                item->pcolor);
+    gtk_color_chooser_set_rgba (GTK_COLOR_CHOOSER (data->wp_scpicker),
+                                item->scolor);
+#elif GTK_CHECK_VERSION (3, 0, 0)
+    gtk_color_button_set_rgba (GTK_COLOR_BUTTON (data->wp_pcpicker),
+                                item->pcolor);
+    gtk_color_button_set_rgba (GTK_COLOR_BUTTON (data->wp_scpicker),
+                                item->scolor);
+#else
     gtk_color_button_set_color (GTK_COLOR_BUTTON (data->wp_pcpicker),
                                 item->pcolor);
     gtk_color_button_set_color (GTK_COLOR_BUTTON (data->wp_scpicker),
                                 item->scolor);
+#endif
 
     wp_props_wp_set (data, item);
   }
@@ -619,9 +677,17 @@ wp_create_filechooser (AppearanceData *data)
                      gtk_file_chooser_dialog_new (_("Add Wallpaper"),
                      GTK_WINDOW (appearance_capplet_get_widget (data, "appearance_window")),
                      GTK_FILE_CHOOSER_ACTION_OPEN,
+#if GTK_CHECK_VERSION (3, 0, 0)
+                     _("_Cancel"),
+#else
                      GTK_STOCK_CANCEL,
+#endif
                      GTK_RESPONSE_CANCEL,
+#if GTK_CHECK_VERSION (3, 0, 0)
+                     _("_Open"),
+#else
                      GTK_STOCK_OPEN,
+#endif
                      GTK_RESPONSE_OK,
                      NULL));
 
@@ -713,7 +779,11 @@ wp_drag_received (GtkWidget *widget,
       cursor = gdk_cursor_new_for_display (gdk_display_get_default (),
              GDK_WATCH);
       gdk_window_set_cursor (window, cursor);
+#if GTK_CHECK_VERSION (3, 0, 0)
+      g_object_unref (cursor);
+#else
       gdk_cursor_unref (cursor);
+#endif
 
       for (uri = uris; *uri; ++uri)
       {
@@ -851,9 +921,15 @@ wp_update_preview (GtkFileChooser *chooser,
     }
     else
     {
+#if GTK_CHECK_VERSION (3, 10, 0)
+      gtk_image_set_from_icon_name (GTK_IMAGE (data->wp_image),
+                                "dialog-question",
+                                GTK_ICON_SIZE_DIALOG);
+#else
       gtk_image_set_from_stock (GTK_IMAGE (data->wp_image),
                                 "gtk-dialog-question",
                                 GTK_ICON_SIZE_DIALOG);
+#endif
     }
   }
 
@@ -1040,12 +1116,33 @@ static GdkPixbuf *buttons[3];
 static void
 create_button_images (AppearanceData  *data)
 {
+#if !GTK_CHECK_VERSION (3, 0, 0)
   GtkWidget *widget = (GtkWidget*)data->wp_view;
   GtkStyle *style = gtk_widget_get_style (widget);
+#endif
+
+#if GTK_CHECK_VERSION (3, 10, 0)
+  GtkIconTheme *icon_theme;
+  GtkIconInfo *icon_info;
+  gint icon_size;
+#else
   GtkIconSet *icon_set;
+#endif
   GdkPixbuf *pixbuf, *pb, *pb2;
   gint i, w, h;
 
+#if GTK_CHECK_VERSION (3, 10, 0)
+  icon_theme = gtk_icon_theme_get_default ();
+  icon_size = 0;
+  gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &icon_size, &icon_size);
+  icon_info = gtk_icon_theme_lookup_icon (icon_theme, "media-playback-start", icon_size, 0);
+  pb = gtk_icon_info_load_icon (icon_info, NULL);
+  pb2 = g_object_ref (pb);
+#elif GTK_CHECK_VERSION (3, 0, 0)
+  icon_set = gtk_style_context_lookup_icon_set (style, "gtk-media-play");
+  pb = gtk_icon_set_render_icon_pixbuf (icon_set, style, GTK_ICON_SIZE_MENU);
+  pb2 = gtk_icon_set_render_icon_pixbuf (icon_set, style, GTK_ICON_SIZE_MENU);
+#else
   icon_set = gtk_style_lookup_icon_set (style, "gtk-media-play");
   pb = gtk_icon_set_render_icon (icon_set,
                                  style,
@@ -1061,6 +1158,7 @@ create_button_images (AppearanceData  *data)
                                   GTK_ICON_SIZE_MENU,
                                   widget,
                                   NULL);
+#endif
   w = gdk_pixbuf_get_width (pb);
   h = gdk_pixbuf_get_height (pb);
 
@@ -1331,8 +1429,13 @@ desktop_init (AppearanceData *data,
                     (GCallback) wp_scolor_changed, data);
 
   add_button = appearance_capplet_get_widget (data, "wp_add_button");
+#if GTK_CHECK_VERSION (3, 10, 0)
+  gtk_button_set_image (GTK_BUTTON (add_button),
+                        gtk_image_new_from_icon_name ("list-add", GTK_ICON_SIZE_BUTTON));
+#else
   gtk_button_set_image (GTK_BUTTON (add_button),
                         gtk_image_new_from_stock ("gtk-add", GTK_ICON_SIZE_BUTTON));
+#endif
 
   g_signal_connect (add_button, "clicked",
                     (GCallback) wp_file_open_dialog, data);

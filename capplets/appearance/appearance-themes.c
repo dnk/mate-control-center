@@ -201,9 +201,7 @@ theme_load_from_gsettings (AppearanceData *data)
 {
   MateThemeMetaInfo *theme;
   gchar *scheme;
-  const char * const *schemas;
-  gboolean schema_exists;
-  gint i;
+  GSettingsSchema * schema;
 
   theme = mate_theme_meta_info_new ();
 
@@ -229,17 +227,11 @@ theme_load_from_gsettings (AppearanceData *data)
   /* We  need this because mate-control-center does not depend on mate-notification-daemon,
    * and if we try to get notification theme without schema installed, gsettings crashes
    * see https://bugzilla.gnome.org/show_bug.cgi?id=651225 */
-  schemas = g_settings_list_schemas ();
-  schema_exists = FALSE;
-  for (i = 0; schemas[i] != NULL; i++) {
-    if (g_strcmp0 (schemas[i], NOTIFICATION_SCHEMA) == 0) {
-      schema_exists = TRUE;
-      break;
-      }
-  }
-  if (schema_exists == TRUE) {
+  schema = g_settings_schema_source_lookup (g_settings_schema_source_get_default (), NOTIFICATION_SCHEMA, TRUE);
+  if (schema != NULL) {
     GSettings *notification_settings;
-    notification_settings = g_settings_new (NOTIFICATION_SCHEMA);
+    notification_settings = g_settings_new_full (schema, NULL, NULL);
+    g_settings_schema_unref (schema);
     theme->notification_theme_name = g_settings_get_string (notification_settings, NOTIFICATION_THEME_KEY);
     g_object_unref (notification_settings);
   }
@@ -679,10 +671,19 @@ theme_message_area_update (AppearanceData *data)
     gtk_label_set_line_wrap (GTK_LABEL (data->theme_message_label), TRUE);
     gtk_misc_set_alignment (GTK_MISC (data->theme_message_label), 0.0, 0.5);
 
+#if GTK_CHECK_VERSION (3, 0, 0)
+    hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 9);
+#else
     hbox = gtk_hbox_new (FALSE, 9);
+#endif
     gtk_widget_show (hbox);
+#if GTK_CHECK_VERSION (3, 10, 0)
+    data->theme_info_icon = gtk_image_new_from_icon_name ("dialog-information", GTK_ICON_SIZE_DIALOG);
+    data->theme_error_icon = gtk_image_new_from_icon_name ("dialog-warning", GTK_ICON_SIZE_DIALOG);
+#else
     data->theme_info_icon = gtk_image_new_from_stock (GTK_STOCK_DIALOG_INFO, GTK_ICON_SIZE_DIALOG);
     data->theme_error_icon = gtk_image_new_from_stock (GTK_STOCK_DIALOG_WARNING, GTK_ICON_SIZE_DIALOG);
+#endif
     gtk_misc_set_alignment (GTK_MISC (data->theme_info_icon), 0.5, 0);
     gtk_misc_set_alignment (GTK_MISC (data->theme_error_icon), 0.5, 0);
     gtk_box_pack_start (GTK_BOX (hbox), data->theme_info_icon, FALSE, FALSE, 0);
@@ -1087,18 +1088,33 @@ void themes_init(AppearanceData* data)
   g_signal_connect_after (icon_view, "realize", (GCallback) theme_select_name, meta_theme->name);
 
   w = appearance_capplet_get_widget (data, "theme_install");
+#if GTK_CHECK_VERSION (3, 10, 0)
+  gtk_button_set_image (GTK_BUTTON (w),
+                        gtk_image_new_from_icon_name ("document-open", GTK_ICON_SIZE_BUTTON));
+#else
   gtk_button_set_image (GTK_BUTTON (w),
                         gtk_image_new_from_stock (GTK_STOCK_OPEN, GTK_ICON_SIZE_BUTTON));
+#endif
   g_signal_connect (w, "clicked", (GCallback) theme_install_cb, data);
 
   w = appearance_capplet_get_widget (data, "theme_save");
+#if GTK_CHECK_VERSION (3, 10, 0)
+  gtk_button_set_image (GTK_BUTTON (w),
+                        gtk_image_new_from_icon_name ("document-save-as", GTK_ICON_SIZE_BUTTON));
+#else
   gtk_button_set_image (GTK_BUTTON (w),
                         gtk_image_new_from_stock (GTK_STOCK_SAVE_AS, GTK_ICON_SIZE_BUTTON));
+#endif
   g_signal_connect (w, "clicked", (GCallback) theme_save_cb, data);
 
   w = appearance_capplet_get_widget (data, "theme_custom");
+#if GTK_CHECK_VERSION (3, 10, 0)
+  gtk_button_set_image (GTK_BUTTON (w),
+                        gtk_image_new_from_icon_name ("gtk-edit", GTK_ICON_SIZE_BUTTON));
+#else
   gtk_button_set_image (GTK_BUTTON (w),
                         gtk_image_new_from_stock (GTK_STOCK_EDIT, GTK_ICON_SIZE_BUTTON));
+#endif
   g_signal_connect (w, "clicked", (GCallback) theme_custom_cb, data);
 
   del_button = appearance_capplet_get_widget (data, "theme_delete");

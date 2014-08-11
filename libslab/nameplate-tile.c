@@ -109,12 +109,6 @@ nameplate_tile_constructor (GType type, guint n_param, GObjectConstructParam * p
 static void
 nameplate_tile_finalize (GObject * g_object)
 {
-	NameplateTile *np_tile;
-	NameplateTilePrivate *priv;
-
-	np_tile = NAMEPLATE_TILE (g_object);
-	priv = NAMEPLATE_TILE_GET_PRIVATE (np_tile);
-
 	(*G_OBJECT_CLASS (nameplate_tile_parent_class)->finalize) (g_object);
 }
 
@@ -232,8 +226,13 @@ nameplate_tile_setup (NameplateTile *this)
 	priv->header_ctnr = GTK_CONTAINER (gtk_alignment_new (0.0, 0.5, 1.0, 1.0));
 	priv->subheader_ctnr = GTK_CONTAINER (gtk_alignment_new (0.0, 0.5, 1.0, 1.0));
 
+#if GTK_CHECK_VERSION (3, 0, 0)
+	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+	vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+#else
 	hbox = gtk_hbox_new (FALSE, 6);
 	vbox = gtk_vbox_new (FALSE, 0);
+#endif
 
 	alignment = gtk_alignment_new (0.0, 0.5, 1.0, 0.0);
 
@@ -283,7 +282,7 @@ nameplate_tile_drag_begin (GtkWidget * widget, GdkDragContext * context)
 		break;
 
 	case GTK_IMAGE_ICON_NAME:
-		gtk_image_get_icon_name (image, name, NULL);
+		gtk_image_get_icon_name (image, &name, NULL);
 		if (name)
 			gtk_drag_set_icon_name (context, name, 0, 0);
 

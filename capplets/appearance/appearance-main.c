@@ -38,8 +38,10 @@ init_appearance_data (int *argc, char ***argv, GOptionContext *context)
   GtkBuilder *ui;
   GError *err = NULL;
 
+#if !GTK_CHECK_VERSION (3, 6, 0)
   gdk_threads_init ();
   gdk_threads_enter ();
+#endif
   theme_thumbnail_factory_init (*argc, *argv);
   capplet_init (context, argc, argv);
   activate_settings_daemon ();
@@ -229,7 +231,9 @@ main (int argc, char **argv)
 
   /* start the mainloop */
   gtk_main ();
+#if !GTK_CHECK_VERSION (3, 6, 0)
   gdk_threads_leave ();
+#endif
 
   /* free stuff */
   g_free (data);

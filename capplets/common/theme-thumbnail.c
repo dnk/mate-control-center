@@ -96,8 +96,8 @@ static void draw_window_on_pixbuf(GtkWidget* widget, GdkPixbuf* pixbuf)
 static GdkPixmap* draw_window_on_pixbuf(GtkWidget* widget)
 #endif
 {
-	GdkVisual* visual;
 #if !GTK_CHECK_VERSION (3, 0, 0)
+	GdkVisual* visual;
 	GdkPixmap* pixmap;
 #endif
 	GtkStyle* style;
@@ -114,8 +114,8 @@ static GdkPixmap* draw_window_on_pixbuf(GtkWidget* widget)
 
 	gtk_window_get_size(GTK_WINDOW(widget), &width, &height);
 
-	visual = gtk_widget_get_visual(widget);
 #if !GTK_CHECK_VERSION (3, 0, 0)
+	visual = gtk_widget_get_visual(widget);
 	pixmap = gdk_pixmap_new(NULL, width, height, visual->depth);
 	gdk_drawable_set_colormap(GDK_DRAWABLE(pixmap), gtk_widget_get_colormap(widget));
 #endif
@@ -145,9 +145,7 @@ static GdkPixmap* draw_window_on_pixbuf(GtkWidget* widget)
 
 	gtk_widget_hide(widget);
 
-#if GTK_CHECK_VERSION (3, 0, 0)
-	return pixbuf;
-#else
+#if !GTK_CHECK_VERSION (3, 0, 0)
 	return pixmap;
 #endif
 }
@@ -294,14 +292,22 @@ create_meta_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
   gtk_container_add (GTK_CONTAINER (window), preview);
   gtk_widget_realize (window);
   gtk_widget_realize (preview);
+#if GTK_CHECK_VERSION (3, 0, 0)
+  vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
+#else
   vbox = gtk_vbox_new (FALSE, 6);
+#endif
   gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
   gtk_container_add (GTK_CONTAINER (preview), vbox);
   align = gtk_alignment_new (0, 0, 0.0, 0.0);
   gtk_box_pack_start (GTK_BOX (vbox), align, FALSE, FALSE, 0);
   stock_button = gtk_button_new_from_stock (GTK_STOCK_OPEN);
   gtk_container_add (GTK_CONTAINER (align), stock_button);
+#if GTK_CHECK_VERSION (3, 0, 0)
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+#else
   box = gtk_hbox_new (FALSE, 0);
+#endif
   gtk_box_pack_start (GTK_BOX (vbox), box, FALSE, FALSE, 0);
   checkbox = gtk_check_button_new ();
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (checkbox), TRUE);
@@ -317,13 +323,21 @@ create_meta_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
 
   gtk_window_set_default_size (GTK_WINDOW (window), META_THUMBNAIL_SIZE, META_THUMBNAIL_SIZE);
 
+#if GTK_CHECK_VERSION (3, 0, 0)
+  gtk_widget_get_preferred_size (window, &requisition, NULL);
+#else
   gtk_widget_size_request (window, &requisition);
+#endif
   allocation.x = 0;
   allocation.y = 0;
   allocation.width = META_THUMBNAIL_SIZE;
   allocation.height = META_THUMBNAIL_SIZE;
   gtk_widget_size_allocate (window, &allocation);
+#if GTK_CHECK_VERSION (3, 0, 0)
+  gtk_widget_get_preferred_size (window, &requisition, NULL);
+#else
   gtk_widget_size_request (window, &requisition);
+#endif
 
 #if GTK_CHECK_VERSION (3, 0, 0)
   pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, META_THUMBNAIL_SIZE, META_THUMBNAIL_SIZE);
@@ -380,9 +394,17 @@ create_gtk_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
 
   window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
 
+#if GTK_CHECK_VERSION (3, 0, 0)
+  vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+#else
   vbox = gtk_vbox_new (FALSE, 0);
+#endif
   gtk_container_add (GTK_CONTAINER (window), vbox);
+#if GTK_CHECK_VERSION (3, 0, 0)
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+#else
   box = gtk_hbox_new (FALSE, 6);
+#endif
   gtk_container_set_border_width (GTK_CONTAINER (box), 6);
   gtk_box_pack_start (GTK_BOX (vbox), box, FALSE, FALSE, 0);
   stock_button = gtk_button_new_from_stock (GTK_STOCK_OPEN);
@@ -403,13 +425,21 @@ create_gtk_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
   gtk_widget_map (checkbox);
   gtk_widget_map (radio);
 
+#if GTK_CHECK_VERSION (3, 0, 0)
+  gtk_widget_get_preferred_size (window, &requisition, NULL);
+#else
   gtk_widget_size_request (window, &requisition);
+#endif
   allocation.x = 0;
   allocation.y = 0;
   allocation.width = requisition.width;
   allocation.height = requisition.height;
   gtk_widget_size_allocate (window, &allocation);
+#if GTK_CHECK_VERSION (3, 0, 0)
+  gtk_widget_get_preferred_size (window, &requisition, NULL);
+#else
   gtk_widget_size_request (window, &requisition);
+#endif
 
   gtk_window_get_size (GTK_WINDOW (window), &width, &height);
 
@@ -482,13 +512,21 @@ create_marco_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
   gtk_widget_show_all (preview);
   gtk_widget_map (dummy);
 
+#if GTK_CHECK_VERSION (3, 0, 0)
+  gtk_widget_get_preferred_size (window, &requisition, NULL);
+#else
   gtk_widget_size_request (window, &requisition);
+#endif
   allocation.x = 0;
   allocation.y = 0;
   allocation.width = (int) MARCO_THUMBNAIL_WIDTH * 1.2;
   allocation.height = (int) MARCO_THUMBNAIL_HEIGHT * 1.2;
   gtk_widget_size_allocate (window, &allocation);
+#if GTK_CHECK_VERSION (3, 0, 0)
+  gtk_widget_get_preferred_size (window, &requisition, NULL);
+#else
   gtk_widget_size_request (window, &requisition);
+#endif
 
 #if GTK_CHECK_VERSION (3, 0, 0)
   pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, (int) MARCO_THUMBNAIL_WIDTH * 1.2, (int) MARCO_THUMBNAIL_HEIGHT * 1.2);
@@ -529,16 +567,16 @@ create_icon_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
 
 
 static void
-handle_bytes (const gchar        *buffer,
+handle_bytes (const guint8        *buffer,
               gint                bytes_read,
               ThemeThumbnailData *theme_thumbnail_data)
 {
-  const gchar *ptr;
+  const guint8 *ptr;
   ptr = buffer;
 
   while (bytes_read > 0)
   {
-    char *nil;
+    guint8 *nil;
 
     switch (theme_thumbnail_data->status)
     {
@@ -667,7 +705,7 @@ message_from_capplet (GIOChannel   *source,
   switch (status)
   {
     case G_IO_STATUS_NORMAL:
-      handle_bytes (buffer, bytes_read, theme_thumbnail_data);
+      handle_bytes ((const guint8*)buffer, bytes_read, theme_thumbnail_data);
 
       if (theme_thumbnail_data->status == WRITING_PIXBUF_DATA)
       {

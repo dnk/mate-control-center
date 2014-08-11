@@ -601,24 +601,26 @@ label_expose_event_cb (GtkLabel       *label,
 		       gpointer        user_data)
 {
 	gint       x, y;
-	GdkColor   color;
-	GtkWidget *widget;
-	GdkWindow *window;
 #if !GTK_CHECK_VERSION (3, 0, 0)
-	GdkGC     *gc;
+	GdkColor   color;
 #endif
+	GtkWidget *widget;
+#if !GTK_CHECK_VERSION (3, 0, 0)
+	GdkWindow *window;
+	GdkGC     *gc;
 
 	color.red = 0;
 	color.green = 0;
 	color.blue = 0;
 	color.pixel = 0;
+#endif
 
 	get_layout_location (label, &x, &y);
 
 	widget = GTK_WIDGET (label);
-	window = gtk_widget_get_window (widget);
 
 #if !GTK_CHECK_VERSION (3, 0, 0)
+	window = gtk_widget_get_window (widget);
 	gc = gdk_gc_new (window);
 	gdk_gc_set_rgb_fg_color (gc, &color);
 	gdk_gc_set_clip_rectangle (gc, &event->area);

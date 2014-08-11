@@ -52,9 +52,8 @@ mate_meta_theme_set (MateThemeMetaInfo *meta_theme_info)
   GSettings *marco_settings;
   GSettings *mouse_settings;
   GSettings *notification_settings = NULL;
-  const char * const *schemas;
-  gboolean schema_exists;
-  gint i;
+  GSettingsSchema *schema;
+  GSettingsSchemaSource *schema_source;
   gchar *old_key;
   gint old_key_int;
 
@@ -65,16 +64,12 @@ mate_meta_theme_set (MateThemeMetaInfo *meta_theme_info)
   /* We  need this because mate-control-center does not depend on mate-notification-daemon,
    * and if we try to get notification theme without schema installed, gsettings crashes
    * see https://bugzilla.gnome.org/show_bug.cgi?id=651225 */
-  schemas = g_settings_list_schemas ();
-  schema_exists = FALSE;
-  for (i = 0; schemas[i] != NULL; i++) {
-    if (g_strcmp0 (schemas[i], NOTIFICATION_SCHEMA) == 0) {
-      schema_exists = TRUE;
-      break;
-      }
-  }
-  if (schema_exists == TRUE) {
-      notification_settings = g_settings_new (NOTIFICATION_SCHEMA);
+  schema_source = g_settings_schema_source_get_default ();
+  schema = g_settings_schema_source_lookup (schema_source, NOTIFICATION_SCHEMA, TRUE);
+
+  if (schema != NULL) {
+      notification_settings = g_settings_new_full (schema, NULL, NULL);
+      g_settings_schema_unref (schema);
   }
 
   /* Set the gtk+ key */

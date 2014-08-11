@@ -634,13 +634,14 @@ foo_scroll_area_expose (GtkWidget *widget,
     GdkWindow *window = gtk_widget_get_window (widget);
 #endif
     GdkRegion *region;
+#if !GTK_CHECK_VERSION (3, 0, 0)
     int x_offset, y_offset;
+#endif
     GtkAllocation widget_allocation;
 
 #if !GTK_CHECK_VERSION (3, 0, 0)
     /* I don't think expose can ever recurse for the same area */
     g_assert (!scroll_area->priv->expose_region);
-#endif
 
     /* Note that this function can be called at a time
      * where the adj->value is different from x_offset. 
@@ -655,7 +656,6 @@ foo_scroll_area_expose (GtkWidget *widget,
     x_offset = scroll_area->priv->x_offset;
     y_offset = scroll_area->priv->y_offset;
 
-#if !GTK_CHECK_VERSION (3, 0, 0)
     scroll_area->priv->expose_region = expose->region;
 #endif
 

@@ -357,7 +357,6 @@ make_rate_string (int hz)
 static void
 rebuild_rate_combo (App *app)
 {
-    GHashTable *rates;
     MateRRMode **modes;
     int best;
     int i;
@@ -370,9 +369,6 @@ rebuild_rate_combo (App *app)
     if (!app->current_output
         || !(modes = get_current_modes (app)))
 	return;
-
-    rates = g_hash_table_new_full (
-	g_str_hash, g_str_equal, (GFreeFunc) g_free, NULL);
 
     best = -1;
     for (i = 0; modes[i] != NULL; ++i)
@@ -1555,13 +1551,10 @@ on_output_event (FooScrollArea *area,
 	{
 	    GrabInfo *info = output->user_data;
 	    double scale = compute_scale (app);
-	    int old_x, old_y;
 	    int new_x, new_y;
 	    int i;
 	    GArray *edges, *snaps, *new_edges;
 
-	    old_x = output->x;
-	    old_y = output->y;
 	    new_x = info->output_x + (event->x - info->grab_x) / scale;
 	    new_y = info->output_y + (event->y - info->grab_y) / scale;
 
@@ -1826,7 +1819,6 @@ on_area_paint (FooScrollArea *area,
 	       gpointer	      data)
 {
     App *app = data;
-    double scale;
     GList *connected_outputs = NULL;
     GList *list;
 
@@ -1835,7 +1827,6 @@ on_area_paint (FooScrollArea *area,
     if (!app->current_configuration)
 	return;
 
-    scale = compute_scale (app);
     connected_outputs = list_connected_outputs (app, NULL, NULL);
 
 #if 0

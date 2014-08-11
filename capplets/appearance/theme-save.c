@@ -156,8 +156,13 @@ setup_directory_structure (const gchar  *theme_name,
 	 					   GTK_BUTTONS_CANCEL,
 						   _("The theme already exists. Would you like to replace it?"));
     button = gtk_dialog_add_button (dialog, _("_Overwrite"), GTK_RESPONSE_ACCEPT);
+#if GTK_CHECK_VERSION (3, 10, 0)
+    gtk_button_set_image (GTK_BUTTON (button),
+			  gtk_image_new_from_icon_name ("document-save", GTK_ICON_SIZE_BUTTON));
+#else
     gtk_button_set_image (GTK_BUTTON (button),
 			  gtk_image_new_from_stock (GTK_STOCK_SAVE, GTK_ICON_SIZE_BUTTON));
+#endif
     response = gtk_dialog_run (dialog);
     gtk_widget_destroy (GTK_WIDGET (dialog));
     retval = (response != GTK_RESPONSE_CANCEL);
