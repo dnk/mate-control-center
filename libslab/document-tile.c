@@ -709,8 +709,17 @@ create_subheader (const gchar *desc)
 	subheader = gtk_label_new (desc);
 	gtk_label_set_ellipsize (GTK_LABEL (subheader), PANGO_ELLIPSIZE_END);
 	gtk_misc_set_alignment (GTK_MISC (subheader), 0.0, 0.5);
+#if GTK_CHECK_VERSION (3, 0, 0)
+	GdkRGBA *color = NULL;
+	gtk_style_context_get (gtk_widget_get_style_context (subheader), GTK_STATE_FLAG_INSENSITIVE,
+	                       GTK_STYLE_PROPERTY_COLOR, &color,
+	                       NULL);
+	gtk_widget_override_color (subheader, GTK_STATE_FLAG_NORMAL, color);
+	gdk_rgba_free (color);
+#else
 	gtk_widget_modify_fg (subheader, GTK_STATE_NORMAL,
 		&gtk_widget_get_style (subheader)->fg[GTK_STATE_INSENSITIVE]);
+#endif
 
 	return subheader;
 }

@@ -21,6 +21,9 @@
 #include <gtk/gtk.h>
 #include <libmate-desktop/mate-desktop-item.h>
 
+#define MATE_DESKTOP_USE_UNSTABLE_API
+#include <libmate-desktop/mate-desktop-utils.h>
+
 #include "app-shell.h"
 #include "app-resizer.h"
 
@@ -325,12 +328,18 @@ app_resizer_paint_window (GtkWidget * widget, GdkEventExpose * event, AppShellDa
 	*/
 
 #if GTK_CHECK_VERSION (3, 0, 0)
+	GdkRGBA *color;
+	GtkStyleContext *style = gtk_widget_get_style_context (widget);
+	gtk_style_context_get (style, GTK_STATE_FLAG_NORMAL,
+	                       GTK_STYLE_PROPERTY_BACKGROUND_COLOR, &color,
+	                       NULL);
 	cairo_save(cr);
 
 	GtkAllocation widget_allocation;
 	gtk_widget_get_allocation (widget, &widget_allocation);
 
-	gdk_cairo_set_source_color (cr, gtk_widget_get_style (widget)->base);
+	gdk_cairo_set_source_rgba (cr, color);
+	gdk_rgba_free (color);
 	cairo_set_line_width(cr, 1);
 
 	cairo_rectangle(cr, widget_allocation.x, widget_allocation.y, widget_allocation.width, widget_allocation.height);
@@ -347,10 +356,12 @@ app_resizer_paint_window (GtkWidget * widget, GdkEventExpose * event, AppShellDa
 		GtkWidget *selected_widget = GTK_WIDGET (app_data->selected_group);
 #if GTK_CHECK_VERSION (3, 0, 0)
 		GtkAllocation selected_widget_allocation;
+		GdkRGBA light_color;
 
+		mate_desktop_gtk_style_get_light_color (gtk_widget_get_style_context(selected_widget), GTK_STATE_FLAG_NORMAL, &light_color);
 		gtk_widget_get_allocation (selected_widget, &selected_widget_allocation);
 
-		gdk_cairo_set_source_color (cr, gtk_widget_get_style (selected_widget)->light);
+		gdk_cairo_set_source_rgba (cr, &light_color);
 		cairo_set_line_width(cr, 1);
 
 		cairo_rectangle(cr, selected_widget_allocation.x, selected_widget_allocation.y, selected_widget_allocation.width, selected_widget_allocation.height);
