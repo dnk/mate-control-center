@@ -51,18 +51,26 @@ enum {
 	DIRECTORY
 };
 
-static gboolean
-cleanup_tmp_dir (GIOSchedulerJob *job,
-		 GCancellable *cancellable,
-		 const gchar *tmp_dir)
+static void
+cleanup_tmp_dir (GTask *task,
+		 gpointer source_object,
+		 gpointer task_data,
+		 GCancellable *cancellable)
 {
 	GFile *directory;
+	const gchar *tmp_dir = (const char *)task_data;
 
 	directory = g_file_new_for_path (tmp_dir);
 	capplet_file_delete_recursive (directory, NULL);
 	g_object_unref (directory);
+}
 
-	return FALSE;
+static void
+cleanup_tmp_dir_done (GObject *source_object,
+		      GAsyncResult *res,
+		      gpointer user_data)
+{
+/* do nothing */
 }
 
 static int
@@ -560,11 +568,11 @@ process_local_theme (GtkWindow  *parent,
 
 		if (!process_local_theme_archive (parent, filetype, tmp_dir, path)
 		    || ((dir = g_dir_open (tmp_dir, 0, NULL)) == NULL)) {
-			g_io_scheduler_push_job ((GIOSchedulerJobFunc) cleanup_tmp_dir,
-						 g_strdup (tmp_dir),
-						 g_free,
-						 G_PRIORITY_DEFAULT,
-						 NULL);
+			GTask *task;
+			task = g_task_new (NULL, NULL, cleanup_tmp_dir_done, NULL);
+			g_task_set_task_data (task, g_strdup (tmp_dir), g_free);
+			g_task_run_in_thread (task, cleanup_tmp_dir);
+			g_object_unref (task);
 			g_free (tmp_dir);
 			return;
 		}
@@ -618,9 +626,14 @@ process_local_theme (GtkWindow  *parent,
 			gtk_dialog_run (GTK_DIALOG (dialog));
 			gtk_widget_destroy (dialog);
 		}
-		g_io_scheduler_push_job ((GIOSchedulerJobFunc) cleanup_tmp_dir,
-					 tmp_dir, g_free,
-					 G_PRIORITY_DEFAULT, NULL);
+
+		{
+			GTask *task;
+			task = g_task_new (NULL, NULL, cleanup_tmp_dir_done, NULL);
+			g_task_set_task_data (task, tmp_dir, g_free);
+			g_task_run_in_thread (task, cleanup_tmp_dir);
+			g_object_unref (task);
+		}
 	}
 }
 

@@ -470,9 +470,15 @@ file_transfer_dialog_overwrite (gpointer user_data)
 		gtk_dialog_add_button (dialog, _("Overwrite _All"), GTK_RESPONSE_APPLY);
 
 		button = gtk_button_new_with_label (_("_Overwrite"));
+#if GTK_CHECK_VERSION (3, 10, 0)
+		gtk_button_set_image (GTK_BUTTON (button),
+				      gtk_image_new_from_icon_name ("gtk-apply",
+								GTK_ICON_SIZE_BUTTON));
+#else
 		gtk_button_set_image (GTK_BUTTON (button),
 				      gtk_image_new_from_stock (GTK_STOCK_APPLY,
 								GTK_ICON_SIZE_BUTTON));
+#endif
 		gtk_dialog_add_action_widget (dialog, button, GTK_RESPONSE_YES);
 		gtk_widget_show (button);
 

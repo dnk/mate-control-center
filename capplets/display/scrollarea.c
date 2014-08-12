@@ -752,8 +752,16 @@ emit_viewport_changed (FooScrollArea *scroll_area,
     if (scroll_area->priv->input_window == NULL)
 	return;
 #endif
+
+#if GTK_CHECK_VERSION (3, 0, 0)
+    GdkDisplay *display = gdk_window_get_display (scroll_area->priv->input_window);
+    GdkDeviceManager *device_manager = gdk_display_get_device_manager (display);
+    GdkDevice *device = gdk_device_manager_get_client_pointer (device_manager);
+    gdk_window_get_device_position (scroll_area->priv->input_window, device, &px, &py, NULL);
+#else
     gdk_window_get_pointer (scroll_area->priv->input_window, &px, &py, NULL);
-    
+#endif
+
     process_event (scroll_area, FOO_MOTION, px, py);
 }
 
@@ -854,8 +862,10 @@ foo_scroll_area_realize (GtkWidget *widget)
 					 -1);
 #endif
     gdk_window_set_user_data (area->priv->input_window, area);
-    
+
+#if !GTK_CHECK_VERSION (3, 0, 0)
     gtk_widget_style_attach (widget);
+#endif
 }
 
 static void
