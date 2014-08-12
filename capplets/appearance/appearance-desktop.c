@@ -372,8 +372,8 @@ wp_color_changed (AppearanceData *data,
   gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER (data->wp_pcpicker), item->pcolor);
   gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER (data->wp_scpicker), item->scolor);
 #elif GTK_CHECK_VERSION (3, 0, 0)
-  gtk_color_button_get_rgba (gtk_color_button (data->wp_pcpicker), item->pcolor);
-  gtk_color_button_get_rgba (gtk_color_button (data->wp_scpicker), item->scolor);
+  gtk_color_button_get_rgba (GTK_COLOR_BUTTON (data->wp_pcpicker), item->pcolor);
+  gtk_color_button_get_rgba (GTK_COLOR_BUTTON (data->wp_scpicker), item->scolor);
 #else
   gtk_color_button_get_color (GTK_COLOR_BUTTON (data->wp_pcpicker), item->pcolor);
   gtk_color_button_get_color (GTK_COLOR_BUTTON (data->wp_scpicker), item->scolor);
@@ -677,13 +677,13 @@ wp_create_filechooser (AppearanceData *data)
                      gtk_file_chooser_dialog_new (_("Add Wallpaper"),
                      GTK_WINDOW (appearance_capplet_get_widget (data, "appearance_window")),
                      GTK_FILE_CHOOSER_ACTION_OPEN,
-#if GTK_CHECK_VERSION (3, 0, 0)
+#if GTK_CHECK_VERSION (3, 10, 0)
                      _("_Cancel"),
 #else
                      GTK_STOCK_CANCEL,
 #endif
                      GTK_RESPONSE_CANCEL,
-#if GTK_CHECK_VERSION (3, 0, 0)
+#if GTK_CHECK_VERSION (3, 10, 0)
                      _("_Open"),
 #else
                      GTK_STOCK_OPEN,

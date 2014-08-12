@@ -99,18 +99,20 @@ static GdkPixmap* draw_window_on_pixbuf(GtkWidget* widget)
 #if !GTK_CHECK_VERSION (3, 0, 0)
 	GdkVisual* visual;
 	GdkPixmap* pixmap;
-#endif
 	GtkStyle* style;
+#endif
 	GdkScreen* screen = gdk_screen_get_default();
 	GdkWindow* window;
 	gint width, height;
 
+#if !GTK_CHECK_VERSION (3, 0, 0)
 	gtk_widget_ensure_style(widget);
 
 	style = gtk_widget_get_style(widget);
 
 	g_assert(style);
 	g_assert(style->font_desc);
+#endif
 
 	gtk_window_get_size(GTK_WINDOW(widget), &width, &height);
 
@@ -213,7 +215,11 @@ create_folder_icon (char *icon_theme_name)
   if (folder_icon_info != NULL)
   {
     folder_icon = gtk_icon_info_load_icon (folder_icon_info, NULL);
+#if GTK_CHECK_VERSION (3, 0, 0)
+    g_object_unref (folder_icon_info);
+#else
     gtk_icon_info_free (folder_icon_info);
+#endif
   }
 
   g_object_unref (icon_theme);
@@ -222,15 +228,34 @@ create_folder_icon (char *icon_theme_name)
   /* render the icon to the thumbnail */
   if (folder_icon == NULL)
   {
+#if GTK_CHECK_VERSION (3, 10, 0)
+    GtkIconTheme *icon_theme;
+    gint size = 0;
+#else
     GtkWidget *dummy;
     dummy = gtk_label_new ("");
+#endif
 
+#if GTK_CHECK_VERSION (3, 10, 0)
+    icon_theme = gtk_icon_theme_get_default ();
+    gtk_icon_size_lookup (GTK_ICON_SIZE_DIALOG, &size, &size);
+    folder_icon = gtk_icon_theme_load_icon (icon_theme,
+                                          "image-missing",
+                                          size, 0, NULL);
+#elif GTK_CHECK_VERSION (3, 0, 0)
+    folder_icon = gtk_widget_render_icon_pixbuf (dummy,
+                                          GTK_STOCK_MISSING_IMAGE,
+                                          GTK_ICON_SIZE_DIALOG);
+#else
     folder_icon = gtk_widget_render_icon (dummy,
                                           GTK_STOCK_MISSING_IMAGE,
                                           GTK_ICON_SIZE_DIALOG,
                                           NULL);
+#endif
 
+#if !GTK_CHECK_VERSION (3, 10, 0)
     gtk_widget_destroy (dummy);
+#endif
   }
 
   return folder_icon;
@@ -301,7 +326,11 @@ create_meta_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
   gtk_container_add (GTK_CONTAINER (preview), vbox);
   align = gtk_alignment_new (0, 0, 0.0, 0.0);
   gtk_box_pack_start (GTK_BOX (vbox), align, FALSE, FALSE, 0);
+#if GTK_CHECK_VERSION (3, 10, 0)
+  stock_button = gtk_button_new_with_label (_("_Open"));
+#else
   stock_button = gtk_button_new_from_stock (GTK_STOCK_OPEN);
+#endif
   gtk_container_add (GTK_CONTAINER (align), stock_button);
 #if GTK_CHECK_VERSION (3, 0, 0)
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
@@ -407,7 +436,11 @@ create_gtk_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
 #endif
   gtk_container_set_border_width (GTK_CONTAINER (box), 6);
   gtk_box_pack_start (GTK_BOX (vbox), box, FALSE, FALSE, 0);
+#if GTK_CHECK_VERSION (3, 10, 0)
+  stock_button = gtk_button_new_with_label (_("_Open"));
+#else
   stock_button = gtk_button_new_from_stock (GTK_STOCK_OPEN);
+#endif
   gtk_box_pack_start (GTK_BOX (box), stock_button, FALSE, FALSE, 0);
   checkbox = gtk_check_button_new ();
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (checkbox), TRUE);

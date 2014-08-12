@@ -80,10 +80,18 @@ create_dialog (void)
 	gtk_size_group_add_widget (size_group, WID ("cursor_blink_time_scale"));
 	g_object_unref (G_OBJECT (size_group));
 
+#if GTK_CHECK_VERSION (3, 10, 0)
+	image = gtk_image_new_from_icon_name ("list-add", GTK_ICON_SIZE_BUTTON);
+#else
 	image = gtk_image_new_from_stock (GTK_STOCK_ADD, GTK_ICON_SIZE_BUTTON);
+#endif
 	gtk_button_set_image (GTK_BUTTON (WID ("xkb_layouts_add")), image);
 
+#if GTK_CHECK_VERSION (3, 10, 0)
+	image = gtk_image_new_from_icon_name ("view-refresh", GTK_ICON_SIZE_BUTTON);
+#else
 	image = gtk_image_new_from_stock (GTK_STOCK_REFRESH, GTK_ICON_SIZE_BUTTON);
+#endif
 	gtk_button_set_image (GTK_BUTTON (WID ("xkb_reset_to_defaults")), image);
 
 	return dialog;

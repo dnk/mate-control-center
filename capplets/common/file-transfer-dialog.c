@@ -408,9 +408,13 @@ file_transfer_job_progress (goffset current_bytes,
 	data->current_bytes = current_bytes;
 	data->total_bytes = total_bytes;
 
+#if !GTK_CHECK_VERSION (3, 6, 0)
 	gdk_threads_enter ();
+#endif
 	file_transfer_job_update (data);
+#if !GTK_CHECK_VERSION (3, 6, 0)
 	gdk_threads_leave ();
+#endif
 }
 
 static void

@@ -540,7 +540,11 @@ ensure_scrollbar (GtkBuilder *builder, int i)
       GtkWidget *treeview = _gtk_builder_get_widget (builder,
                                                      "shortcut_treeview");
       gtk_widget_ensure_style (treeview);
+#if GTK_CHECK_VERSION (3, 0, 0)
+      gtk_widget_get_preferred_size (treeview, &rectangle, NULL);
+#else
       gtk_widget_size_request (treeview, &rectangle);
+#endif
       gtk_widget_set_size_request (treeview, -1, rectangle.height);
       gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (actions_swindow),
                       GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);

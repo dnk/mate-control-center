@@ -489,7 +489,11 @@ static void
 rebuild_current_monitor_label (App *app)
 {
 	char *str, *tmp;
+#if GTK_CHECK_VERSION (3, 0, 0)
+	GdkRGBA color;
+#else
 	GdkColor color;
+#endif
 	gboolean use_color;
 
 	if (app->current_output)
@@ -500,7 +504,11 @@ rebuild_current_monitor_label (App *app)
 		tmp = g_strdup_printf (_("Monitor: %s"), app->current_output->display_name);
 
 	    str = g_strdup_printf ("<b>%s</b>", tmp);
+#if GTK_CHECK_VERSION (3, 0, 0)
+	    mate_rr_labeler_get_rgba_for_output (app->labeler, app->current_output, &color);
+#else
 	    mate_rr_labeler_get_color_for_output (app->labeler, app->current_output, &color);
+#endif
 	    use_color = TRUE;
 	    g_free (tmp);
 	}
@@ -515,6 +523,17 @@ rebuild_current_monitor_label (App *app)
 
 	if (use_color)
 	{
+#if GTK_CHECK_VERSION (3, 0, 0)
+	    GdkRGBA black = { 0, 0, 0, 1.0 };
+
+	    gtk_widget_override_background_color (app->current_monitor_event_box, gtk_widget_get_state_flags (app->current_monitor_event_box), &color);
+
+	    /* Make the label explicitly black.  We don't want it to follow the
+	     * theme's colors, since the label is always shown against a light
+	     * pastel background.  See bgo#556050
+	     */
+	    gtk_widget_override_background_color (app->current_monitor_label, gtk_widget_get_state_flags (app->current_monitor_label), &black);
+#else
 	    GdkColor black = { 0, 0, 0, 0 };
 
 	    gtk_widget_modify_bg (app->current_monitor_event_box, gtk_widget_get_state (app->current_monitor_event_box), &color);
@@ -524,6 +543,7 @@ rebuild_current_monitor_label (App *app)
 	     * pastel background.  See bgo#556050
 	     */
 	    gtk_widget_modify_fg (app->current_monitor_label, gtk_widget_get_state (app->current_monitor_label), &black);
+#endif
 	}
 	else
 	{
