@@ -332,29 +332,55 @@ main (int argc, char **argv)
     dialog_win = gtk_dialog_new_with_buttons (_("Window Preferences"),
                                               NULL,
                                               GTK_DIALOG_MODAL,
+#if GTK_CHECK_VERSION (3, 10, 0)
+                                              _("_Help"),
+#else
                                               GTK_STOCK_HELP,
+#endif
                                               GTK_RESPONSE_HELP,
+#if GTK_CHECK_VERSION (3, 10, 0)
+                                              _("_Close"),
+#else
                                               GTK_STOCK_CLOSE,
+#endif
                                               GTK_RESPONSE_CLOSE,
                                               NULL);
     //gtk_window_set_resizable (GTK_WINDOW (dialog_win), FALSE);
     gtk_window_set_icon_name (GTK_WINDOW (dialog_win), "preferences-system-windows");
     gtk_container_set_border_width (GTK_CONTAINER (dialog_win), 10);
 
-    nb = gtk_notebook_new ();
+    nb = GTK_NOTEBOOK(gtk_notebook_new ());
+#if GTK_CHECK_VERSION (3, 0, 0)
+    general_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+    behaviour_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+    placement_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+#else
     general_vbox = gtk_vbox_new (FALSE, 0);
     behaviour_vbox = gtk_vbox_new (FALSE, 0);
     placement_vbox = gtk_vbox_new (FALSE, 0);
+#endif
     widget = gtk_label_new (_("General"));
+#if GTK_CHECK_VERSION (3, 0, 0)
+    hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+#else
     hbox = gtk_hbox_new (FALSE, 0);
+#endif
     gtk_box_pack_start (GTK_BOX (hbox), general_vbox, FALSE, FALSE, 6);
     gtk_notebook_append_page (nb, hbox, widget);
     widget = gtk_label_new (_("Behaviour"));
+#if GTK_CHECK_VERSION (3, 0, 0)
+    hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+#else
     hbox = gtk_hbox_new (FALSE, 0);
+#endif
     gtk_box_pack_start (GTK_BOX (hbox), behaviour_vbox, FALSE, FALSE, 6);
     gtk_notebook_append_page (nb, hbox, widget);
     widget = gtk_label_new (_("Placement"));
+#if GTK_CHECK_VERSION (3, 0, 0)
+    hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+#else
     hbox = gtk_hbox_new (FALSE, 0);
+#endif
     gtk_box_pack_start (GTK_BOX (hbox), placement_vbox, FALSE, FALSE, 6);
     gtk_notebook_append_page (nb, hbox, widget);
 
@@ -362,9 +388,15 @@ main (int argc, char **argv)
     widget = title_label_new (N_("Compositing Manager"));
     gtk_box_pack_start (GTK_BOX (general_vbox), widget, FALSE, FALSE, 6);
 
+#if GTK_CHECK_VERSION (3, 0, 0)
+    vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+    hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+    hbox1 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+#else
     vbox = gtk_vbox_new (FALSE, 0);
     hbox = gtk_hbox_new (FALSE, 0);
     hbox1 = gtk_hbox_new (FALSE, 0);
+#endif
     compositing_checkbutton = gtk_check_button_new_with_mnemonic (_("Enable software _compositing window manager"));
     compositing_fast_alt_tab_checkbutton = gtk_check_button_new_with_mnemonic (_("Disable _thumbnails in Alt-Tab"));
     gtk_box_pack_start (GTK_BOX (vbox), compositing_checkbutton, FALSE, FALSE, 6);
@@ -377,7 +409,11 @@ main (int argc, char **argv)
     widget = title_label_new (N_("Titlebar Buttons"));
     gtk_box_pack_start (GTK_BOX (general_vbox), widget, FALSE, FALSE, 6);
 
+#if GTK_CHECK_VERSION (3, 0, 0)
+    hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+#else
     hbox = gtk_hbox_new (FALSE, 0);
+#endif
     widget = gtk_label_new (_("Position:"));
     gtk_box_pack_start (GTK_BOX (hbox), widget, FALSE, FALSE, 6);
     titlebar_layout_optionmenu = gtk_combo_box_text_new ();
@@ -388,7 +424,11 @@ main (int argc, char **argv)
     widget = title_label_new (N_("New Windows"));
     gtk_box_pack_start (GTK_BOX (placement_vbox), widget, FALSE, FALSE, 6);
 
+#if GTK_CHECK_VERSION (3, 0, 0)
+    hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+#else
     hbox = gtk_hbox_new (FALSE, 0);
+#endif
     center_new_windows_checkbutton = gtk_check_button_new_with_mnemonic (_("Center _new windows"));
     gtk_box_pack_start (GTK_BOX (hbox), center_new_windows_checkbutton, FALSE, FALSE, 6);
     gtk_box_pack_start (GTK_BOX (placement_vbox), hbox, FALSE, FALSE, 6);
@@ -397,7 +437,11 @@ main (int argc, char **argv)
     widget = title_label_new (N_("Window Snapping"));
     gtk_box_pack_start (GTK_BOX (placement_vbox), widget, FALSE, FALSE, 6);
 
+#if GTK_CHECK_VERSION (3, 0, 0)
+    hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+#else
     hbox = gtk_hbox_new (FALSE, 0);
+#endif
     side_by_side_tiling_checkbutton = gtk_check_button_new_with_mnemonic (_("Enable side by side _tiling"));
     gtk_box_pack_start (GTK_BOX (hbox), side_by_side_tiling_checkbutton, FALSE, FALSE, 6);
     gtk_box_pack_start (GTK_BOX (placement_vbox), hbox, FALSE, FALSE, 6);
@@ -406,11 +450,19 @@ main (int argc, char **argv)
     widget = title_label_new (N_("Window Selection"));
     gtk_box_pack_start (GTK_BOX (behaviour_vbox), widget, FALSE, FALSE, 6);
 
+#if GTK_CHECK_VERSION (3, 0, 0)
+    vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+    vbox1 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+    hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+    hbox1 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+    hbox2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+#else
     vbox = gtk_vbox_new (FALSE, 0);
     vbox1 = gtk_vbox_new (FALSE, 0);
     hbox = gtk_hbox_new (FALSE, 0);
     hbox1 = gtk_hbox_new (FALSE, 0);
     hbox2 = gtk_hbox_new (FALSE, 0);
+#endif
 
     focus_mode_checkbutton = gtk_check_button_new_with_mnemonic (_("_Select windows when the mouse moves over them"));
     gtk_box_pack_start (GTK_BOX (vbox), focus_mode_checkbutton, FALSE, FALSE, 6);
@@ -419,8 +471,13 @@ main (int argc, char **argv)
     gtk_box_pack_start (GTK_BOX (hbox1), autoraise_checkbutton, FALSE, FALSE, 6);
     gtk_box_pack_start (GTK_BOX (vbox1), hbox1, FALSE, FALSE, 6);
 
+#if GTK_CHECK_VERSION (3, 0, 0)
+    autoraise_delay_hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+    autoraise_delay_slider = gtk_scale_new_with_range (GTK_ORIENTATION_HORIZONTAL, 0, 10, 0.2);
+#else
     autoraise_delay_hbox = gtk_hbox_new (FALSE, 0);
     autoraise_delay_slider = gtk_hscale_new_with_range (0, 10, 0.2);
+#endif
     widget = gtk_label_new_with_mnemonic (_("_Interval before raising:"));
     gtk_box_pack_start (GTK_BOX (autoraise_delay_hbox), widget, FALSE, FALSE, 6);
     gtk_box_pack_start (GTK_BOX (autoraise_delay_hbox), autoraise_delay_slider, TRUE, TRUE, 6);
@@ -439,7 +496,11 @@ main (int argc, char **argv)
     widget = title_label_new (N_("Titlebar Action"));
     gtk_box_pack_start (GTK_BOX (behaviour_vbox), widget, FALSE, FALSE, 6);
 
+#if GTK_CHECK_VERSION (3, 0, 0)
+    hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+#else
     hbox = gtk_hbox_new (FALSE, 0);
+#endif
     widget = gtk_label_new_with_mnemonic (_("_Double-click titlebar to perform this action:"));
     gtk_box_pack_start (GTK_BOX (hbox), widget, FALSE, FALSE, 6);
     double_click_titlebar_optionmenu = gtk_combo_box_text_new ();
@@ -451,12 +512,21 @@ main (int argc, char **argv)
     widget = title_label_new (N_("Movement Key"));
     gtk_box_pack_start (GTK_BOX (behaviour_vbox), widget, FALSE, FALSE, 6);
 
+#if GTK_CHECK_VERSION (3, 0, 0)
+    vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+    hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+#else
     vbox = gtk_vbox_new (FALSE, 0);
     hbox = gtk_hbox_new (FALSE, 0);
+#endif
     widget = gtk_label_new_with_mnemonic (_("To move a window, press-and-hold this key then grab the window:"));
     gtk_misc_set_alignment (GTK_MISC (widget), 0, 0);
     gtk_box_pack_start (GTK_BOX (vbox), widget, FALSE, FALSE, 6);
+#if GTK_CHECK_VERSION (3, 0, 0)
+    alt_click_hbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
+#else
     alt_click_hbox = gtk_vbox_new (FALSE, 6);
+#endif
     gtk_label_set_mnemonic_widget (GTK_LABEL (widget), alt_click_hbox);
     gtk_box_pack_start (GTK_BOX (vbox), alt_click_hbox, FALSE, FALSE, 6);
     gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 6);
@@ -554,7 +624,7 @@ main (int argc, char **argv)
     update_sensitivity ();
 
     capplet_set_icon (dialog_win, "preferences-system-windows");
-    gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (dialog_win)), GTK_WIDGET (nb), TRUE, TRUE, 0);
+    gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG(dialog_win))), GTK_WIDGET (nb), TRUE, TRUE, 0);
     gtk_widget_show_all (dialog_win);
 
     gtk_main ();

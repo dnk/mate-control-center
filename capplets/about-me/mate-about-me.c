@@ -244,9 +244,15 @@ about_me_update_preview (GtkFileChooser *chooser,
 			gtk_image_set_from_pixbuf (GTK_IMAGE (image), pixbuf);
 			g_object_unref (pixbuf);
 		} else {
+#if GTK_CHECK_VERSION (3, 10, 0)
+			gtk_image_set_from_icon_name (GTK_IMAGE (image),
+						  "dialog-question",
+						  GTK_ICON_SIZE_DIALOG);
+#else
 			gtk_image_set_from_stock (GTK_IMAGE (image),
 						  "gtk-dialog-question",
 						  GTK_ICON_SIZE_DIALOG);
+#endif
 		}
 	}
 	gtk_file_chooser_set_preview_widget_active (chooser, TRUE);
@@ -269,8 +275,13 @@ about_me_image_clicked_cb (GtkWidget *button, MateAboutMe *me)
 			 gtk_file_chooser_dialog_new (_("Select Image"), GTK_WINDOW (WID ("about-me-dialog")),
 							GTK_FILE_CHOOSER_ACTION_OPEN,
 							_("No Image"), GTK_RESPONSE_NO,
+#if GTK_CHECK_VERSION (3, 10, 0)
+							_("_Cancel"), GTK_RESPONSE_CANCEL,
+							_("_Open"), GTK_RESPONSE_ACCEPT,
+#else
 							GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 							GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+#endif
 							NULL));
 	gtk_window_set_modal (GTK_WINDOW (chooser_dialog), TRUE);
 	gtk_dialog_set_default_response (GTK_DIALOG (chooser_dialog), GTK_RESPONSE_ACCEPT);
@@ -349,7 +360,11 @@ about_me_icon_theme_changed (GtkWindow    *window,
 	g_free (me->person);
 	me->person = g_strdup (gtk_icon_info_get_filename (icon));
 
+#if GTK_CHECK_VERSION (3, 0, 0)
+	g_object_unref (icon);
+#else
 	gtk_icon_info_free (icon);
+#endif
 
 	if (me->have_image)
 		e_image_chooser_set_from_file (E_IMAGE_CHOOSER (me->image_chooser), me->person);
@@ -427,7 +442,11 @@ about_me_setup_dialog (void)
 	icon = gtk_icon_theme_lookup_icon (me->theme, "stock_person", 80, 0);
 	if (icon != NULL) {
 		me->person = g_strdup (gtk_icon_info_get_filename (icon));
+#if GTK_CHECK_VERSION (3, 0, 0)
+		g_object_unref (icon);
+#else
 		gtk_icon_info_free (icon);
+#endif
 	}
 
 	g_signal_connect_object (me->theme, "changed",
