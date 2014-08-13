@@ -49,34 +49,6 @@ msgid ""
 msgstr ""
 "URL 𐑓𐑹 𐑢𐑺 𐑑 𐑜𐑧𐑑 𐑥𐑹 𐑛𐑧𐑕𐑒𐑑𐑪𐑐 𐑔𐑰𐑥𐑟. 𐑦𐑓 𐑕𐑧𐑑 𐑑 𐑩𐑯 𐑧𐑥𐑐𐑑𐑦 𐑕𐑑𐑮𐑦𐑙 𐑞 𐑤𐑦𐑙𐑒 𐑢𐑦𐑤 𐑯𐑪𐑑 𐑩𐑐𐑽."
 
-#: ../capplets/about-me/eel-alert-dialog.c:110
-msgid "Image/label border"
-msgstr "𐑦𐑥𐑦𐑡/𐑤𐑱𐑚𐑩𐑤 𐑚𐑹𐑛𐑼"
-
-#: ../capplets/about-me/eel-alert-dialog.c:111
-msgid "Width of border around the label and image in the alert dialog"
-msgstr "𐑢𐑦𐑛𐑔 𐑝 𐑚𐑹𐑛𐑼 𐑼𐑬𐑯𐑛 𐑞 𐑤𐑱𐑚𐑩𐑤 𐑯 𐑦𐑥𐑦𐑡 𐑦𐑯 𐑞 𐑩𐑤𐑻𐑑 𐑛𐑲𐑩𐑤𐑪𐑜"
-
-#: ../capplets/about-me/eel-alert-dialog.c:120
-msgid "Alert Type"
-msgstr "𐑩𐑤𐑻𐑑 𐑑𐑲𐑐"
-
-#: ../capplets/about-me/eel-alert-dialog.c:121
-msgid "The type of alert"
-msgstr "𐑞 𐑑𐑲𐑐 𐑝 𐑩𐑤𐑻𐑑"
-
-#: ../capplets/about-me/eel-alert-dialog.c:129
-msgid "Alert Buttons"
-msgstr "𐑩𐑤𐑻𐑑 𐑚𐑳𐑑𐑩𐑯𐑟"
-
-#: ../capplets/about-me/eel-alert-dialog.c:130
-msgid "The buttons shown in the alert dialog"
-msgstr "𐑞 𐑚𐑳𐑑𐑩𐑯𐑟 𐑖𐑴𐑯 𐑦𐑯 𐑞 𐑩𐑤𐑻𐑑 𐑛𐑲𐑩𐑤𐑪𐑜"
-
-#: ../capplets/about-me/eel-alert-dialog.c:194
-msgid "Show more _details"
-msgstr "𐑖𐑴 𐑥𐑹 _𐑛𐑰𐑑𐑱𐑤𐑟"
-
 #, c-format
 #: ../capplets/about-me/fingerprint-strings.h:28
 msgid "Place your left thumb on %s"

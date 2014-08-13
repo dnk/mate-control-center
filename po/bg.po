@@ -132,34 +132,6 @@ msgstr "Име"
 msgid "Description associated with a custom keybinding."
 msgstr "Описание, свързано с потребителска клавишна комбинация."
 
-#: ../capplets/about-me/eel-alert-dialog.c:110
-msgid "Image/label border"
-msgstr "Рамка на изображение/етикет"
-
-#: ../capplets/about-me/eel-alert-dialog.c:111
-msgid "Width of border around the label and image in the alert dialog"
-msgstr "Широчината на рамката около етикет"
-
-#: ../capplets/about-me/eel-alert-dialog.c:120
-msgid "Alert Type"
-msgstr "Вид предупреждение"
-
-#: ../capplets/about-me/eel-alert-dialog.c:121
-msgid "The type of alert"
-msgstr "Вид на предупреждението"
-
-#: ../capplets/about-me/eel-alert-dialog.c:129
-msgid "Alert Buttons"
-msgstr "Бутони при предупреждение"
-
-#: ../capplets/about-me/eel-alert-dialog.c:130
-msgid "The buttons shown in the alert dialog"
-msgstr "Бутоните, които се показват при предупреждение"
-
-#: ../capplets/about-me/eel-alert-dialog.c:194
-msgid "Show more _details"
-msgstr "Показване на пове_че информация"
-
 #: ../capplets/about-me/mate-about-me.c:288
 msgid "Select Image"
 msgstr "Избор на изображение"

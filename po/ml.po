@@ -129,34 +129,6 @@ msgstr ""
 msgid "Description associated with a custom keybinding."
 msgstr ""
 
-#: ../capplets/about-me/eel-alert-dialog.c:110
-msgid "Image/label border"
-msgstr "ചിത്രത്തിന്റെ/കുറിപ്പിന്റെ അതിരു്"
-
-#: ../capplets/about-me/eel-alert-dialog.c:111
-msgid "Width of border around the label and image in the alert dialog"
-msgstr "അറിയിപ്പ് ജാലകത്തില്‍ കുറിപ്പിനും ചിത്രത്തിനും ചുറ്റുമുള്ള അതിരിന്റെ വീതി"
-
-#: ../capplets/about-me/eel-alert-dialog.c:120
-msgid "Alert Type"
-msgstr "അറിയിപ്പിന്റെ തരം "
-
-#: ../capplets/about-me/eel-alert-dialog.c:121
-msgid "The type of alert"
-msgstr "അറിയിപ്പിന്റെ രീതി"
-
-#: ../capplets/about-me/eel-alert-dialog.c:129
-msgid "Alert Buttons"
-msgstr "അറിയിപ്പ് ബട്ടണുകള്‍"
-
-#: ../capplets/about-me/eel-alert-dialog.c:130
-msgid "The buttons shown in the alert dialog"
-msgstr "അറിയിപ്പ്  ജാലകത്തില്‍ കാണിക്കുന്ന ബട്ടണുകള്‍"
-
-#: ../capplets/about-me/eel-alert-dialog.c:194
-msgid "Show more _details"
-msgstr "കൂടുതല്‍ വിവരങ്ങള്‍ _കാണിയ്ക്കുക"
-
 #: ../capplets/about-me/mate-about-me.c:288
 msgid "Select Image"
 msgstr "ചിത്രം തെരഞ്ഞെടുക്കുക"

@@ -139,34 +139,6 @@ msgstr "名称"
 msgid "Description associated with a custom keybinding."
 msgstr "关于自定义键绑定的描述。"
 
-#: ../capplets/about-me/eel-alert-dialog.c:110
-msgid "Image/label border"
-msgstr "图像/标签边框"
-
-#: ../capplets/about-me/eel-alert-dialog.c:111
-msgid "Width of border around the label and image in the alert dialog"
-msgstr "提醒对话框中的标签和图像周围的边框宽度"
-
-#: ../capplets/about-me/eel-alert-dialog.c:120
-msgid "Alert Type"
-msgstr "提醒类型"
-
-#: ../capplets/about-me/eel-alert-dialog.c:121
-msgid "The type of alert"
-msgstr "提醒类型"
-
-#: ../capplets/about-me/eel-alert-dialog.c:129
-msgid "Alert Buttons"
-msgstr "提醒按钮"
-
-#: ../capplets/about-me/eel-alert-dialog.c:130
-msgid "The buttons shown in the alert dialog"
-msgstr "提醒对话框中显示的按钮"
-
-#: ../capplets/about-me/eel-alert-dialog.c:194
-msgid "Show more _details"
-msgstr "显示更多细节(_D)"
-
 #: ../capplets/about-me/mate-about-me.c:288
 msgid "Select Image"
 msgstr "选择图像"

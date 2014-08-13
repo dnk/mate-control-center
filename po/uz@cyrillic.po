@@ -17,34 +17,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=0;\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: ../capplets/about-me/eel-alert-dialog.c:114
-msgid "Image/label border"
-msgstr "Расм/ёрлиқ чегараси"
-
-#: ../capplets/about-me/eel-alert-dialog.c:115
-msgid "Width of border around the label and image in the alert dialog"
-msgstr "Огоҳлантириш диалогидаги расм ва ёрлиқларнинг кенглиги"
-
-#: ../capplets/about-me/eel-alert-dialog.c:124
-msgid "Alert Type"
-msgstr "Огоҳлантириш тури"
-
-#: ../capplets/about-me/eel-alert-dialog.c:125
-msgid "The type of alert"
-msgstr "Огоҳлантириш тури"
-
-#: ../capplets/about-me/eel-alert-dialog.c:133
-msgid "Alert Buttons"
-msgstr "Огоҳлантириш тугмалари"
-
-#: ../capplets/about-me/eel-alert-dialog.c:134
-msgid "The buttons shown in the alert dialog"
-msgstr "Огоҳлантириш ойнасида кўрсатиладиган тугмалар"
-
-#: ../capplets/about-me/eel-alert-dialog.c:198
-msgid "Show more _details"
-msgstr "_Тафсилотларни кўрсатиш"
-
 #: ../capplets/about-me/fingerprint-strings.h:28
 #, c-format
 msgid "Place your left thumb on %s"

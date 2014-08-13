@@ -130,34 +130,6 @@ msgstr "Pavadinimas"
 msgid "Description associated with a custom keybinding."
 msgstr ""
 
-#: ../capplets/about-me/eel-alert-dialog.c:110
-msgid "Image/label border"
-msgstr "Paveikslėlio / užrašo rėmelis"
-
-#: ../capplets/about-me/eel-alert-dialog.c:111
-msgid "Width of border around the label and image in the alert dialog"
-msgstr "Rėmelio aplink užrašą ir paveikslėlį perspėjimo dialoge plotis"
-
-#: ../capplets/about-me/eel-alert-dialog.c:120
-msgid "Alert Type"
-msgstr "Perspėjimo tipas"
-
-#: ../capplets/about-me/eel-alert-dialog.c:121
-msgid "The type of alert"
-msgstr "Perspėjimo tipas"
-
-#: ../capplets/about-me/eel-alert-dialog.c:129
-msgid "Alert Buttons"
-msgstr "Perspėjimo mygtukai"
-
-#: ../capplets/about-me/eel-alert-dialog.c:130
-msgid "The buttons shown in the alert dialog"
-msgstr "Perspėjimo dialoge rodomi mygtukai"
-
-#: ../capplets/about-me/eel-alert-dialog.c:194
-msgid "Show more _details"
-msgstr "Rodyti _išsamiau"
-
 #: ../capplets/about-me/mate-about-me.c:288
 msgid "Select Image"
 msgstr "Pasirinkite paveikslėlį"

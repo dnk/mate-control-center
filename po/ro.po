@@ -129,34 +129,6 @@ msgstr ""
 msgid "Description associated with a custom keybinding."
 msgstr ""
 
-#: ../capplets/about-me/eel-alert-dialog.c:110
-msgid "Image/label border"
-msgstr "Marginea imaginii/textului"
-
-#: ../capplets/about-me/eel-alert-dialog.c:111
-msgid "Width of border around the label and image in the alert dialog"
-msgstr "Lățimea marginii din jurul textului și a imaginii din dialogul de alertă"
-
-#: ../capplets/about-me/eel-alert-dialog.c:120
-msgid "Alert Type"
-msgstr "Tip alertă"
-
-#: ../capplets/about-me/eel-alert-dialog.c:121
-msgid "The type of alert"
-msgstr "Tipul alertei"
-
-#: ../capplets/about-me/eel-alert-dialog.c:129
-msgid "Alert Buttons"
-msgstr "Butoane alertă"
-
-#: ../capplets/about-me/eel-alert-dialog.c:130
-msgid "The buttons shown in the alert dialog"
-msgstr "Butoanele afișate în dialogul de alertă"
-
-#: ../capplets/about-me/eel-alert-dialog.c:194
-msgid "Show more _details"
-msgstr "Arată mai multe _detalii"
-
 #: ../capplets/about-me/mate-about-me.c:288
 msgid "Select Image"
 msgstr "Selectează imaginea"

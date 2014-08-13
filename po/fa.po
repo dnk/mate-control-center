@@ -130,34 +130,6 @@ msgstr ""
 msgid "Description associated with a custom keybinding."
 msgstr ""
 
-#: ../capplets/about-me/eel-alert-dialog.c:110
-msgid "Image/label border"
-msgstr "کناره‌ی تصویر/برچسب"
-
-#: ../capplets/about-me/eel-alert-dialog.c:111
-msgid "Width of border around the label and image in the alert dialog"
-msgstr "عرض کناره‌ی دور برچسب و تصویر در محاوره‌ی هشدار"
-
-#: ../capplets/about-me/eel-alert-dialog.c:120
-msgid "Alert Type"
-msgstr "نوع هشدار"
-
-#: ../capplets/about-me/eel-alert-dialog.c:121
-msgid "The type of alert"
-msgstr "نوع هشدار"
-
-#: ../capplets/about-me/eel-alert-dialog.c:129
-msgid "Alert Buttons"
-msgstr "دکمه‌های هشدار"
-
-#: ../capplets/about-me/eel-alert-dialog.c:130
-msgid "The buttons shown in the alert dialog"
-msgstr "دکمه‌هایی که در محاوره‌ی هشدار نشان داده می‌شوند"
-
-#: ../capplets/about-me/eel-alert-dialog.c:194
-msgid "Show more _details"
-msgstr "نشان دادن _جزئیات بیشتر"
-
 #: ../capplets/about-me/mate-about-me.c:288
 msgid "Select Image"
 msgstr "انتخاب تصویر"

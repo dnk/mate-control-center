@@ -25,36 +25,8 @@ msgstr ""
 "ULL NAME <EMAIL@ADDRESS>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../capplets/about-me/eel-alert-dialog.c:114
-msgid "Image/label border"
-msgstr ""
-
-#: ../capplets/about-me/eel-alert-dialog.c:115
-msgid "Width of border around the label and image in the alert dialog"
-msgstr ""
-
-#: ../capplets/about-me/eel-alert-dialog.c:124
-msgid "Alert Type"
-msgstr ""
-
-#: ../capplets/about-me/eel-alert-dialog.c:125
-#, fuzzy
-msgid "The type of alert"
-msgstr "Ubwoko Bya"
 
 # sfx2/source\toolbox\tbxcust.src:RID_USERDEFBMP.GB_FUNCTION.text
-#: ../capplets/about-me/eel-alert-dialog.c:133
-#, fuzzy
-msgid "Alert Buttons"
-msgstr "Utubuto"
-
-#: ../capplets/about-me/eel-alert-dialog.c:134
-msgid "The buttons shown in the alert dialog"
-msgstr ""
-
-#: ../capplets/about-me/eel-alert-dialog.c:198
-msgid "Show more _details"
-msgstr ""
 
 #: ../capplets/about-me/mate-about-me.desktop.in.in.h:1
 #: ../capplets/about-me/mate-about-me.glade.h:14

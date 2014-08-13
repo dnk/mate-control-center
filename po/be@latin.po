@@ -17,34 +17,6 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 
-#: ../capplets/about-me/eel-alert-dialog.c:114
-msgid "Image/label border"
-msgstr "Abvodka vyjavy/etykietki"
-
-#: ../capplets/about-me/eel-alert-dialog.c:115
-msgid "Width of border around the label and image in the alert dialog"
-msgstr "Šyrynia abvodki etykiety j vyjavy ŭ vaknie dyjalohu aściarohi"
-
-#: ../capplets/about-me/eel-alert-dialog.c:124
-msgid "Alert Type"
-msgstr "Vid aściarohi"
-
-#: ../capplets/about-me/eel-alert-dialog.c:125
-msgid "The type of alert"
-msgstr "Vid aściarohi"
-
-#: ../capplets/about-me/eel-alert-dialog.c:133
-msgid "Alert Buttons"
-msgstr "Knopki aściarohi"
-
-#: ../capplets/about-me/eel-alert-dialog.c:134
-msgid "The buttons shown in the alert dialog"
-msgstr "Knopki, bačnyja ŭ vaknie aściarohi"
-
-#: ../capplets/about-me/eel-alert-dialog.c:198
-msgid "Show more _details"
-msgstr "Pakažy _bolej detalaŭ"
-
 #: ../capplets/about-me/fingerprint-strings.h:28
 #, c-format
 msgid "Place your left thumb on %s"

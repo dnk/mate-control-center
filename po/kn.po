@@ -124,34 +124,6 @@ msgstr ""
 msgid "Description associated with a custom keybinding."
 msgstr ""
 
-#: ../capplets/about-me/eel-alert-dialog.c:110
-msgid "Image/label border"
-msgstr "ಚಿತ್ರ/ಲೇಬಲ್ ಅಂಚು"
-
-#: ../capplets/about-me/eel-alert-dialog.c:111
-msgid "Width of border around the label and image in the alert dialog"
-msgstr "ಎಚ್ಚರಿಕಾ ಸಂವಾದದಲ್ಲಿನ ಲೇಬಲ್‌ನ ಹಾಗು ಚಿತ್ರದ ಸುತ್ತಮುತ್ತಲಿನ ಅಂಚಿನ ಅಗಲ"
-
-#: ../capplets/about-me/eel-alert-dialog.c:120
-msgid "Alert Type"
-msgstr "ಎಚ್ಚರಿಕೆ ಬಗೆ"
-
-#: ../capplets/about-me/eel-alert-dialog.c:121
-msgid "The type of alert"
-msgstr "ಎಚ್ಚರಿಕೆಯ ಬಗೆ"
-
-#: ../capplets/about-me/eel-alert-dialog.c:129
-msgid "Alert Buttons"
-msgstr "ಎಚ್ಚರಿಕೆ ಗುಂಡಿಗಳು"
-
-#: ../capplets/about-me/eel-alert-dialog.c:130
-msgid "The buttons shown in the alert dialog"
-msgstr "ಎಚ್ಚರಿಕೆ ಸಂವಾದದಲ್ಲಿ ತೋರಿಸಲಾದ ಗುಂಡಿಗಳು"
-
-#: ../capplets/about-me/eel-alert-dialog.c:194
-msgid "Show more _details"
-msgstr "ಇನ್ನಷ್ಟು ವಿವರಗಳನ್ನು ತೋರಿಸು (_d)"
-
 #: ../capplets/about-me/mate-about-me.c:288
 msgid "Select Image"
 msgstr "ಚಿತ್ರವನ್ನು ಆರಿಸಿ"

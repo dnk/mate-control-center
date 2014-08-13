@@ -126,34 +126,6 @@ msgstr ""
 msgid "Description associated with a custom keybinding."
 msgstr ""
 
-#: ../capplets/about-me/eel-alert-dialog.c:110
-msgid "Image/label border"
-msgstr "ਚਿੱਤਰ/ਲੇਬਲ ਹਾਸ਼ੀਆ"
-
-#: ../capplets/about-me/eel-alert-dialog.c:111
-msgid "Width of border around the label and image in the alert dialog"
-msgstr "ਚੇਤਾਵਨੀ ਬਕਸੇ 'ਚ ਲੇਬਲ ਅਤੇ ਚਿੱਤਰ ਦੇ ਪਾਸੇ ਹਾਸ਼ੀਏ ਦੀ ਚੌੜਾਈ"
-
-#: ../capplets/about-me/eel-alert-dialog.c:120
-msgid "Alert Type"
-msgstr "ਚੇਤਾਵਨੀ ਕਿਸਮ"
-
-#: ../capplets/about-me/eel-alert-dialog.c:121
-msgid "The type of alert"
-msgstr "ਚੇਤਾਵਨੀ ਦੀ ਕਿਸਮ ਹੈ।"
-
-#: ../capplets/about-me/eel-alert-dialog.c:129
-msgid "Alert Buttons"
-msgstr "ਚੇਤਾਵਨੀ ਬਟਨ"
-
-#: ../capplets/about-me/eel-alert-dialog.c:130
-msgid "The buttons shown in the alert dialog"
-msgstr "ਚੇਤਾਵਨੀ ਡਾਈਲਾਗ 'ਚ ਬਟਨ ਵੇਖੋ"
-
-#: ../capplets/about-me/eel-alert-dialog.c:194
-msgid "Show more _details"
-msgstr "ਹੋਰ ਵੇਰਵਾ ਵੇਖੋ(_d)"
-
 #: ../capplets/about-me/mate-about-me.c:288
 msgid "Select Image"
 msgstr "ਚਿੱਤਰ ਚੁਣੋ(_S)"

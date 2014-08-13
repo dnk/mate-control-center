@@ -125,34 +125,6 @@ msgstr ""
 msgid "Description associated with a custom keybinding."
 msgstr ""
 
-#: ../capplets/about-me/eel-alert-dialog.c:110
-msgid "Image/label border"
-msgstr "చిత్రము/లేబుల్ సరిహద్దు"
-
-#: ../capplets/about-me/eel-alert-dialog.c:111
-msgid "Width of border around the label and image in the alert dialog"
-msgstr "సంకేత డైలాగ్ లోని లేబుల్ మరియు చిత్రము చుట్టూ ఉన్న సరిహద్దు యొక్క వెడల్పు"
-
-#: ../capplets/about-me/eel-alert-dialog.c:120
-msgid "Alert Type"
-msgstr "హెచ్చరిక రకము"
-
-#: ../capplets/about-me/eel-alert-dialog.c:121
-msgid "The type of alert"
-msgstr "హెచ్చరిక యొక్క రకము"
-
-#: ../capplets/about-me/eel-alert-dialog.c:129
-msgid "Alert Buttons"
-msgstr "సంకేతం బటన్లు"
-
-#: ../capplets/about-me/eel-alert-dialog.c:130
-msgid "The buttons shown in the alert dialog"
-msgstr "సంకేతం డైలాగ్ నందు చూపించబడిన బటన్లు"
-
-#: ../capplets/about-me/eel-alert-dialog.c:194
-msgid "Show more _details"
-msgstr "చాలా వివరింపులు చూపుము(_d)"
-
 #: ../capplets/about-me/mate-about-me.c:288
 msgid "Select Image"
 msgstr "ప్రతిబింబమును యెంపికచేయుము"

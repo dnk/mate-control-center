@@ -134,34 +134,6 @@ msgstr "الاسم"
 msgid "Description associated with a custom keybinding."
 msgstr "الوصف المقترن بارتباطات المفاتيح المخصّصة."
 
-#: ../capplets/about-me/eel-alert-dialog.c:110
-msgid "Image/label border"
-msgstr "حدود الصّورة/العلامة"
-
-#: ../capplets/about-me/eel-alert-dialog.c:111
-msgid "Width of border around the label and image in the alert dialog"
-msgstr "عرض الحدود حول العلامة و الصّورة في حوار التّنبيه"
-
-#: ../capplets/about-me/eel-alert-dialog.c:120
-msgid "Alert Type"
-msgstr "نوع التّنبيه"
-
-#: ../capplets/about-me/eel-alert-dialog.c:121
-msgid "The type of alert"
-msgstr "نوع التّنبيه"
-
-#: ../capplets/about-me/eel-alert-dialog.c:129
-msgid "Alert Buttons"
-msgstr "أزرار التّنبيه"
-
-#: ../capplets/about-me/eel-alert-dialog.c:130
-msgid "The buttons shown in the alert dialog"
-msgstr "الأزرار المعروضة في حوار التّنبيه"
-
-#: ../capplets/about-me/eel-alert-dialog.c:194
-msgid "Show more _details"
-msgstr "أظهر _تفاصيل أكثر"
-
 #: ../capplets/about-me/mate-about-me.c:288
 msgid "Select Image"
 msgstr "اختر صورة"

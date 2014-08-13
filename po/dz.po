@@ -123,34 +123,6 @@ msgstr ""
 msgid "Description associated with a custom keybinding."
 msgstr ""
 
-#: ../capplets/about-me/eel-alert-dialog.c:110
-msgid "Image/label border"
-msgstr "གཟུགས་བརྙན་/ཁ་ཡིག་གི་མཐའ་མཚམས།"
-
-#: ../capplets/about-me/eel-alert-dialog.c:111
-msgid "Width of border around the label and image in the alert dialog"
-msgstr "དྲན་བརྡའི་ཌའི་ལོག་ནང་ ཁ་ཡིག་དང་ གཟུགས་བརྙན་གྱི་མཐའ་སྐོར་ལུ་ མཐའ་མཚམས་ཀྱི་རྒྱ་ཚད།"
-
-#: ../capplets/about-me/eel-alert-dialog.c:120
-msgid "Alert Type"
-msgstr "དྲན་བརྡའི་དབྱེ་བ།"
-
-#: ../capplets/about-me/eel-alert-dialog.c:121
-msgid "The type of alert"
-msgstr "དྲན་བརྡའི་དབྱེ་བ།"
-
-#: ../capplets/about-me/eel-alert-dialog.c:129
-msgid "Alert Buttons"
-msgstr "དྲན་བརྡའི་ཨེབ་རྟ་ཚུ།"
-
-#: ../capplets/about-me/eel-alert-dialog.c:130
-msgid "The buttons shown in the alert dialog"
-msgstr "དྲན་བརྡའི་ཌའི་ལོག་ནང་སྟོན་མི་ཨེབ་རྟ་ཚུ།"
-
-#: ../capplets/about-me/eel-alert-dialog.c:194
-msgid "Show more _details"
-msgstr "རྒྱས་བཤད་ཧེང་བཀལ་སྟོན།(_d)"
-
 #: ../capplets/about-me/mate-about-me.c:288
 msgid "Select Image"
 msgstr "གཟུགས་བརྙན་སེལ་འཐུ་འབད།"

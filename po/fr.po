@@ -140,34 +140,6 @@ msgstr "Nom"
 msgid "Description associated with a custom keybinding."
 msgstr "Description associée avec une attribution de touche personnalisée."
 
-#: ../capplets/about-me/eel-alert-dialog.c:110
-msgid "Image/label border"
-msgstr "Bordure de l'image/étiquette"
-
-#: ../capplets/about-me/eel-alert-dialog.c:111
-msgid "Width of border around the label and image in the alert dialog"
-msgstr "Largeur de la bordure autour de l'étiquette et de l'image dans la boîte de dialogue d'alerte"
-
-#: ../capplets/about-me/eel-alert-dialog.c:120
-msgid "Alert Type"
-msgstr "Type d'alerte"
-
-#: ../capplets/about-me/eel-alert-dialog.c:121
-msgid "The type of alert"
-msgstr "Le type d'alerte"
-
-#: ../capplets/about-me/eel-alert-dialog.c:129
-msgid "Alert Buttons"
-msgstr "Boutons d'alerte"
-
-#: ../capplets/about-me/eel-alert-dialog.c:130
-msgid "The buttons shown in the alert dialog"
-msgstr "Les boutons affichés dans la boîte de dialogue d'alerte"
-
-#: ../capplets/about-me/eel-alert-dialog.c:194
-msgid "Show more _details"
-msgstr "Afficher plus de _détails"
-
 #: ../capplets/about-me/mate-about-me.c:288
 msgid "Select Image"
 msgstr "Sélectionner une image"

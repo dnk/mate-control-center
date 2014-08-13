@@ -125,34 +125,6 @@ msgstr "ስም "
 msgid "Description associated with a custom keybinding."
 msgstr ""
 
-#: ../capplets/about-me/eel-alert-dialog.c:110
-msgid "Image/label border"
-msgstr "የ ምስል/የ ምልክት ድንበር"
-
-#: ../capplets/about-me/eel-alert-dialog.c:111
-msgid "Width of border around the label and image in the alert dialog"
-msgstr ""
-
-#: ../capplets/about-me/eel-alert-dialog.c:120
-msgid "Alert Type"
-msgstr "የማስጠንቀቂያ አይነት"
-
-#: ../capplets/about-me/eel-alert-dialog.c:121
-msgid "The type of alert"
-msgstr "የማስጠንቀቂያው አይነት"
-
-#: ../capplets/about-me/eel-alert-dialog.c:129
-msgid "Alert Buttons"
-msgstr "የማስጠንቀቂያ ቁልፎች"
-
-#: ../capplets/about-me/eel-alert-dialog.c:130
-msgid "The buttons shown in the alert dialog"
-msgstr "በማስጠንቀቂያ ንግግር ውስጥ የሚታዩት ቁልፎች"
-
-#: ../capplets/about-me/eel-alert-dialog.c:194
-msgid "Show more _details"
-msgstr "ተጨማሪ _ዝርዝሮች ማሳያ "
-
 #: ../capplets/about-me/mate-about-me.c:288
 msgid "Select Image"
 msgstr "ምስል ይምረጡ"

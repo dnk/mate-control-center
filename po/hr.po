@@ -127,34 +127,6 @@ msgstr "Naziv"
 msgid "Description associated with a custom keybinding."
 msgstr "Opis pridružen prilagođenoj vezi tipaka."
 
-#: ../capplets/about-me/eel-alert-dialog.c:110
-msgid "Image/label border"
-msgstr "Obrub slike/oznake"
-
-#: ../capplets/about-me/eel-alert-dialog.c:111
-msgid "Width of border around the label and image in the alert dialog"
-msgstr "Širina obruba oko oznake i slike u dijaloškom okviru upozorenja"
-
-#: ../capplets/about-me/eel-alert-dialog.c:120
-msgid "Alert Type"
-msgstr "Vrsta upozorenja"
-
-#: ../capplets/about-me/eel-alert-dialog.c:121
-msgid "The type of alert"
-msgstr "Vrsta upozorenja"
-
-#: ../capplets/about-me/eel-alert-dialog.c:129
-msgid "Alert Buttons"
-msgstr "Gumbi upozorenja"
-
-#: ../capplets/about-me/eel-alert-dialog.c:130
-msgid "The buttons shown in the alert dialog"
-msgstr "Gumbi prikazani u dijaloškom okviru upozorenja"
-
-#: ../capplets/about-me/eel-alert-dialog.c:194
-msgid "Show more _details"
-msgstr "Pokaži više _pojedinosti"
-
 #: ../capplets/about-me/mate-about-me.c:288
 msgid "Select Image"
 msgstr "Odaberi sliku"

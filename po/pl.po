@@ -127,34 +127,6 @@ msgstr "Nazwa"
 msgid "Description associated with a custom keybinding."
 msgstr "Opis powiązany z niestandardowym skrótem klawiszowym."
 
-#: ../capplets/about-me/eel-alert-dialog.c:110
-msgid "Image/label border"
-msgstr "Krawędź obrazu/etykiety"
-
-#: ../capplets/about-me/eel-alert-dialog.c:111
-msgid "Width of border around the label and image in the alert dialog"
-msgstr "Szerokość krawędzi etykiety i obrazu w oknie dialogowym powiadomienia"
-
-#: ../capplets/about-me/eel-alert-dialog.c:120
-msgid "Alert Type"
-msgstr "Rodzaj powiadomienia"
-
-#: ../capplets/about-me/eel-alert-dialog.c:121
-msgid "The type of alert"
-msgstr "Rodzaj powiadomienia"
-
-#: ../capplets/about-me/eel-alert-dialog.c:129
-msgid "Alert Buttons"
-msgstr "Przyciski powiadomienia"
-
-#: ../capplets/about-me/eel-alert-dialog.c:130
-msgid "The buttons shown in the alert dialog"
-msgstr "Przyciski wyświetlane w oknie powiadomienia"
-
-#: ../capplets/about-me/eel-alert-dialog.c:194
-msgid "Show more _details"
-msgstr "_Więcej szczegółów"
-
 #: ../capplets/about-me/mate-about-me.c:288
 msgid "Select Image"
 msgstr "Wybór obrazu"

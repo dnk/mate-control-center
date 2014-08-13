@@ -126,34 +126,6 @@ msgstr ""
 msgid "Description associated with a custom keybinding."
 msgstr ""
 
-#: ../capplets/about-me/eel-alert-dialog.c:110
-msgid "Image/label border"
-msgstr "ছবি/লেবেলৰ প্ৰান্তৰেখা"
-
-#: ../capplets/about-me/eel-alert-dialog.c:111
-msgid "Width of border around the label and image in the alert dialog"
-msgstr "সতৰ্কবাৰ্তা প্ৰদৰ্শনকাৰী সম্বাদ বক্সৰ লেবেল আৰু ছবিৰ প্ৰান্তৰেখাৰ প্ৰস্থ"
-
-#: ../capplets/about-me/eel-alert-dialog.c:120
-msgid "Alert Type"
-msgstr "সতৰ্কবাৰ্তাৰ ধৰণ"
-
-#: ../capplets/about-me/eel-alert-dialog.c:121
-msgid "The type of alert"
-msgstr "সতৰ্কবাৰ্তাৰ ধৰণ"
-
-#: ../capplets/about-me/eel-alert-dialog.c:129
-msgid "Alert Buttons"
-msgstr "সতৰ্কতামূলক বুটাম"
-
-#: ../capplets/about-me/eel-alert-dialog.c:130
-msgid "The buttons shown in the alert dialog"
-msgstr "সতৰ্কবাৰ্তাৰ সম্বাদ-বক্সত প্ৰদৰ্শিত বুটাম"
-
-#: ../capplets/about-me/eel-alert-dialog.c:194
-msgid "Show more _details"
-msgstr "অতিৰিক্ত বিৱৰণ প্ৰদৰ্শন কৰা হ'ব (_d)"
-
 #: ../capplets/about-me/mate-about-me.c:288
 msgid "Select Image"
 msgstr "ছবি বাচক"

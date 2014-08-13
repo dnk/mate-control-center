@@ -124,34 +124,6 @@ msgstr ""
 msgid "Description associated with a custom keybinding."
 msgstr ""
 
-#: ../capplets/about-me/eel-alert-dialog.c:110
-msgid "Image/label border"
-msgstr "පිළිඹිබුව/ලේබලය රාමුව"
-
-#: ../capplets/about-me/eel-alert-dialog.c:111
-msgid "Width of border around the label and image in the alert dialog"
-msgstr "විපරම් සංවාද කොටුව තුළ වූ ලේබලය සහ පිළිඹිබුව වටා ඇති රාමුවේ ඝනකම"
-
-#: ../capplets/about-me/eel-alert-dialog.c:120
-msgid "Alert Type"
-msgstr "විපරම් වර්ගය"
-
-#: ../capplets/about-me/eel-alert-dialog.c:121
-msgid "The type of alert"
-msgstr "විපරමෙහි වර්ගය"
-
-#: ../capplets/about-me/eel-alert-dialog.c:129
-msgid "Alert Buttons"
-msgstr "විපරම් බොත්තම්"
-
-#: ../capplets/about-me/eel-alert-dialog.c:130
-msgid "The buttons shown in the alert dialog"
-msgstr "විපරම් සංවාද කොටුව තුළ පෙන්වන බොත්තම් වර්‍ග"
-
-#: ../capplets/about-me/eel-alert-dialog.c:194
-msgid "Show more _details"
-msgstr "වැඩි විස්තර පෙන්වන්න (_d)"
-
 #: ../capplets/about-me/mate-about-me.c:288
 msgid "Select Image"
 msgstr "පිළිඹිබුව තෝරන්න"

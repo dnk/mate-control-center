@@ -130,34 +130,6 @@ msgstr ""
 msgid "Description associated with a custom keybinding."
 msgstr ""
 
-#: ../capplets/about-me/eel-alert-dialog.c:110
-msgid "Image/label border"
-msgstr "படம்/பெயர் எல்லை"
-
-#: ../capplets/about-me/eel-alert-dialog.c:111
-msgid "Width of border around the label and image in the alert dialog"
-msgstr "எச்சரிக்கை உரையாடலில் பெயர் மற்றும் உருவை சுற்றிலும் உள்ள எல்லை அகலம்"
-
-#: ../capplets/about-me/eel-alert-dialog.c:120
-msgid "Alert Type"
-msgstr "எச்சரிக்கையின் வகை"
-
-#: ../capplets/about-me/eel-alert-dialog.c:121
-msgid "The type of alert"
-msgstr "எச்சரிக்கையின் வகை"
-
-#: ../capplets/about-me/eel-alert-dialog.c:129
-msgid "Alert Buttons"
-msgstr "எச்சரிக்கை பொத்தான்கள்"
-
-#: ../capplets/about-me/eel-alert-dialog.c:130
-msgid "The buttons shown in the alert dialog"
-msgstr "எச்சரிக்கை உரையாடலில் காட்டப்பட்ட பொத்தான்கள்"
-
-#: ../capplets/about-me/eel-alert-dialog.c:194
-msgid "Show more _details"
-msgstr "கூடுதல் விவரங்களை காட்டவும் (_d)"
-
 #: ../capplets/about-me/mate-about-me.c:288
 msgid "Select Image"
 msgstr "படத்தைத் தேர்ந்தெடு"

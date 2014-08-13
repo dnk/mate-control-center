@@ -135,34 +135,6 @@ msgstr "Név"
 msgid "Description associated with a custom keybinding."
 msgstr "A leírás hozzárendelve az egyéni billentyűparancshoz."
 
-#: ../capplets/about-me/eel-alert-dialog.c:110
-msgid "Image/label border"
-msgstr "Kép/felirat szegélye"
-
-#: ../capplets/about-me/eel-alert-dialog.c:111
-msgid "Width of border around the label and image in the alert dialog"
-msgstr "A feliratot és a képet körülvevő szegély szélessége a figyelmeztető párbeszédablakon"
-
-#: ../capplets/about-me/eel-alert-dialog.c:120
-msgid "Alert Type"
-msgstr "Figyelmeztetés típusa"
-
-#: ../capplets/about-me/eel-alert-dialog.c:121
-msgid "The type of alert"
-msgstr "A figyelmeztetés típusa"
-
-#: ../capplets/about-me/eel-alert-dialog.c:129
-msgid "Alert Buttons"
-msgstr "Figyelmeztetés gombok"
-
-#: ../capplets/about-me/eel-alert-dialog.c:130
-msgid "The buttons shown in the alert dialog"
-msgstr "A figyelmeztető párbeszédablakon megjelenő gombok"
-
-#: ../capplets/about-me/eel-alert-dialog.c:194
-msgid "Show more _details"
-msgstr "Több _részlet megjelenítése"
-
 #: ../capplets/about-me/mate-about-me.c:288
 msgid "Select Image"
 msgstr "Kép kiválasztása"

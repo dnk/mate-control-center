@@ -132,34 +132,6 @@ msgstr "Názov"
 msgid "Description associated with a custom keybinding."
 msgstr "Popis asociovaný s vlastnou klávesovou skratkou"
 
-#: ../capplets/about-me/eel-alert-dialog.c:110
-msgid "Image/label border"
-msgstr "Okraj obrázka/popisu"
-
-#: ../capplets/about-me/eel-alert-dialog.c:111
-msgid "Width of border around the label and image in the alert dialog"
-msgstr "Šírka okraja okolo popisu a obrázka v dialógovom okne výstrahy"
-
-#: ../capplets/about-me/eel-alert-dialog.c:120
-msgid "Alert Type"
-msgstr "Typ výstrahy"
-
-#: ../capplets/about-me/eel-alert-dialog.c:121
-msgid "The type of alert"
-msgstr "Typ výstrahy"
-
-#: ../capplets/about-me/eel-alert-dialog.c:129
-msgid "Alert Buttons"
-msgstr "Tlačidlá výstrahy"
-
-#: ../capplets/about-me/eel-alert-dialog.c:130
-msgid "The buttons shown in the alert dialog"
-msgstr "Tlačidlá zobrazené v dialógovom okne výstrahy"
-
-#: ../capplets/about-me/eel-alert-dialog.c:194
-msgid "Show more _details"
-msgstr "Zobraziť viac _podrobností"
-
 #: ../capplets/about-me/mate-about-me.c:288
 msgid "Select Image"
 msgstr "Vybrať obrázok"

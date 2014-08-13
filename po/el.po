@@ -135,34 +135,6 @@ msgstr "Όνομα"
 msgid "Description associated with a custom keybinding."
 msgstr "Περιγραφή συσχετισμένη με συγκεκριμένο συνδυασμό πλήκτρων"
 
-#: ../capplets/about-me/eel-alert-dialog.c:110
-msgid "Image/label border"
-msgstr "Περίγραμμα εικόνας/ετικέτας"
-
-#: ../capplets/about-me/eel-alert-dialog.c:111
-msgid "Width of border around the label and image in the alert dialog"
-msgstr "Πλάτος του περιγράμματος γύρω από την ετικέτα και την εικόνα στο διάλογο προειδοποίησης"
-
-#: ../capplets/about-me/eel-alert-dialog.c:120
-msgid "Alert Type"
-msgstr "Τύπος προειδοποίησης"
-
-#: ../capplets/about-me/eel-alert-dialog.c:121
-msgid "The type of alert"
-msgstr "Ο τύπος της προειδοποίησης"
-
-#: ../capplets/about-me/eel-alert-dialog.c:129
-msgid "Alert Buttons"
-msgstr "Κουμπιά ειδοποίησης"
-
-#: ../capplets/about-me/eel-alert-dialog.c:130
-msgid "The buttons shown in the alert dialog"
-msgstr "Τα κουμπιά που θα εμφανίζονται στον διάλογο προειδοποίησης"
-
-#: ../capplets/about-me/eel-alert-dialog.c:194
-msgid "Show more _details"
-msgstr "Προβολή περισσότερων _λεπτομερειών"
-
 #: ../capplets/about-me/mate-about-me.c:288
 msgid "Select Image"
 msgstr "Επιλογή εικόνας"

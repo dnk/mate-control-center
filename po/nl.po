@@ -132,34 +132,6 @@ msgstr "Naam"
 msgid "Description associated with a custom keybinding."
 msgstr "Beschrijving die is geassocieerd met een zelftoegewezen sneltoets."
 
-#: ../capplets/about-me/eel-alert-dialog.c:110
-msgid "Image/label border"
-msgstr "Rand afbeelding/opschrift"
-
-#: ../capplets/about-me/eel-alert-dialog.c:111
-msgid "Width of border around the label and image in the alert dialog"
-msgstr "Breedte van de rand om het opschrift en de afbeelding in het waarschuwingsvenster"
-
-#: ../capplets/about-me/eel-alert-dialog.c:120
-msgid "Alert Type"
-msgstr "Type waarschuwing"
-
-#: ../capplets/about-me/eel-alert-dialog.c:121
-msgid "The type of alert"
-msgstr "Het type waarschuwingsvenster"
-
-#: ../capplets/about-me/eel-alert-dialog.c:129
-msgid "Alert Buttons"
-msgstr "Waarschuwingsknoppen"
-
-#: ../capplets/about-me/eel-alert-dialog.c:130
-msgid "The buttons shown in the alert dialog"
-msgstr "De getoonde knoppen in het waarschuwingsvenster"
-
-#: ../capplets/about-me/eel-alert-dialog.c:194
-msgid "Show more _details"
-msgstr "Meer _details tonen"
-
 #: ../capplets/about-me/mate-about-me.c:288
 msgid "Select Image"
 msgstr "Afbeelding selecteren"
