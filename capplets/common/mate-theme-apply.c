@@ -23,6 +23,7 @@
 
 #include <string.h>
 #include <gio/gio.h>
+#include <libmate-desktop/mate-gsettings.h>
 #include "mate-theme-apply.h"
 #include "gtkrc-utils.h"
 
@@ -61,9 +62,6 @@ mate_meta_theme_set (MateThemeMetaInfo *meta_theme_info)
   marco_settings = g_settings_new (MARCO_SCHEMA);
   mouse_settings = g_settings_new (MOUSE_SCHEMA);
   
-  /* We  need this because mate-control-center does not depend on mate-notification-daemon,
-   * and if we try to get notification theme without schema installed, gsettings crashes
-   * see https://bugzilla.gnome.org/show_bug.cgi?id=651225 */
   schema_source = g_settings_schema_source_get_default ();
   schema = g_settings_schema_source_lookup (schema_source, NOTIFICATION_SCHEMA, TRUE);
 
