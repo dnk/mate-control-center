@@ -1777,8 +1777,6 @@ paint_output (App *app, cairo_t *cr, int i)
     g_debug ("%f %f %f %f", x, y, w * scale + 0.5, h * scale + 0.5);
 #endif
 
-    cairo_save (cr);
-
     cairo_translate (cr,
 		     x + (w * scale + 0.5) / 2,
 		     y + (h * scale + 0.5) / 2);
@@ -1869,12 +1867,19 @@ paint_output (App *app, cairo_t *cr, int i)
     g_object_unref (layout);
 }
 
+#if GTK_CHECK_VERSION (3, 0, 0)
+static void
+on_area_paint (FooScrollArea *area,
+	       cairo_t	     *cr,
+	       gpointer	      data)
+#else
 static void
 on_area_paint (FooScrollArea *area,
 	       cairo_t	     *cr,
 	       GdkRectangle  *extent,
 	       GdkRegion     *region,
 	       gpointer	      data)
+#endif
 {
     App *app = data;
     GList *connected_outputs = NULL;
