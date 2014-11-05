@@ -225,9 +225,6 @@ theme_load_from_gsettings (AppearanceData *data)
   if (theme->icon_theme_name == NULL)
     theme->icon_theme_name = g_strdup ("menta");
 
-  /* We  need this because mate-control-center does not depend on mate-notification-daemon,
-   * and if we try to get notification theme without schema installed, gsettings crashes
-   * see https://bugzilla.gnome.org/show_bug.cgi?id=651225 */
   schema = g_settings_schema_source_lookup (g_settings_schema_source_get_default (), NOTIFICATION_SCHEMA, TRUE);
   if (schema != NULL) {
     GSettings *notification_settings;

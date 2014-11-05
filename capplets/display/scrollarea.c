@@ -325,9 +325,14 @@ foo_scroll_area_class_init (FooScrollAreaClass *class)
 				       paint),
 		      NULL, NULL,
 		      foo_marshal_VOID__POINTER_BOXED_POINTER,
-		      G_TYPE_NONE, 3,
+		      G_TYPE_NONE,
+#if GTK_CHECK_VERSION (3, 0, 0)
+                      1,
+#else
+                      3,
 		      G_TYPE_POINTER,
 		      GDK_TYPE_RECTANGLE, 
+#endif
 		      G_TYPE_POINTER);
 
 #if !GTK_CHECK_VERSION (3, 0, 0)
