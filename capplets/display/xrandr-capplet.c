@@ -533,7 +533,7 @@ rebuild_current_monitor_label (App *app)
 	     * theme's colors, since the label is always shown against a light
 	     * pastel background.  See bgo#556050
 	     */
-	    gtk_widget_override_background_color (app->current_monitor_label, gtk_widget_get_state_flags (app->current_monitor_label), &black);
+	    gtk_widget_override_color (app->current_monitor_label, gtk_widget_get_state_flags (app->current_monitor_label), &black); 
 #else
 	    GdkColor black = { 0, 0, 0, 0 };
 
