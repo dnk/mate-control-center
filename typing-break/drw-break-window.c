@@ -601,42 +601,41 @@ label_expose_event_cb (GtkLabel       *label,
 		       gpointer        user_data)
 {
 	gint       x, y;
-#if !GTK_CHECK_VERSION (3, 0, 0)
 	GdkColor   color;
-#endif
 	GtkWidget *widget;
-#if !GTK_CHECK_VERSION (3, 0, 0)
 	GdkWindow *window;
-	GdkGC     *gc;
+#if !GTK_CHECK_VERSION (3, 0, 0)
+	cairo_t *cr;
+#endif
 
 	color.red = 0;
 	color.green = 0;
 	color.blue = 0;
 	color.pixel = 0;
-#endif
 
 	get_layout_location (label, &x, &y);
 
 	widget = GTK_WIDGET (label);
-
-#if !GTK_CHECK_VERSION (3, 0, 0)
 	window = gtk_widget_get_window (widget);
-	gc = gdk_gc_new (window);
-	gdk_gc_set_rgb_fg_color (gc, &color);
-	gdk_gc_set_clip_rectangle (gc, &event->area);
-#endif
 
 #if GTK_CHECK_VERSION (3, 0, 0)
 	pango_cairo_show_layout (cr, gtk_label_get_layout (label));
 #else
-	gdk_draw_layout_with_colors (window,
-				     gc,
-				     x + 1,
-				     y + 1,
-				     gtk_label_get_layout (label),
-				     &color,
-				     NULL);
-	g_object_unref (gc);
+	cr = gdk_cairo_create (window);
+
+        gdk_cairo_rectangle (cr, &event->area);
+        cairo_clip (cr);
+
+        cairo_set_source_rgb (cr, 0, 0, 0);
+
+        /* Can't use pango_cairo_show_layout() here as we need to override
+         * the layout's colors with our shadow color.
+         */
+        cairo_move_to (cr, x + 1, y + 1);
+        pango_cairo_layout_path (cr, gtk_label_get_layout (label));
+        cairo_fill (cr);
+
+        cairo_destroy (cr);
 #endif
 
 	gtk_paint_layout (gtk_widget_get_style (widget),

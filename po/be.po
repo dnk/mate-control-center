@@ -7,20 +7,20 @@
 # Mihail Varantsou <meequz@gmail.com>, 2014
 # Mihail Varantsou <meequz@gmail.com>, 2014
 # Mihail Varantsou <meequz@gmail.com>, 2014
-# Vital Khilko <dojlid@mova.org>, 2003,2014
+# Vital Khilko <dojlid@mova.org>, 2003,2014-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: MATE Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-23 16:27+0100\n"
-"PO-Revision-Date: 2014-04-09 08:41+0000\n"
-"Last-Translator: Mihail Varantsou <meequz@gmail.com>\n"
+"POT-Creation-Date: 2015-07-01 11:41+0200\n"
+"PO-Revision-Date: 2015-07-01 09:43+0000\n"
+"Last-Translator: infirit <infirit@gmail.com>\n"
 "Language-Team: Belarusian (http://www.transifex.com/projects/p/MATE/language/be/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: be\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #: ../org.mate.control-center.gschema.xml.in.in.h:1
 msgid ""
@@ -41,7 +41,7 @@ msgstr ""
 
 #: ../org.mate.control-center.gschema.xml.in.in.h:4
 msgid "Close the control-center when a task is activated"
-msgstr "Закрыйце цэнтр кіравання, калі будзе задзейнічанае заданне"
+msgstr "Закрыць цэнтр кіравання, калі актывуецца заданне"
 
 #: ../org.mate.control-center.gschema.xml.in.in.h:5
 msgid ""
@@ -50,7 +50,7 @@ msgstr ""
 
 #: ../org.mate.control-center.gschema.xml.in.in.h:6
 msgid "Exit shell on start action performed"
-msgstr "Выйсці з абалонкі па старце"
+msgstr "Выйсці з абалонкі, калі выканана дзеянне Старт"
 
 #: ../org.mate.control-center.gschema.xml.in.in.h:7
 msgid "Indicates whether to close the shell when a start action is performed."
@@ -58,7 +58,7 @@ msgstr ""
 
 #: ../org.mate.control-center.gschema.xml.in.in.h:8
 msgid "Exit shell on help action performed"
-msgstr "Выйсці з абалонкі па адкрыцці даведніка"
+msgstr "Выйсці з абалонкі, калі выканана дзеянне Даведка"
 
 #: ../org.mate.control-center.gschema.xml.in.in.h:9
 msgid "Indicates whether to close the shell when a help action is performed."
@@ -66,7 +66,7 @@ msgstr ""
 
 #: ../org.mate.control-center.gschema.xml.in.in.h:10
 msgid "Exit shell on add or remove action performed"
-msgstr "Выйсці з абалонкі па даданні альбо выдаленні"
+msgstr "Выйсці з абалонкі, калі выканана дзеянне Дадаць ці Выдаліць"
 
 #: ../org.mate.control-center.gschema.xml.in.in.h:11
 msgid ""
@@ -76,7 +76,7 @@ msgstr ""
 
 #: ../org.mate.control-center.gschema.xml.in.in.h:12
 msgid "Exit shell on upgrade or uninstall action performed"
-msgstr "Выйсці з абалонкі па абнаўленні альбо выдаленні ўсталяваных файлаў"
+msgstr "Выйсці з абалонкі, калі выканана дзеянне Абнавіць ці Дэінсталяваць"
 
 #: ../org.mate.control-center.gschema.xml.in.in.h:13
 msgid ""
@@ -128,6 +128,34 @@ msgstr "Назва"
 msgid "Description associated with a custom keybinding."
 msgstr ""
 
+#: ../capplets/about-me/eel-alert-dialog.c:110
+msgid "Image/label border"
+msgstr "Мяжа выявы/меціны"
+
+#: ../capplets/about-me/eel-alert-dialog.c:111
+msgid "Width of border around the label and image in the alert dialog"
+msgstr "Шырыня мяжы вакол меціны і выявы ў акне папярэджання"
+
+#: ../capplets/about-me/eel-alert-dialog.c:120
+msgid "Alert Type"
+msgstr "Тып папярэджання"
+
+#: ../capplets/about-me/eel-alert-dialog.c:121
+msgid "The type of alert"
+msgstr "Тып папярэджання"
+
+#: ../capplets/about-me/eel-alert-dialog.c:129
+msgid "Alert Buttons"
+msgstr "Кнопкі акна папярэджання"
+
+#: ../capplets/about-me/eel-alert-dialog.c:130
+msgid "The buttons shown in the alert dialog"
+msgstr "Кнопкі, якія трэба паказваць у акне папярэджання"
+
+#: ../capplets/about-me/eel-alert-dialog.c:194
+msgid "Show more _details"
+msgstr "Паказаць па_драбязнасці"
+
 #: ../capplets/about-me/mate-about-me.c:288
 msgid "Select Image"
 msgstr "Выбраць выяву"
@@ -142,7 +170,7 @@ msgid "Images"
 msgstr "Выявы"
 
 #: ../capplets/about-me/mate-about-me.c:322
-#: ../capplets/appearance/theme-installer.c:774
+#: ../capplets/appearance/theme-installer.c:783
 msgid "All Files"
 msgstr "Усе файлы"
 
@@ -174,11 +202,11 @@ msgstr "Змяніць па_роль..."
 
 #: ../capplets/about-me/mate-about-me-dialog.ui.h:6
 msgid "Enable _Fingerprint Login..."
-msgstr ""
+msgstr "Укл. уваход па адбітках пальцаў..."
 
 #: ../capplets/about-me/mate-about-me-dialog.ui.h:7
 msgid "Disable _Fingerprint Login..."
-msgstr ""
+msgstr "Адкл. уваход па адбітках пальцаў..."
 
 #: ../capplets/about-me/mate-about-me.desktop.in.in.h:2
 msgid "Set your personal information"
@@ -485,7 +513,7 @@ msgstr "_Уключыць дапаможныя тэхналогіі"
 msgid ""
 "Changes to enable assistive technologies will not take effect until your "
 "next log in."
-msgstr "Дапаможныя тэхналогіі уключацца ў наступным сеансе."
+msgstr "Дапаможныя тэхналогіі ўключацца ў наступным сеансе."
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:7
 msgid "Preferences"
@@ -509,7 +537,7 @@ msgstr ""
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:12
 msgid "Accessible Lo_gin"
-msgstr ""
+msgstr "Даступны ўваход"
 
 #: ../capplets/accessibility/at-properties/at-enable-dialog.ui.h:13
 msgid "Jump to the Accessible Login dialog"
@@ -521,7 +549,7 @@ msgstr "Закрыць і _скончыць сеанс"
 
 #: ../capplets/accessibility/at-properties/mate-at-properties.desktop.in.in.h:2
 msgid "Choose which accessibility features to enable when you log in"
-msgstr ""
+msgstr "Выбраць, якія функцыі даступнасці ўключыць пры ўваходзе"
 
 #: ../capplets/appearance/appearance-desktop.c:619
 msgid "Add Wallpaper"
@@ -531,101 +559,101 @@ msgstr "Дадаць абрус"
 msgid "All files"
 msgstr "Усе файлы"
 
-#: ../capplets/appearance/appearance-main.c:59
+#: ../capplets/appearance/appearance-main.c:57
 #, c-format
 msgid "Could not load user interface file: %s"
-msgstr ""
+msgstr "Не выйшла загрузіць файл інтэрфейса: %s"
 
-#: ../capplets/appearance/appearance-main.c:155
+#: ../capplets/appearance/appearance-main.c:161
 msgid "Specify the filename of a theme to install"
 msgstr "Падайце назву файла з новай тэмай"
 
-#: ../capplets/appearance/appearance-main.c:156
+#: ../capplets/appearance/appearance-main.c:162
 msgid "filename"
 msgstr "назва_файла"
 
 #. TRANSLATORS: don't translate the terms in brackets
-#: ../capplets/appearance/appearance-main.c:163
+#: ../capplets/appearance/appearance-main.c:169
 msgid ""
 "Specify the name of the page to show (theme|background|fonts|interface)"
 msgstr ""
 
-#: ../capplets/appearance/appearance-main.c:164
-#: ../capplets/default-applications/mate-da-capplet.c:575
+#: ../capplets/appearance/appearance-main.c:170
+#: ../capplets/default-applications/mate-da-capplet.c:694
 #: ../capplets/mouse/mate-mouse-properties.c:496
 msgid "page"
 msgstr "старонка"
 
-#: ../capplets/appearance/appearance-main.c:171
+#: ../capplets/appearance/appearance-main.c:177
 msgid "[WALLPAPER...]"
 msgstr "[АБРУС...]"
 
 #: ../capplets/appearance/appearance-style.c:171
 #: ../capplets/common/mate-theme-info.c:497
-#: ../capplets/common/mate-theme-info.c:694
+#: ../capplets/common/mate-theme-info.c:690
 msgid "Default Pointer"
 msgstr "Стандартны паказальнік"
 
 #: ../capplets/appearance/appearance-style.c:233
-#: ../capplets/appearance/appearance-themes.c:674
+#: ../capplets/appearance/appearance-themes.c:661
 msgid "Install"
 msgstr "Усталяваць"
 
-#: ../capplets/appearance/appearance-style.c:255
-#: ../capplets/common/mate-theme-info.c:1724
+#: ../capplets/appearance/appearance-style.c:256
+#: ../capplets/common/mate-theme-info.c:1727
 #, c-format
 msgid ""
 "This theme will not look as intended because the required GTK+ theme engine "
 "'%s' is not installed."
-msgstr ""
+msgstr "Гэтая тэма не будзе выглядаць належным чынам, бо яна патрабуе тэмавы рухавік для GTK+'%s', які не ўсталяваны."
 
-#: ../capplets/appearance/appearance-themes.c:662
+#: ../capplets/appearance/appearance-themes.c:649
 msgid "Apply Background"
-msgstr ""
+msgstr "Ужыць фон"
 
-#: ../capplets/appearance/appearance-themes.c:666
+#: ../capplets/appearance/appearance-themes.c:653
 msgid "Apply Font"
 msgstr "Ужыць шрыфт"
 
-#: ../capplets/appearance/appearance-themes.c:670
+#: ../capplets/appearance/appearance-themes.c:657
 msgid "Revert Font"
 msgstr ""
 
-#: ../capplets/appearance/appearance-themes.c:701
+#: ../capplets/appearance/appearance-themes.c:688
 msgid ""
 "The current theme suggests a background and a font. Also, the last applied "
 "font suggestion can be reverted."
 msgstr ""
 
-#: ../capplets/appearance/appearance-themes.c:703
+#: ../capplets/appearance/appearance-themes.c:690
 msgid ""
 "The current theme suggests a background. Also, the last applied font "
 "suggestion can be reverted."
 msgstr ""
 
-#: ../capplets/appearance/appearance-themes.c:705
+#: ../capplets/appearance/appearance-themes.c:692
 msgid "The current theme suggests a background and a font."
-msgstr ""
+msgstr "Дзейная тэма прапануе шрыфт і фон."
 
-#: ../capplets/appearance/appearance-themes.c:707
+#: ../capplets/appearance/appearance-themes.c:694
 msgid ""
 "The current theme suggests a font. Also, the last applied font suggestion "
 "can be reverted."
 msgstr ""
 
-#: ../capplets/appearance/appearance-themes.c:709
+#: ../capplets/appearance/appearance-themes.c:696
 msgid "The current theme suggests a background."
-msgstr ""
+msgstr "Дзейная тэма прапануе фон."
 
-#: ../capplets/appearance/appearance-themes.c:711
+#: ../capplets/appearance/appearance-themes.c:698
 msgid "The last applied font suggestion can be reverted."
 msgstr ""
 
-#: ../capplets/appearance/appearance-themes.c:713
+#: ../capplets/appearance/appearance-themes.c:700
 msgid "The current theme suggests a font."
-msgstr ""
+msgstr "Дзейная тэма прапануе шрыфт."
 
-#: ../capplets/appearance/appearance-themes.c:1029
+#: ../capplets/appearance/appearance-themes.c:1016
 msgid "Custom"
 msgstr "Адмыслова"
 
@@ -761,7 +789,7 @@ msgstr "Шрыфт _стала:"
 
 #: ../capplets/appearance/data/appearance.ui.h:37
 msgid "_Window title font:"
-msgstr "Шрыфт загалоўка в_акна:"
+msgstr "Шрыфт загалоўка _акна:"
 
 #: ../capplets/appearance/data/appearance.ui.h:38
 msgid "_Fixed width font:"
@@ -801,15 +829,15 @@ msgstr "Шрыфты"
 
 #: ../capplets/appearance/data/appearance.ui.h:47
 msgid "Tile"
-msgstr ""
+msgstr "Плітка"
 
 #: ../capplets/appearance/data/appearance.ui.h:48
 msgid "Zoom"
-msgstr "Маштабаваць"
+msgstr "Падагнаць"
 
 #: ../capplets/appearance/data/appearance.ui.h:49
 msgid "Center"
-msgstr "Цэнтр"
+msgstr "Цэнтраваць"
 
 #: ../capplets/appearance/data/appearance.ui.h:50
 msgid "Scale"
@@ -821,7 +849,7 @@ msgstr "Расцягнуць"
 
 #: ../capplets/appearance/data/appearance.ui.h:52
 msgid "Span"
-msgstr ""
+msgstr "Ахапіць"
 
 #: ../capplets/appearance/data/appearance.ui.h:53
 msgid "Solid color"
@@ -837,11 +865,11 @@ msgstr "Вертыкальны градыент"
 
 #: ../capplets/appearance/data/appearance.ui.h:56
 msgid "Text below items"
-msgstr ""
+msgstr "Тэкст пад значкамі"
 
 #: ../capplets/appearance/data/appearance.ui.h:57
 msgid "Text beside items"
-msgstr ""
+msgstr "Тэкст поруч са значкамі"
 
 #: ../capplets/appearance/data/appearance.ui.h:58
 msgid "Icons only"
@@ -893,7 +921,7 @@ msgstr "Колеры"
 
 #: ../capplets/appearance/data/appearance.ui.h:70
 msgid "Window Border"
-msgstr "Мяжа вакна"
+msgstr "Мяжа акна"
 
 #: ../capplets/appearance/data/appearance.ui.h:71
 msgid "Icons"
@@ -901,7 +929,7 @@ msgstr "Значкі"
 
 #: ../capplets/appearance/data/appearance.ui.h:72
 msgid "Changing your cursor theme takes effect the next time you log in."
-msgstr ""
+msgstr "Змяненне тэмы курсора пачне дзейнічаць у наступным сеансе."
 
 #: ../capplets/appearance/data/appearance.ui.h:73
 msgid "_Size:"
@@ -923,7 +951,7 @@ msgstr "Паказальнік"
 
 #: ../capplets/appearance/data/appearance.ui.h:77
 msgid "Save Theme As..."
-msgstr "Запісаць тэму як..."
+msgstr "Захаваць тэму як..."
 
 #: ../capplets/appearance/data/appearance.ui.h:78
 #: ../capplets/keybindings/mate-keybinding-properties.ui.h:4
@@ -936,7 +964,7 @@ msgstr "_Апісанне:"
 
 #: ../capplets/appearance/data/appearance.ui.h:80
 msgid "Save _background image"
-msgstr ""
+msgstr "Захаваць _выяву фону"
 
 #: ../capplets/appearance/data/mate-appearance-properties.desktop.in.in.h:1
 msgid "Appearance"
@@ -960,11 +988,11 @@ msgstr "Пакунак з тэмай для Mate"
 
 #: ../capplets/appearance/mate-wp-info.c:51
 msgid "No Desktop Background"
-msgstr ""
+msgstr "Няма абруса стала"
 
 #: ../capplets/appearance/mate-wp-item.c:288
 msgid "unknown"
-msgstr ""
+msgstr "невядома"
 
 #: ../capplets/appearance/mate-wp-item.c:295
 msgid "Slide Show"
@@ -976,22 +1004,22 @@ msgstr "Выява"
 
 #: ../capplets/appearance/mate-wp-item.c:303
 msgid "multiple sizes"
-msgstr ""
+msgstr "некалькі памераў"
 
 #. translators: x pixel(s) by y pixel(s)
 #: ../capplets/appearance/mate-wp-item.c:306
 #, c-format
 msgid "%d %s by %d %s"
-msgstr ""
+msgstr "%d %s на %d %s"
 
 #: ../capplets/appearance/mate-wp-item.c:308
 #: ../capplets/appearance/mate-wp-item.c:310
 msgid "pixel"
 msgid_plural "pixels"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "піксэль"
+msgstr[1] "піксэлі"
+msgstr[2] "піксэляў"
+msgstr[3] "піксэляў"
 
 #. translators: <b>wallpaper name</b>
 #. * mime type, size
@@ -1004,7 +1032,7 @@ msgid ""
 "%s, %s\n"
 "Folder: %s\n"
 "Artist: %s"
-msgstr ""
+msgstr "<b>%s</b>\n%s, %s\nКаталог: %s\nМастак: %s"
 
 #. translators: <b>wallpaper name</b>
 #. * Image missing
@@ -1017,95 +1045,95 @@ msgid ""
 "%s\n"
 "Folder: %s\n"
 "Artist: %s"
-msgstr ""
+msgstr "<b>%s</b>\n%s\nКаталог: %s\nМастак: %s"
 
 #: ../capplets/appearance/mate-wp-item.c:339
 msgid "Image missing"
-msgstr ""
+msgstr "Выява адстунічае"
 
-#: ../capplets/appearance/theme-installer.c:178
-#: ../capplets/appearance/theme-installer.c:234
+#: ../capplets/appearance/theme-installer.c:185
+#: ../capplets/appearance/theme-installer.c:241
 msgid "Cannot install theme"
-msgstr ""
+msgstr "Немагчыма ўсталяваць тэму"
 
-#: ../capplets/appearance/theme-installer.c:180
+#: ../capplets/appearance/theme-installer.c:187
 #, c-format
 msgid "The %s utility is not installed."
-msgstr ""
+msgstr "Утыліта %s не ўсталявана."
 
-#: ../capplets/appearance/theme-installer.c:236
+#: ../capplets/appearance/theme-installer.c:243
 msgid "There was a problem while extracting the theme."
-msgstr ""
+msgstr "Узнікла праблема падчас распакоўвання тэмы."
 
-#: ../capplets/appearance/theme-installer.c:264
+#: ../capplets/appearance/theme-installer.c:271
 msgid "There was an error installing the selected file"
-msgstr ""
+msgstr "Узнікла памылка падчас усталявання выбранага файла"
 
-#: ../capplets/appearance/theme-installer.c:265
+#: ../capplets/appearance/theme-installer.c:272
 #, c-format
 msgid "\"%s\" does not appear to be a valid theme."
-msgstr ""
+msgstr "\"%s\" не выглядае як дзейсная тэма."
 
-#: ../capplets/appearance/theme-installer.c:266
+#: ../capplets/appearance/theme-installer.c:273
 #, c-format
 msgid ""
 "\"%s\" does not appear to be a valid theme. It may be a theme engine which "
 "you need to compile."
-msgstr ""
+msgstr "\"%s\" не выглядае як дзейсная тэма. Гэта можа быць тэмавым рухавіком, які трэба скампіляваць."
 
-#: ../capplets/appearance/theme-installer.c:372
+#: ../capplets/appearance/theme-installer.c:379
 #, c-format
 msgid "Installation for theme \"%s\" failed."
-msgstr ""
+msgstr "Не выйшла ўсталяваць тэму \"%s\"."
 
-#: ../capplets/appearance/theme-installer.c:411
+#: ../capplets/appearance/theme-installer.c:418
 #, c-format
 msgid "The theme \"%s\" has been installed."
 msgstr "Тэма \"%s\" паспяхова ўсталяваная."
 
-#: ../capplets/appearance/theme-installer.c:421
+#: ../capplets/appearance/theme-installer.c:428
 msgid "Would you like to apply it now, or keep your current theme?"
 msgstr "Вы хочаце ўжыць новую тэму зараз альбо пакінуць дзейную тэму?"
 
-#: ../capplets/appearance/theme-installer.c:424
+#: ../capplets/appearance/theme-installer.c:431
 msgid "Keep Current Theme"
 msgstr "Пакінуць дзейную тэму"
 
-#: ../capplets/appearance/theme-installer.c:427
+#: ../capplets/appearance/theme-installer.c:434
 msgid "Apply New Theme"
 msgstr "Ужыць новую тэму"
 
-#: ../capplets/appearance/theme-installer.c:479
+#: ../capplets/appearance/theme-installer.c:486
 #, c-format
 msgid "MATE Theme %s correctly installed"
 msgstr "Тэма MATE %s паспяхова ўсталяваная"
 
-#: ../capplets/appearance/theme-installer.c:541
+#: ../capplets/appearance/theme-installer.c:548
 msgid "Failed to create temporary directory"
 msgstr "Не выйшла стварыць часовы каталог"
 
-#: ../capplets/appearance/theme-installer.c:604
+#: ../capplets/appearance/theme-installer.c:611
 msgid "New themes have been successfully installed."
-msgstr ""
+msgstr "Новыя тэму паспяхова ўсталяваны."
 
-#: ../capplets/appearance/theme-installer.c:654
+#: ../capplets/appearance/theme-installer.c:661
 msgid "No theme file location specified to install"
 msgstr "Не вызначана знаходжанне файла для ўсталявання"
 
-#: ../capplets/appearance/theme-installer.c:678
+#: ../capplets/appearance/theme-installer.c:685
 #, c-format
 msgid ""
 "Insufficient permissions to install the theme in:\n"
 "%s"
 msgstr "Не стае дазволаў для ўсталявання тэмы ў:\n%s"
 
-#: ../capplets/appearance/theme-installer.c:756
+#: ../capplets/appearance/theme-installer.c:765
 msgid "Select Theme"
-msgstr ""
+msgstr "Выбраць тэму"
 
-#: ../capplets/appearance/theme-installer.c:767
+#: ../capplets/appearance/theme-installer.c:776
 msgid "Theme Packages"
-msgstr ""
+msgstr "Пакункі з тэмамі"
 
 #: ../capplets/appearance/theme-save.c:94
 #, c-format
@@ -1123,7 +1151,7 @@ msgstr "_Перазапісаць"
 
 #: ../capplets/appearance/theme-util.c:73
 msgid "Would you like to delete this theme?"
-msgstr ""
+msgstr "Жадаеце выдаліць гэтую тэму?"
 
 #: ../capplets/appearance/theme-util.c:123
 msgid "Theme cannot be deleted"
@@ -1131,7 +1159,7 @@ msgstr "Нельга выдаліць тэму"
 
 #: ../capplets/appearance/theme-util.c:249
 msgid "Could not install theme engine"
-msgstr ""
+msgstr "Не выйшла ўсталяваць тэмавы рухавік"
 
 #: ../capplets/common/activate-settings-daemon.c:16
 msgid ""
@@ -1166,11 +1194,11 @@ msgstr "Капіююцца файлы"
 
 #: ../capplets/common/file-transfer-dialog.c:224
 msgid "Parent Window"
-msgstr "Бацкоўскае вакно"
+msgstr "Бацкоўскае акно"
 
 #: ../capplets/common/file-transfer-dialog.c:225
 msgid "Parent window of the dialog"
-msgstr "Бацкоўскае вакно дыялогавага вакенца"
+msgstr "Бацкоўскае акно дыялогавага акенца"
 
 #: ../capplets/common/file-transfer-dialog.c:231
 msgid "From URI"
@@ -1215,64 +1243,64 @@ msgstr "Агульная колькасць URI"
 #: ../capplets/common/file-transfer-dialog.c:444
 #, c-format
 msgid "File '%s' already exists. Do you want to overwrite it?"
-msgstr ""
+msgstr "Файл '%s' ужо існуе. Перазапісаць яго?"
 
 #: ../capplets/common/file-transfer-dialog.c:447
 msgid "_Skip"
-msgstr ""
+msgstr "_Прапусціць"
 
 #: ../capplets/common/file-transfer-dialog.c:448
 msgid "Overwrite _All"
-msgstr ""
+msgstr "Перазапісаць _усё"
 
-#: ../capplets/common/mate-theme-info.c:695
+#: ../capplets/common/mate-theme-info.c:691
 msgid "Default Pointer - Current"
 msgstr "Стандартны паказальнік - дзейны"
 
-#: ../capplets/common/mate-theme-info.c:699
+#: ../capplets/common/mate-theme-info.c:695
 msgid "White Pointer"
 msgstr "Белы паказальнік"
 
-#: ../capplets/common/mate-theme-info.c:700
+#: ../capplets/common/mate-theme-info.c:696
 msgid "White Pointer - Current"
 msgstr "Белы паказальнік - дзейны"
 
-#: ../capplets/common/mate-theme-info.c:704
+#: ../capplets/common/mate-theme-info.c:700
 msgid "Large Pointer"
 msgstr "Вялікі паказальнік"
 
-#: ../capplets/common/mate-theme-info.c:705
+#: ../capplets/common/mate-theme-info.c:701
 msgid "Large Pointer - Current"
 msgstr "Вялікі паказальнік - дзейны"
 
-#: ../capplets/common/mate-theme-info.c:709
+#: ../capplets/common/mate-theme-info.c:705
 msgid "Large White Pointer - Current"
 msgstr "Вялікі белы паказальнік - дзейны"
 
-#: ../capplets/common/mate-theme-info.c:710
+#: ../capplets/common/mate-theme-info.c:706
 msgid "Large White Pointer"
 msgstr "Вялікі белы паказальнік"
 
-#: ../capplets/common/mate-theme-info.c:1694
+#: ../capplets/common/mate-theme-info.c:1697
 #, c-format
 msgid ""
 "This theme will not look as intended because the required GTK+ theme '%s' is"
 " not installed."
-msgstr ""
+msgstr "Гэтая тэма не будзе выглядаць належным чынам, бо патрабная ёй тэма GTK+ '%s' не ўсталявана."
 
-#: ../capplets/common/mate-theme-info.c:1704
+#: ../capplets/common/mate-theme-info.c:1707
 #, c-format
 msgid ""
 "This theme will not look as intended because the required window manager "
 "theme '%s' is not installed."
-msgstr ""
+msgstr "Гэтая тэма не будзе выглядаць належным чынам, бо патрабная ёй тэма кіраўніка вокнаў '%s' не ўсталявана."
 
-#: ../capplets/common/mate-theme-info.c:1712
+#: ../capplets/common/mate-theme-info.c:1715
 #, c-format
 msgid ""
 "This theme will not look as intended because the required icon theme '%s' is"
 " not installed."
-msgstr ""
+msgstr "Гэтая тэма не будзе выглядаць належным чынам, бо патрабная ёй тэма значкоў '%s' не ўсталявана."
 
 #: ../capplets/default-applications/mate-default-applications-properties.desktop.in.in.h:1
 #: ../capplets/default-applications/mate-default-applications-properties.ui.h:1
@@ -1283,20 +1311,20 @@ msgstr "Пераважныя праграмы"
 msgid "Select your default applications"
 msgstr "Вылучыць свае пераважныя праграмы"
 
-#: ../capplets/default-applications/mate-da-capplet.c:448
+#: ../capplets/default-applications/mate-da-capplet.c:543
 msgid "Could not load the main interface"
-msgstr "Немагчыма загрузіць галоўны інтэрфэйс"
+msgstr "Не выйшла загрузіць галоўны інтэрфейс"
 
-#: ../capplets/default-applications/mate-da-capplet.c:449
+#: ../capplets/default-applications/mate-da-capplet.c:544
 msgid "Please make sure that the applet is properly installed"
 msgstr "Праверце правільнасць усталявання аплета"
 
 #. TRANSLATORS: don't translate the terms in brackets
-#: ../capplets/default-applications/mate-da-capplet.c:574
+#: ../capplets/default-applications/mate-da-capplet.c:693
 msgid "Specify the name of the page to show (internet|multimedia|system|a11y)"
 msgstr ""
 
-#: ../capplets/default-applications/mate-da-capplet.c:580
+#: ../capplets/default-applications/mate-da-capplet.c:699
 msgid "- MATE Default Applications"
 msgstr "- Стандартныя праграмы MATE"
 
@@ -1304,101 +1332,96 @@ msgstr "- Стандартныя праграмы MATE"
 msgid "Web Browser"
 msgstr "Браўзэр"
 
+#: ../capplets/default-applications/mate-default-applications-properties.ui.h:3
+msgid "Mail Reader"
+msgstr "Чытач пошты"
+
 #: ../capplets/default-applications/mate-default-applications-properties.ui.h:4
+msgid "Instant Messenger"
+msgstr "Імгненныя паведамленні"
+
+#: ../capplets/default-applications/mate-default-applications-properties.ui.h:5
+msgid "Co_mmand:"
+msgstr "_Загад:"
+
+#: ../capplets/default-applications/mate-default-applications-properties.ui.h:7
 #, no-c-format
 msgid "All %s occurrences will be replaced with actual link"
 msgstr "Усе параметры %s будуць замененыя на сапраўдную спасылку"
 
-#: ../capplets/default-applications/mate-default-applications-properties.ui.h:5
+#: ../capplets/default-applications/mate-default-applications-properties.ui.h:8
 msgid "Run in t_erminal"
 msgstr "Запусціць у _тэрмінале"
 
-#: ../capplets/default-applications/mate-default-applications-properties.ui.h:6
-msgid "Open link with web browser _default"
-msgstr "Адкрыць спасылку адпаведна настáўленням браўзэра"
-
-#: ../capplets/default-applications/mate-default-applications-properties.ui.h:7
-msgid "Open link in new _tab"
-msgstr "Адкрыць спасылку ў новай _картцы"
-
-#: ../capplets/default-applications/mate-default-applications-properties.ui.h:8
-msgid "Open link in new _window"
-msgstr "Адкрыць спасылку ў новым _вакне"
-
 #: ../capplets/default-applications/mate-default-applications-properties.ui.h:9
-#: ../capplets/keybindings/mate-keybinding-properties.ui.h:5
-msgid "C_ommand:"
-msgstr "З_агад:"
-
-#: ../capplets/default-applications/mate-default-applications-properties.ui.h:10
-msgid "Mail Reader"
-msgstr "Чытач пошты"
-
-#: ../capplets/default-applications/mate-default-applications-properties.ui.h:11
-msgid "Co_mmand:"
-msgstr "_Загад:"
-
-#: ../capplets/default-applications/mate-default-applications-properties.ui.h:12
-msgid "Instant Messenger"
-msgstr "Імгненныя паведамленні"
-
-#: ../capplets/default-applications/mate-default-applications-properties.ui.h:13
 msgid "Internet"
 msgstr "Інтэрнэт"
 
-#: ../capplets/default-applications/mate-default-applications-properties.ui.h:14
+#: ../capplets/default-applications/mate-default-applications-properties.ui.h:10
 msgid "Image Viewer"
 msgstr "Прагляднік выяў"
 
-#: ../capplets/default-applications/mate-default-applications-properties.ui.h:15
+#: ../capplets/default-applications/mate-default-applications-properties.ui.h:11
 msgid "Multimedia Player"
 msgstr "Мультымедыя-плэер"
 
-#: ../capplets/default-applications/mate-default-applications-properties.ui.h:16
+#: ../capplets/default-applications/mate-default-applications-properties.ui.h:12
 msgid "Video Player"
 msgstr "Відэаплэер"
 
-#: ../capplets/default-applications/mate-default-applications-properties.ui.h:17
+#: ../capplets/default-applications/mate-default-applications-properties.ui.h:13
 msgid "Multimedia"
 msgstr "Мультымедыя"
 
-#: ../capplets/default-applications/mate-default-applications-properties.ui.h:18
+#: ../capplets/default-applications/mate-default-applications-properties.ui.h:14
 msgid "Text Editor"
 msgstr "Тэкставы рэдактар"
 
-#: ../capplets/default-applications/mate-default-applications-properties.ui.h:19
+#: ../capplets/default-applications/mate-default-applications-properties.ui.h:15
 msgid "Terminal Emulator"
 msgstr "Эмулятар тэрмінала"
 
-#: ../capplets/default-applications/mate-default-applications-properties.ui.h:20
-msgid "E_xecute flag:"
-msgstr "Вы_канальны сцяг:"
-
-#: ../capplets/default-applications/mate-default-applications-properties.ui.h:21
+#: ../capplets/default-applications/mate-default-applications-properties.ui.h:16
 msgid "File Manager"
 msgstr "Файлавы кіраўнік"
 
-#: ../capplets/default-applications/mate-default-applications-properties.ui.h:22
+#: ../capplets/default-applications/mate-default-applications-properties.ui.h:17
 msgid "System"
 msgstr "Сістэма"
 
-#: ../capplets/default-applications/mate-default-applications-properties.ui.h:23
+#: ../capplets/default-applications/mate-default-applications-properties.ui.h:18
+msgid "Document Viewer"
+msgstr ""
+
+#: ../capplets/default-applications/mate-default-applications-properties.ui.h:19
+msgid "Word Processor"
+msgstr ""
+
+#: ../capplets/default-applications/mate-default-applications-properties.ui.h:20
+msgid "Spreadsheet Editor"
+msgstr ""
+
+#: ../capplets/default-applications/mate-default-applications-properties.ui.h:21
+msgid "Office"
+msgstr ""
+
+#: ../capplets/default-applications/mate-default-applications-properties.ui.h:22
 msgid "Visual"
 msgstr "Візуальная"
 
-#: ../capplets/default-applications/mate-default-applications-properties.ui.h:24
+#: ../capplets/default-applications/mate-default-applications-properties.ui.h:23
 msgid "_Run at start"
 msgstr "_Уключаць падчас запуску"
 
-#: ../capplets/default-applications/mate-default-applications-properties.ui.h:25
+#: ../capplets/default-applications/mate-default-applications-properties.ui.h:24
 msgid "Mobility"
 msgstr ""
 
-#: ../capplets/default-applications/mate-default-applications-properties.ui.h:26
+#: ../capplets/default-applications/mate-default-applications-properties.ui.h:25
 msgid "Run at st_art"
 msgstr "Уключаць падчас _запуску"
 
-#: ../capplets/default-applications/mate-default-applications-properties.ui.h:27
+#: ../capplets/default-applications/mate-default-applications-properties.ui.h:26
 #: ../capplets/keyboard/mate-keyboard-properties-dialog.ui.h:45
 msgid "Accessibility"
 msgstr "Даступнасць"
@@ -1440,7 +1463,7 @@ msgid "Off"
 msgstr "Адкл."
 
 #: ../capplets/display/display-capplet.ui.h:10
-#: ../capplets/display/xrandr-capplet.c:513
+#: ../capplets/display/xrandr-capplet.c:520
 msgid "Monitor"
 msgstr "Манітор"
 
@@ -1464,11 +1487,13 @@ msgstr "Нармальны"
 
 #: ../capplets/display/display-capplet.ui.h:15
 #: ../capplets/display/xrandr-capplet.c:310
+#: ../capplets/windows/mate-window-properties.c:468
 msgid "Left"
 msgstr "Улева"
 
 #: ../capplets/display/display-capplet.ui.h:16
 #: ../capplets/display/xrandr-capplet.c:311
+#: ../capplets/windows/mate-window-properties.c:467
 msgid "Right"
 msgstr "Управа"
 
@@ -1477,12 +1502,12 @@ msgid "Upside-down"
 msgstr "Дагары нагамі"
 
 #: ../capplets/display/mate-display-properties.desktop.in.in.h:1
-msgid "Monitors"
-msgstr "Маніторы"
+msgid "Displays"
+msgstr ""
 
 #: ../capplets/display/mate-display-properties.desktop.in.in.h:2
-msgid "Change resolution and position of monitors"
-msgstr "Змяніць разрозненне і пазіцыю манітораў"
+msgid "Change resolution and position of monitors and projectors"
+msgstr ""
 
 #: ../capplets/display/mate-display-properties-install-systemwide.c:44
 #, c-format
@@ -1513,22 +1538,22 @@ msgstr ""
 #: ../capplets/display/mate-display-properties-install-systemwide.c:179
 #, c-format
 msgid "Could not open %s: %s\n"
-msgstr ""
+msgstr "Не выйшла адкрыць %s: %s\n"
 
 #. Translators: first %s is a filename; second %s is an error message
 #: ../capplets/display/mate-display-properties-install-systemwide.c:188
 #, c-format
 msgid "Could not get information for %s: %s\n"
-msgstr ""
+msgstr "Не выйшла атрымаць звесткі для %s: %s\n"
 
 #: ../capplets/display/mate-display-properties-install-systemwide.c:195
 #, c-format
 msgid "%s must be a regular file\n"
-msgstr ""
+msgstr "%s мае быць звычайным файлам\n"
 
 #: ../capplets/display/mate-display-properties-install-systemwide.c:204
 msgid "This program must only be run through pkexec(1)"
-msgstr ""
+msgstr "Гэтая праграма мае запускацца толькі праз pkexec(1)"
 
 #: ../capplets/display/mate-display-properties-install-systemwide.c:209
 msgid "PKEXEC_UID must be set to an integer value"
@@ -1539,7 +1564,7 @@ msgstr ""
 #: ../capplets/display/mate-display-properties-install-systemwide.c:215
 #, c-format
 msgid "%s must be owned by you\n"
-msgstr ""
+msgstr "%s мае належаць вам\n"
 
 #. Translators: here we are saying that a plain filename must look like
 #. "filename", not like "some_dir/filename"
@@ -1551,19 +1576,19 @@ msgstr ""
 #: ../capplets/display/mate-display-properties-install-systemwide.c:231
 #, c-format
 msgid "%s must be a directory\n"
-msgstr ""
+msgstr "%s мае быць каталогам\n"
 
 #. Translators: the first %s/%s is a directory/filename; the last %s is an
 #. error message
 #: ../capplets/display/mate-display-properties-install-systemwide.c:242
 #, c-format
 msgid "Could not open %s/%s: %s\n"
-msgstr ""
+msgstr "Не выйшла адкрыць %s/%s: %s\n"
 
 #: ../capplets/display/mate-display-properties-install-systemwide.c:262
 #, c-format
 msgid "Could not rename %s to %s: %s\n"
-msgstr ""
+msgstr "Не выйшла пераназваць %s to %s: %s\n"
 
 #: ../capplets/display/org.mate.randr.policy.in.h:1
 msgid "Install multi-monitor settings for the whole system"
@@ -1576,7 +1601,7 @@ msgstr ""
 
 #: ../capplets/display/xrandr-capplet.c:312
 msgid "Upside Down"
-msgstr ""
+msgstr "Дагары нагамі"
 
 #: ../capplets/display/xrandr-capplet.c:354
 #, c-format
@@ -1587,52 +1612,52 @@ msgstr "%d Гц"
 #. * screen is the same as your external monitor.  Here, "Mirror" is being
 #. * used as an adjective, not as a verb.  For example, the Spanish
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
-#: ../capplets/display/xrandr-capplet.c:502
-#: ../capplets/display/xrandr-capplet.c:1652
+#: ../capplets/display/xrandr-capplet.c:505
+#: ../capplets/display/xrandr-capplet.c:1678
 msgid "Mirror Screens"
 msgstr ""
 
-#: ../capplets/display/xrandr-capplet.c:504
+#: ../capplets/display/xrandr-capplet.c:507
 #, c-format
 msgid "Monitor: %s"
 msgstr "Манітор: %s"
 
-#: ../capplets/display/xrandr-capplet.c:582
+#: ../capplets/display/xrandr-capplet.c:603
 #, c-format
 msgid "%d x %d"
 msgstr "%d x %d"
 
-#: ../capplets/display/xrandr-capplet.c:1508
+#: ../capplets/display/xrandr-capplet.c:1535
 msgid ""
 "Select a monitor to change its properties; drag it to rearrange its "
 "placement."
 msgstr "Вылучыце манітор, каб змяніць яго ўласцівасці; перацягніце, каб змяніць яго размяшчэнне."
 
-#: ../capplets/display/xrandr-capplet.c:2073
+#: ../capplets/display/xrandr-capplet.c:2143
 msgid "Could not save the monitor configuration"
 msgstr "Не выйшла захаваць канфігурацыю манітораў"
 
-#: ../capplets/display/xrandr-capplet.c:2095
+#: ../capplets/display/xrandr-capplet.c:2165
 msgid "Could not get session bus while applying display configuration"
 msgstr ""
 
-#: ../capplets/display/xrandr-capplet.c:2137
+#: ../capplets/display/xrandr-capplet.c:2207
 msgid "Could not detect displays"
 msgstr "Не выйшла выявіць маніторы"
 
-#: ../capplets/display/xrandr-capplet.c:2334
+#: ../capplets/display/xrandr-capplet.c:2401
 msgid "The monitor configuration has been saved"
-msgstr "Канфігурацыя манітораў захаваная"
+msgstr "Канфігурацыя манітораў захавана"
 
-#: ../capplets/display/xrandr-capplet.c:2336
+#: ../capplets/display/xrandr-capplet.c:2403
 msgid "This configuration will be used the next time someone logs in."
 msgstr "Канфігурацыя будзе задзейнічана, калі хтосьці пачне сеанс наступным разам."
 
-#: ../capplets/display/xrandr-capplet.c:2345
+#: ../capplets/display/xrandr-capplet.c:2412
 msgid "Could not set the default configuration for monitors"
-msgstr ""
+msgstr "Не выйшла задаць стандартную канфігурацыю манітораў"
 
-#: ../capplets/display/xrandr-capplet.c:2429
+#: ../capplets/display/xrandr-capplet.c:2496
 msgid "Could not get screen information"
 msgstr ""
 
@@ -1665,7 +1690,7 @@ msgstr "Тып паскаральніка."
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:234
 #: ../capplets/keybindings/mate-keybinding-properties.c:137
-#: ../typing-break/drwright.c:504
+#: ../typing-break/drwright.c:501
 msgid "Disabled"
 msgstr "Адключана"
 
@@ -1673,47 +1698,47 @@ msgstr "Адключана"
 msgid "<Unknown Action>"
 msgstr "<Невядомае дзеянне>"
 
-#: ../capplets/keybindings/mate-keybinding-properties.c:1026
-#: ../capplets/keybindings/mate-keybinding-properties.c:1624
+#: ../capplets/keybindings/mate-keybinding-properties.c:1023
+#: ../capplets/keybindings/mate-keybinding-properties.c:1613
 msgid "Custom Shortcuts"
 msgstr "Уласныя скароты"
 
-#: ../capplets/keybindings/mate-keybinding-properties.c:1204
+#: ../capplets/keybindings/mate-keybinding-properties.c:1193
 msgid "Error saving the new shortcut"
-msgstr ""
+msgstr "Памылка пры захаванні новага скарота"
 
-#: ../capplets/keybindings/mate-keybinding-properties.c:1280
+#: ../capplets/keybindings/mate-keybinding-properties.c:1269
 #, c-format
 msgid ""
 "The shortcut \"%s\" cannot be used because it will become impossible to type using this key.\n"
 "Please try with a key such as Control, Alt or Shift at the same time."
 msgstr ""
 
-#: ../capplets/keybindings/mate-keybinding-properties.c:1312
+#: ../capplets/keybindings/mate-keybinding-properties.c:1301
 #, c-format
 msgid ""
 "The shortcut \"%s\" is already used for\n"
 "\"%s\""
 msgstr ""
 
-#: ../capplets/keybindings/mate-keybinding-properties.c:1319
+#: ../capplets/keybindings/mate-keybinding-properties.c:1308
 #, c-format
 msgid "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be disabled."
 msgstr ""
 
-#: ../capplets/keybindings/mate-keybinding-properties.c:1324
+#: ../capplets/keybindings/mate-keybinding-properties.c:1313
 msgid "_Reassign"
 msgstr ""
 
-#: ../capplets/keybindings/mate-keybinding-properties.c:1579
+#: ../capplets/keybindings/mate-keybinding-properties.c:1568
 msgid "Too many custom shortcuts"
 msgstr "Занадта шмат уласных скаротаў"
 
-#: ../capplets/keybindings/mate-keybinding-properties.c:1867
+#: ../capplets/keybindings/mate-keybinding-properties.c:1856
 msgid "Action"
 msgstr "Дзеянне"
 
-#: ../capplets/keybindings/mate-keybinding-properties.c:1889
+#: ../capplets/keybindings/mate-keybinding-properties.c:1878
 msgid "Shortcut"
 msgstr "Скарот"
 
@@ -1733,27 +1758,31 @@ msgstr "Каб змяніць скарот, пстрыкніце па адпав
 msgid "Custom Shortcut"
 msgstr "Уласны скарот"
 
+#: ../capplets/keybindings/mate-keybinding-properties.ui.h:5
+msgid "C_ommand:"
+msgstr "З_агад:"
+
 #: ../capplets/keybindings/mate-keybinding.desktop.in.in.h:2
 msgid "Assign shortcut keys to commands"
 msgstr "Задаць загады скаротам"
 
-#: ../capplets/keyboard/mate-keyboard-properties.c:203
-#: ../capplets/keyboard/mate-keyboard-properties.c:208
+#: ../capplets/keyboard/mate-keyboard-properties.c:213
+#: ../capplets/keyboard/mate-keyboard-properties.c:218
 msgid ""
 "Just apply settings and quit (compatibility only; now handled by daemon)"
 msgstr "Проста ўжыць настáўленні і выйсці (толькі для сумяшчальнасці; зараз апрацоўваецца дэманам)"
 
-#: ../capplets/keyboard/mate-keyboard-properties.c:213
+#: ../capplets/keyboard/mate-keyboard-properties.c:223
 msgid "Start the page with the typing break settings showing"
 msgstr "Пачынаць старонку з бачнымі настáўленнямі перапынку набору"
 
-#: ../capplets/keyboard/mate-keyboard-properties.c:218
+#: ../capplets/keyboard/mate-keyboard-properties.c:228
 msgid "Start the page with the accessibility settings showing"
 msgstr ""
 
-#: ../capplets/keyboard/mate-keyboard-properties.c:224
+#: ../capplets/keyboard/mate-keyboard-properties.c:234
 msgid "- MATE Keyboard Preferences"
-msgstr "- Настáўленні клавіятуры"
+msgstr "- Настáўленні клавіятуры MATE"
 
 #: ../capplets/keyboard/mate-keyboard-properties-a11y-notifications.ui.h:1
 msgid "Keyboard Accessibility Audio Feedback"
@@ -1762,9 +1791,9 @@ msgstr ""
 #: ../capplets/keyboard/mate-keyboard-properties-a11y-notifications.ui.h:2
 #: ../capplets/keyboard/mate-keyboard-properties-dialog.ui.h:15
 #: ../capplets/mouse/mate-mouse-properties.ui.h:24
-#: ../capplets/windows/mate-window-properties.c:319
+#: ../capplets/windows/mate-window-properties.c:348
 msgid "General"
-msgstr "Асноўныя"
+msgstr "Асноўнае"
 
 #: ../capplets/keyboard/mate-keyboard-properties-a11y-notifications.ui.h:3
 msgid "Beep when _accessibility features are turned on or off"
@@ -1784,7 +1813,7 @@ msgstr ""
 
 #: ../capplets/keyboard/mate-keyboard-properties-a11y-notifications.ui.h:7
 msgid "Flash _window titlebar"
-msgstr "Мігценне загалоўка _вакна"
+msgstr "Мігценне загалоўка _акна"
 
 #: ../capplets/keyboard/mate-keyboard-properties-a11y-notifications.ui.h:8
 msgid "Flash entire _screen"
@@ -1924,11 +1953,11 @@ msgstr ""
 
 #: ../capplets/keyboard/mate-keyboard-properties-dialog.ui.h:26
 msgid "_Separate layout for each window"
-msgstr "_Памятаць раскладку кожнага вакна"
+msgstr "_Памятаць раскладку кожнага акна"
 
 #: ../capplets/keyboard/mate-keyboard-properties-dialog.ui.h:27
 msgid "New windows u_se active window's layout"
-msgstr "Новыя вокны пераймаюць раскладку актыўнага вакна"
+msgstr "Новыя вокны пераймаюць раскладку актыўнага акна"
 
 #: ../capplets/keyboard/mate-keyboard-properties-dialog.ui.h:28
 msgid "Keyboard _model:"
@@ -1982,7 +2011,7 @@ msgstr "Затрымка:"
 
 #: ../capplets/keyboard/mate-keyboard-properties-dialog.ui.h:44
 msgid "Audio _Feedback..."
-msgstr ""
+msgstr "Аўдыё-_адкліканне..."
 
 #: ../capplets/keyboard/mate-keyboard-properties-dialog.ui.h:46
 msgid "_Pointer can be controlled using the keypad"
@@ -2087,7 +2116,7 @@ msgstr "Мадэлі"
 msgid "Keyboard Layout Options"
 msgstr "Параметры раскладкі"
 
-#: ../capplets/keyboard/mate-keyboard-properties-xkb.c:85
+#: ../capplets/keyboard/mate-keyboard-properties-xkb.c:83
 msgid "Unknown"
 msgstr "Невядомы"
 
@@ -2095,11 +2124,11 @@ msgstr "Невядомы"
 msgid "Layout"
 msgstr "Раскладка"
 
-#: ../capplets/keyboard/mate-keyboard-properties-xkbmc.c:173
+#: ../capplets/keyboard/mate-keyboard-properties-xkbmc.c:170
 msgid "Vendors"
 msgstr "Вендары"
 
-#: ../capplets/keyboard/mate-keyboard-properties-xkbmc.c:239
+#: ../capplets/keyboard/mate-keyboard-properties-xkbmc.c:236
 msgid "Models"
 msgstr "Мадэлі"
 
@@ -2122,7 +2151,7 @@ msgstr ""
 
 #: ../capplets/mouse/mate-mouse-properties.c:500
 msgid "- MATE Mouse Preferences"
-msgstr "- Настáўленні мышы"
+msgstr "- Настáўленні мышы MATE"
 
 #: ../capplets/mouse/mate-mouse-properties.ui.h:1
 msgid "Mouse Preferences"
@@ -2311,136 +2340,145 @@ msgstr "Настáўленні Metacity"
 
 #. Compositing manager
 #: ../capplets/windows/mate-metacity-support.c:51
-#: ../capplets/windows/mate-window-properties.c:333
+#: ../capplets/windows/mate-window-properties.c:362
 msgid "Compositing Manager"
 msgstr "Кіраўнік кампазітынгу"
 
 #: ../capplets/windows/mate-metacity-support.c:58
-#: ../capplets/windows/mate-window-properties.c:339
+#: ../capplets/windows/mate-window-properties.c:368
 msgid "Enable software _compositing window manager"
 msgstr "Уключыць праграмны _кампазітынг кіраўніка вокнаў"
 
-#: ../capplets/windows/mate-window-properties.c:218
+#: ../capplets/windows/mate-window-properties.c:245
 msgid "The current window manager is unsupported"
-msgstr ""
+msgstr "Дзейны кіраўнік вокнаў не падтрымліваецца"
 
 #. Window
-#: ../capplets/windows/mate-window-properties.c:304
+#: ../capplets/windows/mate-window-properties.c:332
 msgid "Window Preferences"
 msgstr "Настáўленні вокнаў"
 
-#: ../capplets/windows/mate-window-properties.c:323
+#: ../capplets/windows/mate-window-properties.c:352
 msgid "Behaviour"
 msgstr "Паводзіны"
 
-#: ../capplets/windows/mate-window-properties.c:327
+#: ../capplets/windows/mate-window-properties.c:356
 msgid "Placement"
 msgstr "Размяшчэнне"
 
-#: ../capplets/windows/mate-window-properties.c:340
+#: ../capplets/windows/mate-window-properties.c:369
 msgid "Disable _thumbnails in Alt-Tab"
 msgstr "Адключыць _мініяцюры па Alt-Tab"
 
+#. Titlebar buttons
+#: ../capplets/windows/mate-window-properties.c:377
+msgid "Titlebar Buttons"
+msgstr ""
+
+#: ../capplets/windows/mate-window-properties.c:381
+msgid "Position:"
+msgstr ""
+
 #. New Windows
-#: ../capplets/windows/mate-window-properties.c:348
+#: ../capplets/windows/mate-window-properties.c:388
 msgid "New Windows"
 msgstr "Новыя вокны"
 
-#: ../capplets/windows/mate-window-properties.c:352
+#: ../capplets/windows/mate-window-properties.c:392
 msgid "Center _new windows"
 msgstr "Цэнтраваць _новыя вокны"
 
 #. Window Snapping
-#: ../capplets/windows/mate-window-properties.c:357
+#: ../capplets/windows/mate-window-properties.c:397
 msgid "Window Snapping"
 msgstr "Фіксаванне вокнаў"
 
-#: ../capplets/windows/mate-window-properties.c:361
+#: ../capplets/windows/mate-window-properties.c:401
 msgid "Enable side by side _tiling"
 msgstr "Уключыць баковы _тайлінг"
 
 #. Window Selection
-#: ../capplets/windows/mate-window-properties.c:366
+#: ../capplets/windows/mate-window-properties.c:406
 msgid "Window Selection"
 msgstr "Пераключэнне вокнаў"
 
-#: ../capplets/windows/mate-window-properties.c:375
+#: ../capplets/windows/mate-window-properties.c:415
 msgid "_Select windows when the mouse moves over them"
 msgstr "_Вылучаць вокны, калі паказальнік мышы паказвае на іх"
 
-#: ../capplets/windows/mate-window-properties.c:378
+#: ../capplets/windows/mate-window-properties.c:418
 msgid "_Raise selected windows after an interval"
-msgstr "_Узняць вылучанае вакно праз некаторы час"
+msgstr "_Узняць вылучанае акно праз некаторы час"
 
-#: ../capplets/windows/mate-window-properties.c:384
+#: ../capplets/windows/mate-window-properties.c:424
 msgid "_Interval before raising:"
 msgstr "За_трымка перад узняццем:"
 
-#: ../capplets/windows/mate-window-properties.c:388
+#: ../capplets/windows/mate-window-properties.c:428
 msgid "seconds"
 msgstr "секунд"
 
 #. Titlebar Action
-#: ../capplets/windows/mate-window-properties.c:399
+#: ../capplets/windows/mate-window-properties.c:439
 msgid "Titlebar Action"
 msgstr "Дзеянні загалоўка"
 
-#: ../capplets/windows/mate-window-properties.c:403
+#: ../capplets/windows/mate-window-properties.c:443
 msgid "_Double-click titlebar to perform this action:"
-msgstr "_Падвойны пстрык па загалоўку вакна выконвае дзеянне:"
+msgstr "_Падвойны пстрык па загалоўку акна выконвае дзеянне:"
 
 #. Movement Key
-#: ../capplets/windows/mate-window-properties.c:411
+#: ../capplets/windows/mate-window-properties.c:451
 msgid "Movement Key"
 msgstr "Кнопка перасоўвання"
 
-#: ../capplets/windows/mate-window-properties.c:416
+#: ../capplets/windows/mate-window-properties.c:456
 msgid "To move a window, press-and-hold this key then grab the window:"
-msgstr "Каб перасунуць акно, націсніце і ўтрымлівайце гэтую кнопку, а затым хапайце і цягніце вакно:"
+msgstr "Каб перасунуць акно, націсніце і ўтрымлівайце гэтую кнопку, а затым хапайце і цягніце акно:"
 
-#: ../capplets/windows/mate-window-properties.c:427
-#: ../libwindow-settings/marco-window-manager.c:379
+#: ../capplets/windows/mate-window-properties.c:474
+#: ../libwindow-settings/marco-window-manager.c:394
 msgid "Roll up"
 msgstr "Згарнуць"
 
-#: ../capplets/windows/mate-window-properties.c:428
-#: ../libwindow-settings/marco-window-manager.c:380
+#: ../capplets/windows/mate-window-properties.c:475
+#: ../libwindow-settings/marco-window-manager.c:395
 msgid "Maximize"
 msgstr "Найбольшыць"
 
-#: ../capplets/windows/mate-window-properties.c:429
-#: ../libwindow-settings/marco-window-manager.c:381
+#: ../capplets/windows/mate-window-properties.c:476
+#: ../libwindow-settings/marco-window-manager.c:396
 msgid "Maximize Horizontally"
 msgstr "Найбольшыць гарызантальна"
 
-#: ../capplets/windows/mate-window-properties.c:430
-#: ../libwindow-settings/marco-window-manager.c:382
+#: ../capplets/windows/mate-window-properties.c:477
+#: ../libwindow-settings/marco-window-manager.c:397
 msgid "Maximize Vertically"
 msgstr "Найбольшыць вертыкальна"
 
-#: ../capplets/windows/mate-window-properties.c:431
-#: ../libwindow-settings/marco-window-manager.c:383
+#: ../capplets/windows/mate-window-properties.c:478
+#: ../libwindow-settings/marco-window-manager.c:398
 msgid "Minimize"
 msgstr "Найменшыць"
 
-#: ../capplets/windows/mate-window-properties.c:432
-#: ../libwindow-settings/marco-window-manager.c:384
+#: ../capplets/windows/mate-window-properties.c:479
+#: ../libwindow-settings/marco-window-manager.c:399
 msgid "None"
 msgstr "Нічога"
 
-#: ../capplets/windows/mate-window-properties.c:636
+#: ../capplets/windows/mate-window-properties.c:676
 msgid "_Alt"
 msgstr "_Alt"
 
-#: ../capplets/windows/mate-window-properties.c:642
+#: ../capplets/windows/mate-window-properties.c:682
 msgid "H_yper"
 msgstr "H_yper"
 
-#: ../capplets/windows/mate-window-properties.c:649
+#: ../capplets/windows/mate-window-properties.c:689
 msgid "S_uper (or \"Windows logo\")"
 msgstr "S_uper (ці \"Лагатып Windows\")"
 
-#: ../capplets/windows/mate-window-properties.c:656
+#: ../capplets/windows/mate-window-properties.c:696
 msgid "_Meta"
 msgstr "_Meta"
 
@@ -2450,9 +2488,9 @@ msgstr "Вокны"
 
 #: ../capplets/windows/mate-window-properties.desktop.in.in.h:2
 msgid "Set your window properties"
-msgstr "Задаць уласцівасці вакна"
+msgstr "Задаць уласцівасці акна"
 
-#: ../libwindow-settings/mate-wm-manager.c:321
+#: ../libwindow-settings/mate-wm-manager.c:317
 #, c-format
 msgid "Window manager \"%s\" has not registered a configuration tool\n"
 msgstr "Кіраўнік вокнаў \"%s\" не зарэгістраваў сродак настáўлення\n"
@@ -2495,76 +2533,76 @@ msgstr "Ад_класці перапынак"
 msgid "Take a break!"
 msgstr "Пачаць перапынак!"
 
-#: ../typing-break/drwright.c:142
+#: ../typing-break/drwright.c:139
 msgid "_Take a Break"
 msgstr "_Пачаць перапынак"
 
-#: ../typing-break/drwright.c:513
+#: ../typing-break/drwright.c:510
 #, c-format
 msgid "Take a break now (next in %dm)"
-msgstr ""
+msgstr "Узяць перапынак зараз (наступны праз %dхв)"
 
-#: ../typing-break/drwright.c:515
+#: ../typing-break/drwright.c:512
 #, c-format
 msgid "%d minute until the next break"
 msgid_plural "%d minutes until the next break"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%d хвіліна да наступнага перапынка"
+msgstr[1] "%d хвіліны да наступнага перапынка"
+msgstr[2] "%d хвілін да наступнага перапынка"
+msgstr[3] "%d хвілін да наступнага перапынка"
 
-#: ../typing-break/drwright.c:521
+#: ../typing-break/drwright.c:518
 #, c-format
 msgid "Take a break now (next in less than one minute)"
-msgstr ""
+msgstr "Узяць перапынак зараз (наступны менш як праз хвіліну)"
 
-#: ../typing-break/drwright.c:523
+#: ../typing-break/drwright.c:520
 #, c-format
 msgid "Less than one minute until the next break"
 msgstr "Менш за адну хвіліну да наступнага перапынку"
 
-#: ../typing-break/drwright.c:613
+#: ../typing-break/drwright.c:610
 #, c-format
 msgid ""
 "Unable to bring up the typing break properties dialog with the following "
 "error: %s"
 msgstr "Немагчыма выклікаць акенца ўласцівасцяў перапынку набору праз наступную памылку: %s"
 
-#: ../typing-break/drwright.c:630
+#: ../typing-break/drwright.c:627
 msgid "Written by Richard Hult <richard@imendio.com>"
 msgstr "Напісаў Richard Hult <richard@imendio.com>"
 
-#: ../typing-break/drwright.c:631
+#: ../typing-break/drwright.c:628
 msgid "Eye candy added by Anders Carlsson"
 msgstr "Паляпшэнні вонкавага выгляду дадаў Anders Carlsson"
 
-#: ../typing-break/drwright.c:640
+#: ../typing-break/drwright.c:637
 msgid "A computer break reminder."
-msgstr "Кампутарны нагадвальнік перапынкаў."
+msgstr "Нагадвальнік пра адпачынкі ад камп'ютара."
 
-#: ../typing-break/drwright.c:642
+#: ../typing-break/drwright.c:639
 msgid "translator-credits"
-msgstr "Ігар Грачышка, Міхаіл Варанцоў"
+msgstr "Ігар Грачышка,\nMikhas Varantsou <meequz@gmail.com>, 2015"
 
-#: ../typing-break/main.c:67
+#: ../typing-break/main.c:63
 msgid "Enable debugging code"
-msgstr ""
+msgstr "Уключыць код наладкі"
 
-#: ../typing-break/main.c:69
+#: ../typing-break/main.c:65
 msgid "Don't check whether the notification area exists"
-msgstr ""
+msgstr "Не правяраць, ці існуе прастора абвяшчэнняў"
 
-#: ../typing-break/main.c:95
+#: ../typing-break/main.c:89
 msgid "Typing Monitor"
 msgstr "Назіральнік за актыўнасцю клавіятуры"
 
-#: ../typing-break/main.c:112
+#: ../typing-break/main.c:106
 msgid ""
 "The typing monitor uses the notification area to display information. You "
 "don't seem to have a notification area on your panel. You can add it by "
 "right-clicking on your panel and choosing 'Add to panel', selecting "
 "'Notification area' and clicking 'Add'."
-msgstr "Назіральнік набору выкарыстоўвае прастору паведамленняў для паказу звестак. Але вы не маеце прасторы паведамленняў на вашай панэлі. Вы можаце дадаць яе, націснуўшы правай кнопкай мышы на панэлі і выбраўшы \"Дадаць да панэлі -> Прастора паведамленняў\"."
+msgstr "Назіральнік набірання выкарыстоўвае прастору абвяшчэнняў для паказу звестак. Але вы не маеце прасторы абвяшчэнняў на вашай панэлі. Можна дадаць яе, націснуўшы правай кнопкай мышы на панэлі і выбраўшы \"Дадаць да панэлі -> Прастора абвяшчэнняў\"."
 
 #: ../font-viewer/font-view.c:303
 msgid "Name:"
@@ -2639,25 +2677,25 @@ msgstr "ПАМЕР"
 msgid "FONT-FILE OUTPUT-FILE"
 msgstr ""
 
-#: ../font-viewer/font-thumbnailer.c:272
+#: ../font-viewer/font-thumbnailer.c:265
 #, c-format
 msgid "Error parsing arguments: %s\n"
-msgstr ""
+msgstr "Памылка разбору аргументаў: %s\n"
 
-#: ../libslab/app-shell.c:761
+#: ../libslab/app-shell.c:762
 #, c-format
 msgid "Your filter \"%s\" does not match any items."
-msgstr ""
+msgstr "Ваш фільтр \"%s\" нічога не знайшоў."
 
-#: ../libslab/app-shell.c:763
+#: ../libslab/app-shell.c:764
 msgid "No matches found."
 msgstr "Супадзенняў не знойдзена."
 
-#: ../libslab/app-shell.c:864
+#: ../libslab/app-shell.c:865
 msgid "New Applications"
 msgstr "Новыя праграмы"
 
-#: ../libslab/app-shell.c:919
+#: ../libslab/app-shell.c:920
 msgid "Other"
 msgstr "Іншыя"
 
@@ -2669,15 +2707,15 @@ msgstr "Запуск %s"
 
 #: ../libslab/application-tile.c:361
 msgid "Help"
-msgstr "Дапамога"
+msgstr "Даведка"
 
 #: ../libslab/application-tile.c:629 ../libslab/document-tile.c:735
 msgid "Remove from Favorites"
-msgstr "Прыбраць з улюбёнага спіса"
+msgstr "Выдаліць з абранага"
 
 #: ../libslab/application-tile.c:631 ../libslab/document-tile.c:737
 msgid "Add to Favorites"
-msgstr "Дадаць ва ўлюбёны спіс"
+msgstr "Дадаць да абранага"
 
 #: ../libslab/application-tile.c:716
 msgid "Remove from Startup Programs"
@@ -2687,36 +2725,36 @@ msgstr "Прыбраць са спісу праграм аўтастарту"
 msgid "Add to Startup Programs"
 msgstr "Дадаць да спісу праграм аўтастарту"
 
-#: ../libslab/bookmark-agent.c:1091
+#: ../libslab/bookmark-agent.c:1087
 msgid "New Spreadsheet"
 msgstr "Новая табліца"
 
-#: ../libslab/bookmark-agent.c:1096
+#: ../libslab/bookmark-agent.c:1091
 msgid "New Document"
 msgstr "Новы дакумент"
 
-#: ../libslab/bookmark-agent.c:1149
+#: ../libslab/bookmark-agent.c:1145
 msgctxt "Home folder"
 msgid "Home"
 msgstr "Хатні каталог"
 
-#: ../libslab/bookmark-agent.c:1156
+#: ../libslab/bookmark-agent.c:1152
 msgid "Documents"
 msgstr "Дакументы"
 
-#: ../libslab/bookmark-agent.c:1164
+#: ../libslab/bookmark-agent.c:1158
 msgid "Desktop"
 msgstr "Стол"
 
-#: ../libslab/bookmark-agent.c:1171
+#: ../libslab/bookmark-agent.c:1163
 msgid "File System"
 msgstr "Файлавая сістэма"
 
-#: ../libslab/bookmark-agent.c:1175
+#: ../libslab/bookmark-agent.c:1166
 msgid "Network Servers"
 msgstr "Сеткавыя серверы"
 
-#: ../libslab/bookmark-agent.c:1204
+#: ../libslab/bookmark-agent.c:1197
 msgid "Search"
 msgstr "Пошук"
 
@@ -2749,11 +2787,11 @@ msgstr "Выдаліць"
 #: ../libslab/directory-tile.c:530 ../libslab/document-tile.c:1014
 #, c-format
 msgid "Are you sure you want to permanently delete \"%s\"?"
-msgstr ""
+msgstr "Сапраўды жадаеце назаўсёды выдаліць \"%s\"?"
 
 #: ../libslab/directory-tile.c:531 ../libslab/document-tile.c:1015
 msgid "If you delete an item, it is permanently lost."
-msgstr ""
+msgstr "Гэта незваротнае дзеянне."
 
 #: ../libslab/document-tile.c:200
 #, c-format
@@ -2810,12 +2848,12 @@ msgstr "%b %d %Y"
 msgid "Find Now"
 msgstr "Знайсці"
 
-#: ../libslab/system-tile.c:126
+#: ../libslab/system-tile.c:132
 #, c-format
 msgid "<b>Open %s</b>"
 msgstr "<b>Адкрыць %s</b>"
 
-#: ../libslab/system-tile.c:139
+#: ../libslab/system-tile.c:145
 #, c-format
 msgid "Remove from System Items"
-msgstr ""
+msgstr "Выдаліць з Сістэмных элементаў"
