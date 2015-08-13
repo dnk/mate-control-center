@@ -233,7 +233,7 @@ static void setup_font_sample(GtkWidget* darea, Antialiasing antialiasing, Hinti
 			cairo_set_font_face (cr, font2);
 			cairo_font_extents( cr, &extents);
 			cairo_text_extents (cr, string2, &te2);
-				ascent = MAX (ascent, extents.ascent);
+			ascent = MAX (ascent, extents.ascent);
 			descent = MAX (descent, extents.descent);
 		}
 
