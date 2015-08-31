@@ -35,7 +35,6 @@
 
 #include "capplet-util.h"
 
-#ifdef HAVE_XFT2
 /* X servers sometimes lie about the screen's physical dimensions, so we cannot
  * compute an accurate DPI value.  When this happens, the user gets fonts that
  * are too huge or too tiny.  So, we see what the server returns:  if it reports
@@ -49,7 +48,6 @@
 #define DPI_FALLBACK 96
 #define DPI_LOW_REASONABLE_VALUE 50
 #define DPI_HIGH_REASONABLE_VALUE 500
-#endif /* HAVE_XFT2 */
 
 static gboolean in_change = FALSE;
 
