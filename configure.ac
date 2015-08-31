@@ -8,7 +8,6 @@ AM_INIT_AUTOMAKE([1.9 no-dist-gzip dist-xz tar-ustar])
 AM_MAINTAINER_MODE
 m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 
-AC_ISC_POSIX
 AC_PROG_CC
 AM_PROG_CC_C_O
 AC_STDC_HEADERS
@@ -198,18 +197,8 @@ AC_SUBST(WARN_CFLAGS)
 
 AM_CONDITIONAL(HAVE_LIBMATESLAB, [test $have_libmateslab = yes])
 
-dnl
-dnl Check for Xft version 2; we build in extra functionality to the font capplet
-dnl when we have it.
-dnl
-xft_modules=
-if $PKG_CONFIG --exists xft ; then
-  xft_modules="xft"
-  AC_DEFINE(HAVE_XFT2,,[Define if Xft functionality is available])
-fi
-
-PKG_CHECK_MODULES(FONT_CAPPLET, $COMMON_MODULES $xft_modules fontconfig)
-PKG_CHECK_MODULES(FONT_VIEWER, $COMMON_MODULES $xft_modules freetype2)
+PKG_CHECK_MODULES(FONT_CAPPLET, $COMMON_MODULES pango)
+PKG_CHECK_MODULES(FONT_VIEWER, $COMMON_MODULES freetype2)
 
 PKG_CHECK_MODULES(AT_CAPPLET, $COMMON_MODULES)
 

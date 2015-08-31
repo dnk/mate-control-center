@@ -25,7 +25,7 @@
  *
  */
 
-#include "config.h"
+#include <config.h>
 
 #include <glib.h>
 #include <glib/gstdio.h>
@@ -112,7 +112,7 @@ totem_resources_monitor_start (const char *input, gint wall_clock_time)
 		sleep_time = wall_clock_time;
 
 	finished = FALSE;
-	g_thread_new ("totem-resources-monitor", time_monitor, (gpointer) input);
+	g_thread_new ("time-monitor", time_monitor, (gpointer) input);
 }
 
 void

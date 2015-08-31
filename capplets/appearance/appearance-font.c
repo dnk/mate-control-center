@@ -32,7 +32,6 @@
 
 #include <glib/gi18n.h>
 #include <gio/gio.h>
-#include <cairo-ft.h>
 
 #include "capplet-util.h"
 
@@ -54,54 +53,37 @@
 
 static gboolean in_change = FALSE;
 
-#define MAX_FONT_POINT_WITHOUT_WARNING 32
-#define MAX_FONT_SIZE_WITHOUT_WARNING MAX_FONT_POINT_WITHOUT_WARNING * 1024
-
-#ifdef HAVE_XFT2
-
-#if !GTK_CHECK_VERSION (3, 0, 0)
-/*
- * Code for displaying previews of font rendering with various Xft options
- */
-
-static void sample_size_request(GtkWidget* darea, GtkRequisition* requisition)
-{
-	cairo_surface_t* surface = g_object_get_data(G_OBJECT(darea), "sample-surface");
-
-	requisition->width = cairo_image_surface_get_width(surface) + 2;
-	requisition->height = cairo_image_surface_get_height(surface) + 2;
-}
-#endif
-
 #if GTK_CHECK_VERSION (3, 0, 0)
 static void sample_draw(GtkWidget* darea, cairo_t* cr)
 #else
 static void sample_expose(GtkWidget* darea, GdkEventExpose* expose)
 #endif
 {
-	GtkAllocation allocation;
 	cairo_surface_t* surface = g_object_get_data(G_OBJECT(darea), "sample-surface");
-
-	int width = cairo_image_surface_get_width(surface);
-	int height = cairo_image_surface_get_height(surface);
+	GtkAllocation allocation;
+	int x, y, w, h;
 
 	gtk_widget_get_allocation (darea, &allocation);
-	int x = (allocation.width - width) / 2;
-	int y = (allocation.height - height) / 2;
+	x = allocation.width;
+	y = allocation.height;
+	w = cairo_image_surface_get_width (surface);
+	h = cairo_image_surface_get_height (surface);
 
 #if !GTK_CHECK_VERSION (3, 0, 0)
 	cairo_t *cr = gdk_cairo_create (expose->window);
 #endif
+
 	cairo_set_line_width (cr, 1);
 	cairo_set_line_cap (cr, CAIRO_LINE_CAP_SQUARE);
 
 	cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
-	cairo_rectangle (cr, 0, 0, allocation.width, allocation.height);
+	cairo_rectangle (cr, 0, 0, x, y);
 	cairo_fill_preserve (cr);
 	cairo_set_source_rgb (cr, 0.0, 0.0, 0.0);
 	cairo_stroke (cr);
 
-	cairo_set_source_surface (cr, surface, x, y);
+	cairo_set_source_surface (cr, surface, (x - w) / 2, (y - h) / 2);
+
 	cairo_paint(cr);
 
 #if !GTK_CHECK_VERSION (3, 0, 0)
@@ -129,172 +111,99 @@ typedef enum {
 	RGBA_VBGR
 } RgbaOrder;
 
-static cairo_font_face_t* open_pattern(FcPattern* pattern, Antialiasing antialiasing, Hinting hinting)
+static void set_fontoptions(PangoContext *context, Antialiasing antialiasing, Hinting hinting)
 {
-	#ifdef FC_HINT_STYLE
-		static const int hintstyles[] = {
-			FC_HINT_NONE, FC_HINT_SLIGHT, FC_HINT_MEDIUM, FC_HINT_FULL
-		};
-	#endif /* FC_HINT_STYLE */
-
-	FcPattern* res_pattern;
-	FcResult result;
-
-	Display* xdisplay = gdk_x11_get_default_xdisplay();
-	int screen = gdk_x11_get_default_screen();
-
-	res_pattern = XftFontMatch(xdisplay, screen, pattern, &result);
-
-	if (res_pattern == NULL)
-	{
-		return NULL;
+	cairo_font_options_t *opt;
+	cairo_antialias_t aa;
+	cairo_hint_style_t hs;
+	
+	switch (antialiasing) {
+	case ANTIALIAS_NONE:
+		aa = CAIRO_ANTIALIAS_NONE;
+		break;
+	case ANTIALIAS_GRAYSCALE:
+		aa = CAIRO_ANTIALIAS_GRAY;
+		break;
+	case ANTIALIAS_RGBA:
+		aa = CAIRO_ANTIALIAS_SUBPIXEL;
+		break;
+	default:
+		aa = CAIRO_ANTIALIAS_DEFAULT;
+		break;
 	}
 
-	FcPatternDel(res_pattern, FC_HINTING);
-	FcPatternAddBool(res_pattern, FC_HINTING, hinting != HINT_NONE);
-
-	#ifdef FC_HINT_STYLE
-		FcPatternDel(res_pattern, FC_HINT_STYLE);
-		FcPatternAddInteger(res_pattern, FC_HINT_STYLE, hintstyles[hinting]);
-	#endif /* FC_HINT_STYLE */
-
-	FcPatternDel(res_pattern, FC_ANTIALIAS);
-	FcPatternAddBool(res_pattern, FC_ANTIALIAS, antialiasing != ANTIALIAS_NONE);
-
-	FcPatternDel(res_pattern, FC_RGBA);
-	FcPatternAddInteger(res_pattern, FC_RGBA, antialiasing == ANTIALIAS_RGBA ? FC_RGBA_RGB : FC_RGBA_NONE);
-
-	FcPatternDel(res_pattern, FC_DPI);
-	FcPatternAddInteger(res_pattern, FC_DPI, 96);
-
-	cairo_font_face_t* font_face = cairo_ft_font_face_create_for_pattern (res_pattern);
-
-	if (!font_face)
-	{
-		FcPatternDestroy(res_pattern);
+	switch (hinting) {
+	case HINT_NONE:
+		hs = CAIRO_HINT_STYLE_NONE;
+		break;
+	case HINT_SLIGHT:
+		hs = CAIRO_HINT_STYLE_SLIGHT;
+		break;
+	case HINT_MEDIUM:
+		hs = CAIRO_HINT_STYLE_MEDIUM;
+		break;
+	case HINT_FULL:
+		hs = CAIRO_HINT_STYLE_FULL;
+		break;
+	default:
+		hs = CAIRO_HINT_STYLE_DEFAULT;
+		break;
 	}
 
-	return font_face;
+	opt = cairo_font_options_create ();
+	cairo_font_options_set_antialias (opt, aa);
+	cairo_font_options_set_hint_style (opt, hs);
+	pango_cairo_context_set_font_options (context, opt);
+	cairo_font_options_destroy (opt);
 }
 
 static void setup_font_sample(GtkWidget* darea, Antialiasing antialiasing, Hinting hinting)
 {
-	const char* string1 = "abcfgop AO ";
-	const char* string2 = "abcfgop";
+	const char *str = "<span font=\"18\" style=\"normal\">abcfgop AO </span>"
+					  "<span font=\"20\" style=\"italic\">abcfgop</span>";
 
-	FcPattern* pattern;
-	cairo_font_face_t* font1;
-	cairo_font_face_t* font2;
-	cairo_text_extents_t te1;
-	cairo_text_extents_t te2;
-
+	PangoContext *context;
+	PangoLayout *layout;
+	PangoFontDescription *fd;
+	PangoRectangle extents;
+	cairo_surface_t *surface;
+	cairo_t *cr;
 	int width, height;
-	int ascent, descent;
 
-	pattern = FcPatternBuild (NULL,
-		FC_FAMILY, FcTypeString, "Serif",
-		FC_SLANT, FcTypeInteger, FC_SLANT_ROMAN,
-		FC_SIZE, FcTypeDouble, 18.,
-		NULL);
-	font1 = open_pattern (pattern, antialiasing, hinting);
-	FcPatternDestroy (pattern);
+	context = gtk_widget_get_pango_context (darea);
+	set_fontoptions (context, antialiasing, hinting);
+	layout = pango_layout_new (context);
 
-	pattern = FcPatternBuild (NULL,
-		FC_FAMILY, FcTypeString, "Serif",
-		FC_SLANT, FcTypeInteger, FC_SLANT_ITALIC,
-		FC_SIZE, FcTypeDouble, 20.,
-		NULL);
-	font2 = open_pattern (pattern, antialiasing, hinting);
-	FcPatternDestroy (pattern);
+	fd = pango_font_description_from_string ("Serif");
+	pango_layout_set_font_description (layout, fd);
+	pango_font_description_free (fd);
 
-	ascent = 0;
-	descent = 0;
-	{
-		// temporary surface to get font/text extents
-		cairo_surface_t *surface = cairo_image_surface_create (CAIRO_FORMAT_RGB24, 1, 1);
-		cairo_t *cr = cairo_create (surface);
+	pango_layout_set_markup (layout, str, -1);
 
-		if (font1)
-		{
-			cairo_font_extents_t extents;
+	pango_layout_get_extents (layout, NULL, &extents);
+	width = PANGO_PIXELS(extents.width) + 4;
+	height = PANGO_PIXELS(extents.height) + 2;
 
-			cairo_set_font_face (cr, font1);
-			cairo_set_font_size (cr, 18);
+	surface = cairo_image_surface_create (CAIRO_FORMAT_A8, width, height);
+	cr = cairo_create (surface);
 
-			cairo_font_extents (cr, &extents);
-			cairo_text_extents (cr, string1, &te1);
-			ascent = MAX (ascent, extents.ascent);
-			descent = MAX (descent, extents.descent);
-		}
-
-		if (font2)
-		{
-			cairo_font_extents_t extents;
-			cairo_set_font_face (cr, font2);
-			cairo_font_extents( cr, &extents);
-			cairo_text_extents (cr, string2, &te2);
-			ascent = MAX (ascent, extents.ascent);
-			descent = MAX (descent, extents.descent);
-		}
-
-		cairo_destroy (cr);
-		cairo_surface_destroy (surface);
-	}
-
-
-	width = te2.x_advance + te1.x_advance + 4;
-	height = ascent + descent + 2;
-
-	cairo_surface_t *surface = cairo_image_surface_create (CAIRO_FORMAT_RGB24, width, height);
-
-	cairo_t* cr = cairo_create (surface);
-
-	cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
-	cairo_rectangle (cr, 0, 0, width, height);
-	cairo_fill (cr);
-
-	if (font1)
-	{
-		cairo_set_source_rgb (cr, 0, 0, 0);
-		cairo_set_font_size (cr, 18);
-		cairo_set_font_face (cr, font1);
-		cairo_move_to (cr, 2, 2 + ascent);
-		cairo_show_text (cr, string1);
-	}
-	
-	if (font2)
-	{
-		cairo_set_source_rgb (cr, 0, 0, 0);
-		cairo_set_font_face (cr, font2);
-		cairo_move_to (cr, 2 + te1.x_advance, 2 + ascent);
-		cairo_show_text (cr, string2);
-	}
-
-	if (font1)
-	{
-		cairo_font_face_destroy (font1);
-	}
-	
-	if (font2)
-	{
-		cairo_font_face_destroy (font2);
-	}
-
+	cairo_move_to (cr, 2, 1);
+	pango_cairo_show_layout (cr, layout);
+	g_object_unref (layout);
 	cairo_destroy (cr);
 
 	g_object_set_data_full(G_OBJECT(darea), "sample-surface", surface, (GDestroyNotify) cairo_surface_destroy);
 
+	gtk_widget_set_size_request (GTK_WIDGET(darea), width + 2, height + 2);
 #if GTK_CHECK_VERSION (3, 0, 0)
-	gtk_widget_set_size_request  (GTK_WIDGET(darea), width + 2, height + 2);
 	g_signal_connect(darea, "draw", G_CALLBACK(sample_draw), NULL);
 #else
-	g_signal_connect(darea, "size_request", G_CALLBACK(sample_size_request), NULL);
 	g_signal_connect(darea, "expose_event", G_CALLBACK(sample_expose), NULL);
 #endif
 }
 
 /*
- * Code implementing a group of radio buttons with different Xft option combinations.
+ * Code implementing a group of radio buttons with different cairo option combinations.
  * If one of the buttons is matched by the GSettings key, we pick it. Otherwise we
  * show the group as inconsistent.
  */
@@ -381,7 +290,6 @@ setup_font_pair (GtkWidget    *radio,
   g_signal_connect (radio, "toggled",
 		    G_CALLBACK (font_radio_toggled), pair);
 }
-#endif /* HAVE_XFT2 */
 
 static void
 marco_titlebar_load_sensitivity (AppearanceData *data)
@@ -399,7 +307,6 @@ marco_changed (GSettings *settings,
   marco_titlebar_load_sensitivity (user_data);
 }
 
-#ifdef HAVE_XFT2
 /*
  * EnumGroup - a group of radio buttons for a gsettings enum
  */
@@ -702,7 +609,6 @@ cb_show_details (GtkWidget *button,
 
   gtk_window_present (GTK_WINDOW (data->font_details));
 }
-#endif /* HAVE_XFT2 */
 
 void font_init(AppearanceData* data)
 {
@@ -757,20 +663,16 @@ void font_init(AppearanceData* data)
 
 	marco_titlebar_load_sensitivity(data);
 
-	#ifdef HAVE_XFT2
-		setup_font_pair(appearance_capplet_get_widget(data, "monochrome_radio"), appearance_capplet_get_widget (data, "monochrome_sample"), ANTIALIAS_NONE, HINT_FULL);
-		setup_font_pair(appearance_capplet_get_widget(data, "best_shapes_radio"), appearance_capplet_get_widget (data, "best_shapes_sample"), ANTIALIAS_GRAYSCALE, HINT_MEDIUM);
-		setup_font_pair(appearance_capplet_get_widget(data, "best_contrast_radio"), appearance_capplet_get_widget (data, "best_contrast_sample"), ANTIALIAS_GRAYSCALE, HINT_FULL);
-		setup_font_pair(appearance_capplet_get_widget(data, "subpixel_radio"), appearance_capplet_get_widget (data, "subpixel_sample"), ANTIALIAS_RGBA, HINT_FULL);
+	setup_font_pair(appearance_capplet_get_widget(data, "monochrome_radio"), appearance_capplet_get_widget (data, "monochrome_sample"), ANTIALIAS_NONE, HINT_FULL);
+	setup_font_pair(appearance_capplet_get_widget(data, "best_shapes_radio"), appearance_capplet_get_widget (data, "best_shapes_sample"), ANTIALIAS_GRAYSCALE, HINT_MEDIUM);
+	setup_font_pair(appearance_capplet_get_widget(data, "best_contrast_radio"), appearance_capplet_get_widget (data, "best_contrast_sample"), ANTIALIAS_GRAYSCALE, HINT_FULL);
+	setup_font_pair(appearance_capplet_get_widget(data, "subpixel_radio"), appearance_capplet_get_widget (data, "subpixel_sample"), ANTIALIAS_RGBA, HINT_FULL);
 
-		font_render_load (data->font_settings);
+	font_render_load (data->font_settings);
 
-		g_signal_connect (data->font_settings, "changed", G_CALLBACK (font_render_changed), NULL);
+	g_signal_connect (data->font_settings, "changed", G_CALLBACK (font_render_changed), NULL);
 
-		g_signal_connect (appearance_capplet_get_widget (data, "details_button"), "clicked", G_CALLBACK (cb_show_details), data);
-	#else /* !HAVE_XFT2 */
-		gtk_widget_hide (appearance_capplet_get_widget (data, "font_render_frame"));
-	#endif /* HAVE_XFT2 */
+	g_signal_connect (appearance_capplet_get_widget (data, "details_button"), "clicked", G_CALLBACK (cb_show_details), data);
 }
 
 void font_shutdown(AppearanceData* data)
