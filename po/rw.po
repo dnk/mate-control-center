@@ -24,35 +24,38 @@ msgstr ""
 "Language: rw\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../capplets/about-me/eel-alert-dialog.c:114
-msgid "Image/label border"
+#: ../org.mate.control-center.gschema.xml.in.in.h:1
+msgid ""
+"[ 'Change Theme;mate-appearance-properties.desktop', 'Set Preferred "
+"Applications;mate-default-applications-properties.desktop' ]"
 msgstr ""
 
-#: ../capplets/about-me/eel-alert-dialog.c:115
-msgid "Width of border around the label and image in the alert dialog"
+#: ../org.mate.control-center.gschema.xml.in.in.h:2
+msgid "Task names and associated .desktop files"
 msgstr ""
 
-#: ../capplets/about-me/eel-alert-dialog.c:124
-msgid "Alert Type"
+#: ../org.mate.control-center.gschema.xml.in.in.h:3
+msgid ""
+"The task name to be displayed in the control-center followed by a \";\" "
+"separator then the filename of an associated .desktop file to launch for "
+"that task."
 msgstr ""
 
-#: ../capplets/about-me/eel-alert-dialog.c:125
-#, fuzzy
-msgid "The type of alert"
-msgstr "Ubwoko Bya"
-
-# sfx2/source\toolbox\tbxcust.src:RID_USERDEFBMP.GB_FUNCTION.text
-#: ../capplets/about-me/eel-alert-dialog.c:133
-#, fuzzy
-msgid "Alert Buttons"
-msgstr "Utubuto"
-
-#: ../capplets/about-me/eel-alert-dialog.c:134
-msgid "The buttons shown in the alert dialog"
+#: ../org.mate.control-center.gschema.xml.in.in.h:4
+msgid "Close the control-center when a task is activated"
 msgstr ""
 
-#: ../capplets/about-me/eel-alert-dialog.c:198
-msgid "Show more _details"
+#: ../org.mate.control-center.gschema.xml.in.in.h:5
+msgid ""
+"if true, the control-center will close when a \"Common Task\" is activated."
+msgstr ""
+
+#: ../org.mate.control-center.gschema.xml.in.in.h:6
+msgid "Exit shell on start action performed"
+msgstr ""
+
+#: ../org.mate.control-center.gschema.xml.in.in.h:7
+msgid "Indicates whether to close the shell when a start action is performed."
 msgstr ""
 
 #: ../org.mate.control-center.gschema.xml.in.in.h:8
