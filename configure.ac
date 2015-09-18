@@ -25,9 +25,15 @@ if test "x$GCC" = "xyes"; then
 fi
 changequote([,])dnl
 
+# GLib min/max required versions
+AC_DEFINE([GLIB_VERSION_MAX_ALLOWED], [GLIB_VERSION_2_36],
+	[Warn on use of APIs added after GLib 2.36])
+AC_DEFINE([GLIB_VERSION_MIN_REQUIRED], [GLIB_VERSION_2_36],
+	[Warn on use of APIs deprecated before GLib 2.36])
+
 # Internationalization support
 
-IT_PROG_INTLTOOL([0.37.1])
+IT_PROG_INTLTOOL([0.50.1])
 
 GETTEXT_PACKAGE=mate-control-center
 AC_SUBST(GETTEXT_PACKAGE)
@@ -327,6 +333,8 @@ fi
 
 AC_CONFIG_FILES([
 Makefile
+org.mate.control-center.gschema.xml
+org.mate.control-center.keybinding.gschema.xml
 capplets/Makefile
 capplets/about-me/Makefile
 capplets/about-me/mate-about-me.desktop.in
