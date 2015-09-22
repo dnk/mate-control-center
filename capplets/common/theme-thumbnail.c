@@ -88,70 +88,6 @@ static int pipe_from_factory_fd[2];
 #define MARCO_THUMBNAIL_WIDTH  120
 #define MARCO_THUMBNAIL_HEIGHT  60
 
-/* This draw the thumbnail of gtk
- */
-#if GTK_CHECK_VERSION (3, 0, 0)
-static void draw_window_on_pixbuf(GtkWidget* widget, GdkPixbuf* pixbuf)
-#else
-static GdkPixmap* draw_window_on_pixbuf(GtkWidget* widget)
-#endif
-{
-#if !GTK_CHECK_VERSION (3, 0, 0)
-	GdkVisual* visual;
-	GdkPixmap* pixmap;
-	GtkStyle* style;
-#endif
-	GdkScreen* screen = gdk_screen_get_default();
-	GdkWindow* window;
-	gint width, height;
-
-#if !GTK_CHECK_VERSION (3, 0, 0)
-	gtk_widget_ensure_style(widget);
-
-	style = gtk_widget_get_style(widget);
-
-	g_assert(style);
-	g_assert(style->font_desc);
-#endif
-
-	gtk_window_get_size(GTK_WINDOW(widget), &width, &height);
-
-#if !GTK_CHECK_VERSION (3, 0, 0)
-	visual = gtk_widget_get_visual(widget);
-	pixmap = gdk_pixmap_new(NULL, width, height, gdk_visual_get_depth(visual));
-	gdk_drawable_set_colormap(GDK_DRAWABLE(pixmap), gtk_widget_get_colormap(widget));
-#endif
-
-	window = gtk_widget_get_window(widget);
-
-	/* This is a hack for the default resize grip on Ubuntu.
-	 * We need to add a --enable-ubuntu for this.
-   * Resize grip is also default with GTK3.
-	 */
-#if defined(UBUNTU) || GTK_CHECK_VERSION (3, 0, 0)
-	gtk_window_set_has_resize_grip(GTK_WINDOW(widget), FALSE);
-#endif
-
-#if !GTK_CHECK_VERSION (3, 0, 0)
-	gdk_window_redirect_to_drawable(window, pixmap, 0, 0, 0, 0, width, height);
-#endif
-	gdk_window_set_override_redirect(window, TRUE);
-	gtk_window_move(GTK_WINDOW(widget), gdk_screen_get_width(screen), gdk_screen_get_height(screen));
-	gtk_widget_show(widget);
-
-	gdk_window_process_updates(window, TRUE);
-
-#if GTK_CHECK_VERSION (3, 0, 0)
-	pixbuf = gdk_pixbuf_get_from_window (window, 0, 0, width, height);
-#endif
-
-	gtk_widget_hide(widget);
-
-#if !GTK_CHECK_VERSION (3, 0, 0)
-	return pixmap;
-#endif
-}
-
 static void pixbuf_apply_mask_region(GdkPixbuf* pixbuf, GdkRegion* region)
 {
   gint nchannels, rowstride, w, h;
@@ -312,11 +248,10 @@ create_meta_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
           META_FRAME_ALLOWS_SHADE |
           META_FRAME_ALLOWS_MOVE;
 
-  window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+  window = gtk_offscreen_window_new ();
   preview = meta_preview_new ();
   gtk_container_add (GTK_CONTAINER (window), preview);
-  gtk_widget_realize (window);
-  gtk_widget_realize (preview);
+  gtk_widget_show_all (window);
 #if GTK_CHECK_VERSION (3, 0, 0)
   vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
 #else
@@ -368,15 +303,7 @@ create_meta_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
   gtk_widget_size_request (window, &requisition);
 #endif
 
-#if GTK_CHECK_VERSION (3, 0, 0)
-  pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, META_THUMBNAIL_SIZE, META_THUMBNAIL_SIZE);
-  draw_window_on_pixbuf (window, pixbuf);
-#else
-  pixmap = draw_window_on_pixbuf (window);
-
-  pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, META_THUMBNAIL_SIZE, META_THUMBNAIL_SIZE);
-  gdk_pixbuf_get_from_drawable (pixbuf, pixmap, NULL, 0, 0, 0, 0, META_THUMBNAIL_SIZE, META_THUMBNAIL_SIZE);
-#endif
+  pixbuf = gtk_offscreen_window_get_pixbuf (GTK_OFFSCREEN_WINDOW(window));
 
   gtk_widget_get_allocation (vbox, &vbox_allocation);
 
@@ -421,7 +348,7 @@ create_gtk_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
 			  "gtk-color-scheme", (char *) theme_thumbnail_data->gtk_color_scheme->data,
  			  NULL);
 
-  window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+  window = gtk_offscreen_window_new ();
 
 #if GTK_CHECK_VERSION (3, 0, 0)
   vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
@@ -448,15 +375,7 @@ create_gtk_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
   radio = gtk_radio_button_new_from_widget (NULL);
   gtk_box_pack_start (GTK_BOX (box), radio, FALSE, FALSE, 0);
 
-  gtk_widget_show_all (vbox);
-  gtk_widget_realize (stock_button);
-  gtk_widget_realize (gtk_bin_get_child (GTK_BIN (stock_button)));
-  gtk_widget_realize (checkbox);
-  gtk_widget_realize (radio);
-  gtk_widget_map (stock_button);
-  gtk_widget_map (gtk_bin_get_child (GTK_BIN (stock_button)));
-  gtk_widget_map (checkbox);
-  gtk_widget_map (radio);
+  gtk_widget_show_all (window);
 
 #if GTK_CHECK_VERSION (3, 0, 0)
   gtk_widget_get_preferred_size (window, &requisition, NULL);
@@ -476,15 +395,7 @@ create_gtk_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
 
   gtk_window_get_size (GTK_WINDOW (window), &width, &height);
 
-#if GTK_CHECK_VERSION (3, 0, 0)
-  pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, width, height);
-  draw_window_on_pixbuf (window, pixbuf);
-#else
-  pixmap = draw_window_on_pixbuf (window);
-
-  pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, width, height);
-  gdk_pixbuf_get_from_drawable (pixbuf, pixmap, NULL, 0, 0, 0, 0, width, height);
-#endif
+  pixbuf = gtk_offscreen_window_get_pixbuf (GTK_OFFSCREEN_WINDOW(window));
 
   retval = gdk_pixbuf_scale_simple (pixbuf,
                                     GTK_THUMBNAIL_SIZE,
@@ -527,7 +438,7 @@ create_marco_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
           META_FRAME_ALLOWS_SHADE |
           META_FRAME_ALLOWS_MOVE;
 
-  window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+  window = gtk_offscreen_window_new ();
   gtk_window_set_default_size (GTK_WINDOW (window), (int) MARCO_THUMBNAIL_WIDTH * 1.2, (int) MARCO_THUMBNAIL_HEIGHT * 1.2);
 
   preview = meta_preview_new ();
@@ -539,11 +450,7 @@ create_marco_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
   dummy = gtk_label_new ("");
   gtk_container_add (GTK_CONTAINER (preview), dummy);
 
-  gtk_widget_realize (window);
-  gtk_widget_realize (preview);
-  gtk_widget_realize (dummy);
-  gtk_widget_show_all (preview);
-  gtk_widget_map (dummy);
+  gtk_widget_show_all (window);
 
 #if GTK_CHECK_VERSION (3, 0, 0)
   gtk_widget_get_preferred_size (window, &requisition, NULL);
@@ -561,15 +468,7 @@ create_marco_theme_pixbuf (ThemeThumbnailData *theme_thumbnail_data)
   gtk_widget_size_request (window, &requisition);
 #endif
 
-#if GTK_CHECK_VERSION (3, 0, 0)
-  pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, (int) MARCO_THUMBNAIL_WIDTH * 1.2, (int) MARCO_THUMBNAIL_HEIGHT * 1.2);
-  draw_window_on_pixbuf (window, pixbuf);
-#else
-  pixmap = draw_window_on_pixbuf (window);
-
-  pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, (int) MARCO_THUMBNAIL_WIDTH * 1.2, (int) MARCO_THUMBNAIL_HEIGHT * 1.2);
-  gdk_pixbuf_get_from_drawable (pixbuf, pixmap, NULL, 0, 0, 0, 0, (int) MARCO_THUMBNAIL_WIDTH * 1.2, (int) MARCO_THUMBNAIL_HEIGHT * 1.2);
-#endif
+  pixbuf = gtk_offscreen_window_get_pixbuf (GTK_OFFSCREEN_WINDOW(window));
 
   region = meta_preview_get_clip_region (META_PREVIEW (preview),
       MARCO_THUMBNAIL_WIDTH * 1.2, MARCO_THUMBNAIL_HEIGHT * 1.2);
