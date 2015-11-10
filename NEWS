@@ -1,3 +1,31 @@
+1.12.0
+  * Appearance: restored Interface tab
+  * Display: added support to set the primary monitor
+  * Display: show output names in addition to display names
+  * Keybindings: added keybinding for logout
+  * Touchpad settings: add option to enable/disable touchpad
+  * Touchpad settings: added support for natural scrolling, 2 finger
+    and 3 finger clicks
+  * Improved categorization
+  * Retrieve strings directly from gschema (requires intltool 0.50.1)
+  * Switch to org.gnome.SessionManager
+  * GTK+3: fix font rendering in Appearance and mate-font-viewer
+  * Some more fixes and cleanups
+
+1.10.2
+  * Appearance: fix possible segmentation fault on closing
+  * Appearance: allow to save notification theme optionally
+  * Display: made changing refresh rate actually work
+  * Fix build with prefix other than /usr
+  * Help fixes
+  * Translations update
+
+1.10.1
+  * Appearance: add theme changing support for metacity >= 3.16
+  * Help fixes
+  * GTK+3 fixes
+  * Translations update
+
 1.10.0
   * windows: Add option to configure titlebar buttons layout
   * appearance: Add support for metacity-theme-2.xml

@@ -34,7 +34,6 @@
 #include "capplet-util.h"
 #include "activate-settings-daemon.h"
 #include "capplet-stock-icons.h"
-//#include "mate-mouse-accessibility.h"
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -112,10 +111,14 @@ event_box_button_press_event (GtkWidget   *widget,
 
 	double_click_time = g_settings_get_int (mouse_settings, DOUBLE_CLICK_KEY);
 
-	if (test_maybe_timeout_id != 0)
+	if (test_maybe_timeout_id != 0) {
 		g_source_remove  (test_maybe_timeout_id);
-	if (test_on_timeout_id != 0)
+		test_maybe_timeout_id = 0;
+	}
+	if (test_on_timeout_id != 0) {
 		g_source_remove (test_on_timeout_id);
+		test_on_timeout_id = 0;
+	}
 
 	switch (double_click_state) {
 	case DOUBLE_CLICK_TEST_OFF:
@@ -392,6 +395,15 @@ setup_dialog (GtkBuilder *dialog)
 	if (find_synaptics () == FALSE)
 		gtk_notebook_remove_page (GTK_NOTEBOOK (WID ("prefs_widget")), -1);
 	else {
+		g_settings_bind (touchpad_settings, "touchpad-enabled",
+			WID ("touchpad_enable"), "active",
+			G_SETTINGS_BIND_DEFAULT);
+		g_settings_bind (touchpad_settings, "touchpad-enabled",
+			WID ("vbox_touchpad_general"), "sensitive",
+			G_SETTINGS_BIND_DEFAULT);
+		g_settings_bind (touchpad_settings, "touchpad-enabled",
+			WID ("vbox_touchpad_scrolling"), "sensitive",
+			G_SETTINGS_BIND_DEFAULT);
 		g_settings_bind (touchpad_settings, "disable-while-typing",
 			WID ("disable_w_typing_toggle"), "active",
 			G_SETTINGS_BIND_DEFAULT);
@@ -526,7 +538,6 @@ main (int argc, char **argv)
 
 	if (dialog) {
 		setup_dialog (dialog);
-		//setup_accessibility (dialog);
 
 		dialog_win = WID ("mouse_properties_dialog");
 		g_signal_connect (dialog_win, "response",
