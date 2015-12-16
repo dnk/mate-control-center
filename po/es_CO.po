@@ -3,19 +3,18 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# fenris <fenris.kcf@gmail.com>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: MATE Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-11-03 16:59+0300\n"
-"PO-Revision-Date: 2015-11-03 14:04+0000\n"
+"PO-Revision-Date: 2015-11-20 11:11+0000\n"
 "Last-Translator: Vlad Orlov <monsta@inbox.ru>\n"
-"Language-Team: Esperanto (http://www.transifex.com/mate/MATE/language/eo/)\n"
+"Language-Team: Spanish (Colombia) (http://www.transifex.com/mate/MATE/language/es_CO/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: eo\n"
+"Language: es_CO\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../org.mate.control-center.gschema.xml.in.h:1
@@ -82,23 +81,23 @@ msgstr ""
 
 #: ../org.mate.control-center.gschema.xml.in.h:14
 msgid "More backgrounds URL"
-msgstr "Reteja adreso por pliajn labortablajn fonojn"
+msgstr ""
 
 #: ../org.mate.control-center.gschema.xml.in.h:15
 msgid ""
 "URL for where to get more desktop backgrounds. If set to an empty string the"
 " link will not appear."
-msgstr "Reteja adreso por ricevi pliajn labortablajn fonojn. Se agordita kiel la malplena ĉeno, la adreso ne aperos."
+msgstr ""
 
 #: ../org.mate.control-center.gschema.xml.in.h:16
 msgid "More themes URL"
-msgstr "Reteja adreso por pliajn labortablajn etosojn"
+msgstr ""
 
 #: ../org.mate.control-center.gschema.xml.in.h:17
 msgid ""
 "URL for where to get more desktop themes. If set to an empty string the link"
 " will not appear."
-msgstr "Reteja adreso por ricevi pliajn labortablajn etesojn. Se agordita kiel la malplena ĉeno, la adreso ne aperos."
+msgstr ""
 
 #: ../org.mate.control-center.keybinding.gschema.xml.in.h:1
 msgid "Keybinding"
@@ -118,7 +117,7 @@ msgstr ""
 
 #: ../org.mate.control-center.keybinding.gschema.xml.in.h:5
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #: ../org.mate.control-center.keybinding.gschema.xml.in.h:6
 msgid "Description associated with a custom keybinding."
@@ -126,119 +125,119 @@ msgstr ""
 
 #: ../capplets/about-me/eel-alert-dialog.c:110
 msgid "Image/label border"
-msgstr "Rando de la bildo/etikedo"
+msgstr ""
 
 #: ../capplets/about-me/eel-alert-dialog.c:111
 msgid "Width of border around the label and image in the alert dialog"
-msgstr "Larĝo de la rando ĉirkaŭ la etikedo kaj la bildo en la alarm-avizo"
+msgstr ""
 
 #: ../capplets/about-me/eel-alert-dialog.c:120
 msgid "Alert Type"
-msgstr "Tipo de alarmo"
+msgstr ""
 
 #: ../capplets/about-me/eel-alert-dialog.c:121
 msgid "The type of alert"
-msgstr "La tipo de la alarmo"
+msgstr ""
 
 #: ../capplets/about-me/eel-alert-dialog.c:129
 msgid "Alert Buttons"
-msgstr "Alarm-butonoj"
+msgstr ""
 
 #: ../capplets/about-me/eel-alert-dialog.c:130
 msgid "The buttons shown in the alert dialog"
-msgstr "La butonoj montrita en la alarm-avizo"
+msgstr ""
 
 #: ../capplets/about-me/eel-alert-dialog.c:194
 msgid "Show more _details"
-msgstr "Montri pli da _detaloj"
+msgstr ""
 
 #: ../capplets/about-me/mate-about-me.c:288
 msgid "Select Image"
-msgstr "Eleketi bildon"
+msgstr ""
 
 #: ../capplets/about-me/mate-about-me.c:290
 msgid "No Image"
-msgstr "Nenia bildo"
+msgstr ""
 
 #: ../capplets/about-me/mate-about-me.c:318
 #: ../capplets/appearance/appearance-desktop.c:650
 msgid "Images"
-msgstr "Bildo"
+msgstr "Imágenes"
 
 #: ../capplets/about-me/mate-about-me.c:322
 #: ../capplets/appearance/theme-installer.c:783
 msgid "All Files"
-msgstr "Ĉiuj dosieroj"
+msgstr ""
 
 #: ../capplets/about-me/mate-about-me.c:473
 #, c-format
 msgid "About %s"
-msgstr "Pri %s"
+msgstr ""
 
 #: ../capplets/about-me/mate-about-me-dialog.ui.h:1
 #: ../capplets/about-me/mate-about-me.desktop.in.in.h:1
 msgid "About Me"
-msgstr "Pri mi"
+msgstr ""
 
 #: ../capplets/about-me/mate-about-me-dialog.ui.h:2
 msgid "Select your photo"
-msgstr "Elekti vian foton"
+msgstr ""
 
 #: ../capplets/about-me/mate-about-me-dialog.ui.h:3
 msgid "Full Name"
-msgstr "Tuta nomo"
+msgstr ""
 
 #: ../capplets/about-me/mate-about-me-dialog.ui.h:4
 msgid "User name:"
-msgstr "Uzant-nomo:"
+msgstr ""
 
 #: ../capplets/about-me/mate-about-me-dialog.ui.h:5
 msgid "Change Passwo_rd..."
-msgstr "Ŝanĝi _pasvorton..."
+msgstr ""
 
 #: ../capplets/about-me/mate-about-me-dialog.ui.h:6
 msgid "Enable _Fingerprint Login..."
-msgstr "Ŝalti _fingropreman ensaluton..."
+msgstr ""
 
 #: ../capplets/about-me/mate-about-me-dialog.ui.h:7
 msgid "Disable _Fingerprint Login..."
-msgstr "Malŝalti _fingropreman ensaluton..."
+msgstr ""
 
 #: ../capplets/about-me/mate-about-me.desktop.in.in.h:2
 msgid "Set your personal information"
-msgstr "Agordi vian personan informon:"
+msgstr ""
 
 #: ../capplets/about-me/mate-about-me-fingerprint.c:100
 msgid ""
 "You are not allowed to access the device. Contact your system administrator."
-msgstr "Vi ne rajtas atingi la aparaton. Kontaktu vian sisteman administranton!"
+msgstr ""
 
 #: ../capplets/about-me/mate-about-me-fingerprint.c:102
 msgid "The device is already in use."
-msgstr "La aparato jam estas uzata."
+msgstr ""
 
 #: ../capplets/about-me/mate-about-me-fingerprint.c:104
 msgid "An internal error occured"
-msgstr "Interna eraro okazis"
+msgstr ""
 
 #: ../capplets/about-me/mate-about-me-fingerprint.c:221
 msgid "Delete registered fingerprints?"
-msgstr "Ĉu forigi la registritajn fingro-premojn?"
+msgstr ""
 
 #: ../capplets/about-me/mate-about-me-fingerprint.c:224
 msgid "_Delete Fingerprints"
-msgstr "_Forigi fingro-premojn"
+msgstr ""
 
 #: ../capplets/about-me/mate-about-me-fingerprint.c:231
 msgid ""
 "Do you want to delete your registered fingerprints so fingerprint login is "
 "disabled?"
-msgstr "Ĉu vi volas forigi viajn registritajn fingro-premojn, do fingro-prema ensaluto estos malŝaltita?"
+msgstr ""
 
 #: ../capplets/about-me/mate-about-me-fingerprint.c:359
 #: ../capplets/about-me/mate-about-me-fingerprint.ui.h:15
 msgid "Done!"
-msgstr "Farita!"
+msgstr ""
 
 #. translators:
 #. * The variable is the name of the device, for example:
@@ -247,7 +246,7 @@ msgstr "Farita!"
 #: ../capplets/about-me/mate-about-me-fingerprint.c:427
 #, c-format
 msgid "Could not access '%s' device"
-msgstr "La aparato '%s' ne povis esti atingita"
+msgstr ""
 
 #. translators:
 #. * The variable is the name of the device, for example:
@@ -255,7 +254,7 @@ msgstr "La aparato '%s' ne povis esti atingita"
 #: ../capplets/about-me/mate-about-me-fingerprint.c:476
 #, c-format
 msgid "Could not start finger capture on '%s' device"
-msgstr "La fingro-kaptado ne povis esti komencita ĉe la la aparato '%s'"
+msgstr ""
 
 #: ../capplets/about-me/mate-about-me-fingerprint.c:523
 msgid "Could not access any fingerprint readers"
@@ -263,12 +262,12 @@ msgstr ""
 
 #: ../capplets/about-me/mate-about-me-fingerprint.c:524
 msgid "Please contact your system administrator for help."
-msgstr "Bonvolu kontakti vian sisteman administranton por helpo!"
+msgstr ""
 
 #: ../capplets/about-me/mate-about-me-fingerprint.c:554
 #: ../capplets/about-me/mate-about-me-fingerprint.ui.h:9
 msgid "Enable Fingerprint Login"
-msgstr "Ŝalti fingro-preman ensaluton"
+msgstr ""
 
 #. translators:
 #. * The variable is the name of the device, for example:
@@ -280,7 +279,7 @@ msgstr "Ŝalti fingro-preman ensaluton"
 msgid ""
 "To enable fingerprint login, you need to save one of your fingerprints, "
 "using the '%s' device."
-msgstr "Por ebligi fingro-preman ensaluton, vi devas konservi unu el viaj fingro-premoj per uzi la '%s'-aparaton."
+msgstr ""
 
 #: ../capplets/about-me/mate-about-me-fingerprint.c:593
 msgid "Swipe finger on reader"
@@ -845,11 +844,11 @@ msgstr ""
 
 #: ../capplets/appearance/data/appearance.ui.h:52
 msgid "_File"
-msgstr ""
+msgstr "_Archvio"
 
 #: ../capplets/appearance/data/appearance.ui.h:53
 msgid "Edit"
-msgstr ""
+msgstr "Modificar"
 
 #: ../capplets/appearance/data/appearance.ui.h:54
 msgid "Interface"
@@ -961,7 +960,7 @@ msgstr ""
 
 #: ../capplets/appearance/data/appearance.ui.h:81
 msgid "_Size:"
-msgstr ""
+msgstr "_Tamaño"
 
 #. small threshold
 #: ../capplets/appearance/data/appearance.ui.h:82
@@ -986,7 +985,7 @@ msgstr ""
 #: ../capplets/appearance/data/appearance.ui.h:86
 #: ../capplets/keybindings/mate-keybinding-properties.ui.h:4
 msgid "_Name:"
-msgstr ""
+msgstr "_Nombre"
 
 #: ../capplets/appearance/data/appearance.ui.h:87
 msgid "_Description:"
@@ -1279,7 +1278,7 @@ msgstr ""
 
 #: ../capplets/common/file-transfer-dialog.c:447
 msgid "_Skip"
-msgstr ""
+msgstr "_Saltar"
 
 #: ../capplets/common/file-transfer-dialog.c:448
 msgid "Overwrite _All"
@@ -1419,7 +1418,7 @@ msgstr ""
 
 #: ../capplets/default-applications/mate-default-applications-properties.ui.h:17
 msgid "System"
-msgstr ""
+msgstr "Sistema"
 
 #: ../capplets/default-applications/mate-default-applications-properties.ui.h:18
 msgid "Document Viewer"
@@ -1535,13 +1534,13 @@ msgstr ""
 #: ../capplets/display/xrandr-capplet.c:311
 #: ../capplets/windows/mate-window-properties.c:468
 msgid "Left"
-msgstr ""
+msgstr "Izquierda"
 
 #: ../capplets/display/display-capplet.ui.h:19
 #: ../capplets/display/xrandr-capplet.c:312
 #: ../capplets/windows/mate-window-properties.c:467
 msgid "Right"
-msgstr ""
+msgstr "Derecha"
 
 #: ../capplets/display/display-capplet.ui.h:20
 msgid "Upside-down"
@@ -1840,7 +1839,7 @@ msgstr ""
 #: ../capplets/mouse/mate-mouse-properties.ui.h:30
 #: ../capplets/windows/mate-window-properties.c:348
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #: ../capplets/keyboard/mate-keyboard-properties-a11y-notifications.ui.h:3
 msgid "Beep when _accessibility features are turned on or off"
@@ -2167,7 +2166,7 @@ msgstr ""
 
 #: ../capplets/keyboard/mate-keyboard-properties-xkb.c:83
 msgid "Unknown"
-msgstr ""
+msgstr "Desconocido"
 
 #: ../capplets/keyboard/mate-keyboard-properties-xkblt.c:240
 msgid "Layout"
@@ -2495,7 +2494,7 @@ msgstr ""
 
 #: ../capplets/windows/mate-window-properties.c:428
 msgid "seconds"
-msgstr ""
+msgstr "segundos"
 
 #. Titlebar Action
 #: ../capplets/windows/mate-window-properties.c:439
@@ -2691,11 +2690,11 @@ msgstr ""
 
 #: ../font-viewer/font-view.c:364 ../font-viewer/font-view.c:366
 msgid "Type:"
-msgstr ""
+msgstr "Tipo:"
 
 #: ../font-viewer/font-view.c:372 ../font-viewer/font-view.c:374
 msgid "Size:"
-msgstr ""
+msgstr "Tamaño:"
 
 #: ../font-viewer/font-view.c:420 ../font-viewer/font-view.c:422
 #: ../font-viewer/font-view.c:445 ../font-viewer/font-view.c:447
@@ -2814,15 +2813,15 @@ msgstr ""
 
 #: ../libslab/bookmark-agent.c:1152
 msgid "Documents"
-msgstr ""
+msgstr "Documentos"
 
 #: ../libslab/bookmark-agent.c:1158
 msgid "Desktop"
-msgstr ""
+msgstr "Escritorio"
 
 #: ../libslab/bookmark-agent.c:1163
 msgid "File System"
-msgstr ""
+msgstr "Sistema de Archivos"
 
 #: ../libslab/bookmark-agent.c:1166
 msgid "Network Servers"
@@ -2830,7 +2829,7 @@ msgstr ""
 
 #: ../libslab/bookmark-agent.c:1197
 msgid "Search"
-msgstr ""
+msgstr "Buscar"
 
 #. make open with default action
 #: ../libslab/directory-tile.c:176
@@ -2896,7 +2895,7 @@ msgstr ""
 
 #: ../libslab/document-tile.c:638
 msgid "%l:%M %p"
-msgstr ""
+msgstr "%l:%M %p"
 
 #: ../libslab/document-tile.c:646
 msgid "Today %l:%M %p"

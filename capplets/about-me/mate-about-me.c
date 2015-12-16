@@ -66,6 +66,20 @@ typedef struct {
 
 static MateAboutMe *me = NULL;
 
+/*** Utility functions ***/
+static void
+about_me_error (GtkWindow *parent, gchar *str)
+{
+	GtkWidget *dialog;
+
+	dialog = gtk_message_dialog_new (parent,
+				         GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR,
+				         GTK_BUTTONS_OK, "%s", str);
+
+	gtk_dialog_run (GTK_DIALOG (dialog));
+	gtk_widget_destroy (dialog);
+}
+
 /********************/
 static void
 about_me_destroy (void)
@@ -106,11 +120,15 @@ about_me_load_photo (MateAboutMe *me)
 static void
 about_me_update_photo (MateAboutMe *me)
 {
+	GtkBuilder    *dialog;
 	gchar         *file;
 	GError        *error;
+        gboolean       result;
 
 	guchar 	      *data;
 	gsize 	       length;
+
+	dialog = me->dialog;
 
 	if (me->image_changed && me->have_image) {
 		GdkPixbufLoader *loader = gdk_pixbuf_loader_new ();
@@ -145,6 +163,7 @@ about_me_update_photo (MateAboutMe *me)
 			}
 			do_scale = TRUE;
 		}
+
 		if (height > MAX_HEIGHT) {
 			scaley = (float)MAX_HEIGHT/height;
 			if (scaley < scale) {
@@ -179,7 +198,6 @@ about_me_update_photo (MateAboutMe *me)
 
 		g_free (file);
                 g_object_unref (pixbuf);
-
 	} else if (me->image_changed && !me->have_image) {
 		/* Update the image in the card */
 		file = g_build_filename (g_get_home_dir (), ".face", NULL);
@@ -354,17 +372,15 @@ about_me_icon_theme_changed (GtkWindow    *window,
 	GtkIconInfo *icon;
 
 	icon = gtk_icon_theme_lookup_icon (me->theme, "stock_person", 80, 0);
-	if (icon == NULL) {
-		g_debug ("Icon not found");
-	}
-	g_free (me->person);
-	me->person = g_strdup (gtk_icon_info_get_filename (icon));
-
+	if (icon != NULL) {
+		g_free (me->person);
+		me->person = g_strdup (gtk_icon_info_get_filename (icon));
 #if GTK_CHECK_VERSION (3, 0, 0)
-	g_object_unref (icon);
+		g_object_unref (icon);
 #else
-	gtk_icon_info_free (icon);
+		gtk_icon_info_free (icon);
 #endif
+	}
 
 	if (me->have_image)
 		e_image_chooser_set_from_file (E_IMAGE_CHOOSER (me->image_chooser), me->person);
@@ -373,16 +389,12 @@ about_me_icon_theme_changed (GtkWindow    *window,
 static void
 about_me_button_clicked_cb (GtkDialog *dialog, gint response_id, MateAboutMe *me)
 {
-	if (response_id == GTK_RESPONSE_HELP)
-		g_print ("Help goes here");
-	else {
-		if (me->commit_timeout_id) {
-			g_source_remove (me->commit_timeout_id);
-		}
-
-		about_me_destroy ();
-		gtk_main_quit ();
+	if (me->commit_timeout_id) {
+		g_source_remove (me->commit_timeout_id);
 	}
+
+	about_me_destroy ();
+	gtk_main_quit ();
 }
 
 static void
