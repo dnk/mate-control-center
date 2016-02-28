@@ -318,7 +318,12 @@ file_transfer_dialog_init (FileTransferDialog *dlg)
 	gtk_label_set_markup (GTK_LABEL (dlg->priv->status), markup);
 	g_free (markup);
 
+#if GTK_CHECK_VERSION (3, 16, 0)
+	gtk_label_set_xalign (GTK_LABEL (dlg->priv->status), 0.0);
+	gtk_label_set_yalign (GTK_LABEL (dlg->priv->status), 0.0);
+#else
 	gtk_misc_set_alignment (GTK_MISC (dlg->priv->status), 0.0, 0.0);
+#endif
 
 	gtk_box_pack_start (GTK_BOX (vbox), dlg->priv->status, FALSE, FALSE, 0);
 
@@ -334,7 +339,6 @@ file_transfer_dialog_init (FileTransferDialog *dlg)
 	gtk_table_set_col_spacings (GTK_TABLE (table), 4);
 
 	gtk_box_pack_start (GTK_BOX (vbox), GTK_WIDGET (table), FALSE, FALSE, 0);
-
 #if GTK_CHECK_VERSION (3, 0, 0)
 	progress_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 	gtk_box_set_homogeneous (GTK_BOX(progress_vbox), TRUE);

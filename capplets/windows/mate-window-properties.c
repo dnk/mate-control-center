@@ -7,6 +7,7 @@
  * Written by: Seth Nickell <snickell@stanford.edu>
  *             Havoc Pennington <hp@redhat.com>
  *             Stefano Karapetsas <stefano@karapetsas.com>
+ *             Friedrich Herbst <frimam@web.de>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -89,12 +90,13 @@ static GtkWidget *compositing_fast_alt_tab_checkbutton;
 static GtkWidget *side_by_side_tiling_checkbutton;
 static GtkWidget *center_new_windows_checkbutton;
 static GtkWidget *focus_mode_checkbutton;
+static GtkWidget *focus_mode_mouse_checkbutton;
 static GtkWidget *autoraise_checkbutton;
 static GtkWidget *autoraise_delay_slider;
 static GtkWidget *autoraise_delay_hbox;
 static GtkWidget *double_click_titlebar_optionmenu;
 static GtkWidget *titlebar_layout_optionmenu;
-static GtkWidget *alt_click_hbox;
+static GtkWidget *alt_click_vbox;
 
 static GSettings *marco_settings;
 
@@ -110,6 +112,8 @@ update_sensitivity ()
 
     gtk_widget_set_sensitive (GTK_WIDGET (compositing_fast_alt_tab_checkbutton),
                               g_settings_get_boolean (marco_settings, MARCO_COMPOSITING_MANAGER_KEY));
+    gtk_widget_set_sensitive (GTK_WIDGET (focus_mode_mouse_checkbutton),
+                              g_settings_get_enum (marco_settings, MARCO_FOCUS_KEY) != FOCUS_MODE_CLICK);
     gtk_widget_set_sensitive (GTK_WIDGET (autoraise_checkbutton),
                               g_settings_get_enum (marco_settings, MARCO_FOCUS_KEY) != FOCUS_MODE_CLICK);
     gtk_widget_set_sensitive (GTK_WIDGET (autoraise_delay_hbox),
@@ -135,10 +139,15 @@ static void
 mouse_focus_toggled_callback (GtkWidget *button,
                               void      *data)
 {
-    g_settings_set_enum (marco_settings,
-                         MARCO_FOCUS_KEY,
-                         gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)) ?
-                         FOCUS_MODE_SLOPPY : FOCUS_MODE_CLICK);
+    if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (focus_mode_checkbutton))) {
+        g_settings_set_enum (marco_settings,
+                             MARCO_FOCUS_KEY,
+                             gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (focus_mode_mouse_checkbutton)) ?
+                             FOCUS_MODE_MOUSE : FOCUS_MODE_SLOPPY);
+    }
+    else {
+        g_settings_set_enum (marco_settings, MARCO_FOCUS_KEY, FOCUS_MODE_CLICK);
+    }
 }
 
 static void
@@ -146,8 +155,18 @@ mouse_focus_changed_callback (GSettings *settings,
                               const gchar *key,
                               gpointer user_data)
 {
-       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (focus_mode_checkbutton),
-                                     g_settings_get_enum (settings, key) == FOCUS_MODE_SLOPPY);
+    if (g_settings_get_enum (settings, key) == FOCUS_MODE_MOUSE) {
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (focus_mode_checkbutton), TRUE);
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (focus_mode_mouse_checkbutton), TRUE);
+    }
+    else if (g_settings_get_enum (settings, key) == FOCUS_MODE_SLOPPY) {
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (focus_mode_checkbutton), TRUE);
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (focus_mode_mouse_checkbutton), FALSE);
+    }
+    else {
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (focus_mode_checkbutton), FALSE);
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (focus_mode_mouse_checkbutton), FALSE);
+    }
 }
 
 static void
@@ -284,7 +303,12 @@ title_label_new (const char* title)
     g_free (str);
 
     gtk_label_set_use_markup (GTK_LABEL (widget), TRUE);
-    gtk_misc_set_alignment (GTK_MISC (widget), 0, 0);
+#if GTK_CHECK_VERSION (3, 16, 0)
+    gtk_label_set_xalign (GTK_LABEL (widget), 0.0);
+    gtk_label_set_yalign (GTK_LABEL (widget), 0.0);
+#else
+    gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.0);
+#endif
 
     return widget;
 }
@@ -293,7 +317,7 @@ int
 main (int argc, char **argv)
 {
     GdkScreen *screen;
-    GtkNotebook *nb;
+    GtkWidget *nb;
     GtkWidget *general_vbox;
     GtkWidget *behaviour_vbox;
     GtkWidget *placement_vbox;
@@ -303,6 +327,8 @@ main (int argc, char **argv)
     GtkWidget *hbox;
     GtkWidget *hbox1;
     GtkWidget *hbox2;
+    GtkWidget *hbox3;
+    GtkWidget *content_area;
     gchar *str;
     const char *current_wm;
     int i;
@@ -349,7 +375,8 @@ main (int argc, char **argv)
     gtk_window_set_icon_name (GTK_WINDOW (dialog_win), "preferences-system-windows");
     gtk_container_set_border_width (GTK_CONTAINER (dialog_win), 10);
 
-    nb = GTK_NOTEBOOK(gtk_notebook_new ());
+    nb = gtk_notebook_new ();
+
 #if GTK_CHECK_VERSION (3, 0, 0)
     general_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
     behaviour_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
@@ -359,6 +386,7 @@ main (int argc, char **argv)
     behaviour_vbox = gtk_vbox_new (FALSE, 0);
     placement_vbox = gtk_vbox_new (FALSE, 0);
 #endif
+
     widget = gtk_label_new (_("General"));
 #if GTK_CHECK_VERSION (3, 0, 0)
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
@@ -366,7 +394,8 @@ main (int argc, char **argv)
     hbox = gtk_hbox_new (FALSE, 0);
 #endif
     gtk_box_pack_start (GTK_BOX (hbox), general_vbox, FALSE, FALSE, 6);
-    gtk_notebook_append_page (nb, hbox, widget);
+    gtk_notebook_append_page (GTK_NOTEBOOK (nb), hbox, widget);
+
     widget = gtk_label_new (_("Behaviour"));
 #if GTK_CHECK_VERSION (3, 0, 0)
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
@@ -374,7 +403,8 @@ main (int argc, char **argv)
     hbox = gtk_hbox_new (FALSE, 0);
 #endif
     gtk_box_pack_start (GTK_BOX (hbox), behaviour_vbox, FALSE, FALSE, 6);
-    gtk_notebook_append_page (nb, hbox, widget);
+    gtk_notebook_append_page (GTK_NOTEBOOK (nb), hbox, widget);
+
     widget = gtk_label_new (_("Placement"));
 #if GTK_CHECK_VERSION (3, 0, 0)
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
@@ -382,7 +412,7 @@ main (int argc, char **argv)
     hbox = gtk_hbox_new (FALSE, 0);
 #endif
     gtk_box_pack_start (GTK_BOX (hbox), placement_vbox, FALSE, FALSE, 6);
-    gtk_notebook_append_page (nb, hbox, widget);
+    gtk_notebook_append_page (GTK_NOTEBOOK (nb), hbox, widget);
 
     /* Compositing manager */
     widget = title_label_new (N_("Compositing Manager"));
@@ -450,26 +480,33 @@ main (int argc, char **argv)
     widget = title_label_new (N_("Window Selection"));
     gtk_box_pack_start (GTK_BOX (behaviour_vbox), widget, FALSE, FALSE, 6);
 
+
 #if GTK_CHECK_VERSION (3, 0, 0)
     vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
     vbox1 = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
     hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
     hbox1 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
     hbox2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+    hbox3 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
 #else
     vbox = gtk_vbox_new (FALSE, 0);
     vbox1 = gtk_vbox_new (FALSE, 0);
     hbox = gtk_hbox_new (FALSE, 0);
     hbox1 = gtk_hbox_new (FALSE, 0);
     hbox2 = gtk_hbox_new (FALSE, 0);
+    hbox3 = gtk_hbox_new (FALSE, 0);
 #endif
 
     focus_mode_checkbutton = gtk_check_button_new_with_mnemonic (_("_Select windows when the mouse moves over them"));
     gtk_box_pack_start (GTK_BOX (vbox), focus_mode_checkbutton, FALSE, FALSE, 6);
 
-    autoraise_checkbutton = gtk_check_button_new_with_mnemonic (_("_Raise selected windows after an interval"));
-    gtk_box_pack_start (GTK_BOX (hbox1), autoraise_checkbutton, FALSE, FALSE, 6);
+    focus_mode_mouse_checkbutton = gtk_check_button_new_with_mnemonic (_("U_nselect windows when the mouse leaves them"));
+    gtk_box_pack_start (GTK_BOX (hbox1), focus_mode_mouse_checkbutton, FALSE, FALSE, 6);
     gtk_box_pack_start (GTK_BOX (vbox1), hbox1, FALSE, FALSE, 6);
+
+    autoraise_checkbutton = gtk_check_button_new_with_mnemonic (_("_Raise selected windows after an interval"));
+    gtk_box_pack_start (GTK_BOX (hbox2), autoraise_checkbutton, FALSE, FALSE, 6);
+    gtk_box_pack_start (GTK_BOX (vbox1), hbox2, FALSE, FALSE, 6);
 
 #if GTK_CHECK_VERSION (3, 0, 0)
     autoraise_delay_hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
@@ -487,8 +524,8 @@ main (int argc, char **argv)
     gtk_box_pack_start (GTK_BOX (autoraise_delay_hbox), widget, FALSE, FALSE, 6);
     gtk_box_pack_start (GTK_BOX (vbox1), autoraise_delay_hbox, FALSE, FALSE, 6);
 
-    gtk_box_pack_start (GTK_BOX (hbox2), vbox1, FALSE, FALSE, 6);
-    gtk_box_pack_start (GTK_BOX (vbox), hbox2, FALSE, FALSE, 6);
+    gtk_box_pack_start (GTK_BOX (hbox3), vbox1, FALSE, FALSE, 6);
+    gtk_box_pack_start (GTK_BOX (vbox), hbox3, FALSE, FALSE, 6);
     gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 6);
     gtk_box_pack_start (GTK_BOX (behaviour_vbox), hbox, FALSE, FALSE, 6);
 
@@ -519,16 +556,23 @@ main (int argc, char **argv)
     vbox = gtk_vbox_new (FALSE, 0);
     hbox = gtk_hbox_new (FALSE, 0);
 #endif
+
     widget = gtk_label_new_with_mnemonic (_("To move a window, press-and-hold this key then grab the window:"));
-    gtk_misc_set_alignment (GTK_MISC (widget), 0, 0);
-    gtk_box_pack_start (GTK_BOX (vbox), widget, FALSE, FALSE, 6);
-#if GTK_CHECK_VERSION (3, 0, 0)
-    alt_click_hbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
+#if GTK_CHECK_VERSION (3, 16, 0)
+    gtk_label_set_xalign (GTK_LABEL (widget), 0.0);
+    gtk_label_set_yalign (GTK_LABEL (widget), 0.0);
 #else
-    alt_click_hbox = gtk_vbox_new (FALSE, 6);
+    gtk_misc_set_alignment (GTK_MISC (widget), 0.0, 0.0);
 #endif
-    gtk_label_set_mnemonic_widget (GTK_LABEL (widget), alt_click_hbox);
-    gtk_box_pack_start (GTK_BOX (vbox), alt_click_hbox, FALSE, FALSE, 6);
+    gtk_box_pack_start (GTK_BOX (vbox), widget, FALSE, FALSE, 6);
+
+#if GTK_CHECK_VERSION (3, 0, 0)
+    alt_click_vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
+#else
+    alt_click_vbox = gtk_vbox_new (FALSE, 6);
+#endif
+    gtk_label_set_mnemonic_widget (GTK_LABEL (widget), alt_click_vbox);
+    gtk_box_pack_start (GTK_BOX (vbox), alt_click_vbox, FALSE, FALSE, 6);
     gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 6);
     gtk_box_pack_start (GTK_BOX (behaviour_vbox), hbox, FALSE, FALSE, 6);
 
@@ -589,12 +633,15 @@ main (int argc, char **argv)
                      "active",
                      G_SETTINGS_BIND_DEFAULT);
 
-    g_signal_connect (focus_mode_checkbutton, "toggled",
-                      G_CALLBACK (mouse_focus_toggled_callback), NULL);
     g_signal_connect (marco_settings, "changed::" MARCO_FOCUS_KEY,
                       G_CALLBACK (mouse_focus_changed_callback), NULL);
     /* Initialize the checkbox state appropriately */
     mouse_focus_changed_callback(marco_settings, MARCO_FOCUS_KEY, NULL);
+
+    g_signal_connect (focus_mode_checkbutton, "toggled",
+                      G_CALLBACK (mouse_focus_toggled_callback), NULL);
+    g_signal_connect (focus_mode_mouse_checkbutton, "toggled",
+                      G_CALLBACK (mouse_focus_toggled_callback), NULL);
 
     g_settings_bind (marco_settings,
                      MARCO_AUTORAISE_KEY,
@@ -626,7 +673,8 @@ main (int argc, char **argv)
     update_sensitivity ();
 
     capplet_set_icon (dialog_win, "preferences-system-windows");
-    gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG(dialog_win))), GTK_WIDGET (nb), TRUE, TRUE, 0);
+    content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog_win));
+    gtk_box_pack_start (GTK_BOX (content_area), nb, TRUE, TRUE, 0);
     gtk_widget_show_all (dialog_win);
 
     gtk_main ();
@@ -645,7 +693,7 @@ fill_radio (GtkRadioButton     *group,
         MouseClickModifier *modifier)
 {
     modifier->radio = gtk_radio_button_new_with_mnemonic_from_widget (group, modifier->name);
-    gtk_box_pack_start (GTK_BOX (alt_click_hbox), modifier->radio, FALSE, FALSE, 0);
+    gtk_box_pack_start (GTK_BOX (alt_click_vbox), modifier->radio, FALSE, FALSE, 0);
 
     gtk_widget_show (modifier->radio);
 }

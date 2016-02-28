@@ -234,7 +234,11 @@ static void update_message_area(AppearanceData* data)
 
 		data->style_message_label = gtk_label_new (NULL);
 		gtk_label_set_line_wrap (GTK_LABEL (data->style_message_label), TRUE);
+#if GTK_CHECK_VERSION (3, 16, 0)
+		gtk_label_set_xalign (GTK_LABEL (data->style_message_label), 0.0);
+#else
 		gtk_misc_set_alignment (GTK_MISC (data->style_message_label), 0.0, 0.5);
+#endif
 
 #if GTK_CHECK_VERSION (3, 0, 0)
 		hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 9);
@@ -247,7 +251,12 @@ static void update_message_area(AppearanceData* data)
 #else
 		icon = gtk_image_new_from_stock (GTK_STOCK_DIALOG_WARNING, GTK_ICON_SIZE_DIALOG);
 #endif
-		gtk_misc_set_alignment (GTK_MISC (icon), 0.5, 0);
+#if GTK_CHECK_VERSION (3, 0, 0)
+		gtk_widget_set_halign (icon, GTK_ALIGN_CENTER);
+		gtk_widget_set_valign (icon, GTK_ALIGN_START);
+#else
+		gtk_misc_set_alignment (GTK_MISC (icon), 0.5, 0.0);
+#endif
 		gtk_box_pack_start (GTK_BOX (hbox), icon, FALSE, FALSE, 0);
 		gtk_box_pack_start (GTK_BOX (hbox), data->style_message_label, TRUE, TRUE, 0);
 		content = gtk_info_bar_get_content_area (GTK_INFO_BAR (data->style_message_area));

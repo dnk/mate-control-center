@@ -342,7 +342,11 @@ create_header (const gchar *name)
 
 	header = gtk_label_new (name);
 	gtk_label_set_ellipsize (GTK_LABEL (header), PANGO_ELLIPSIZE_END);
+#if GTK_CHECK_VERSION (3, 16, 0)
+	gtk_label_set_xalign (GTK_LABEL (header), 0.0);
+#else
 	gtk_misc_set_alignment (GTK_MISC (header), 0.0, 0.5);
+#endif
 
 	header_bin = gtk_alignment_new (0.0, 0.5, 1.0, 0.0);
 	gtk_container_add (GTK_CONTAINER (header_bin), header);
@@ -409,7 +413,11 @@ rename_entry_activate_cb (GtkEntry *entry, gpointer user_data)
 	g_object_unref (dst_file);
 
 	header = gtk_label_new (priv->basename);
+#if GTK_CHECK_VERSION (3, 16, 0)
+	gtk_label_set_xalign (GTK_LABEL (header), 0.0);
+#else
 	gtk_misc_set_alignment (GTK_MISC (header), 0.0, 0.5);
+#endif
 
 	child = gtk_bin_get_child (priv->header_bin);
 

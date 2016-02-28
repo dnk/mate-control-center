@@ -88,6 +88,47 @@ static int pipe_from_factory_fd[2];
 #define MARCO_THUMBNAIL_WIDTH  120
 #define MARCO_THUMBNAIL_HEIGHT  60
 
+/* This draw the thumbnail of gtk
+ */
+#if !GTK_CHECK_VERSION (3, 0, 0)
+static GdkPixmap *
+draw_window_on_pixbuf(GtkWidget* widget)
+{
+	GdkVisual* visual;
+	GdkPixmap* pixmap;
+	GtkStyle* style;
+	GdkScreen* screen = gdk_screen_get_default();
+	GdkWindow* window;
+	gint width, height;
+
+	gtk_widget_ensure_style(widget);
+
+	style = gtk_widget_get_style(widget);
+
+	g_assert(style);
+	g_assert(style->font_desc);
+
+	gtk_window_get_size(GTK_WINDOW(widget), &width, &height);
+
+	visual = gtk_widget_get_visual(widget);
+	pixmap = gdk_pixmap_new(NULL, width, height, gdk_visual_get_depth (visual));
+	gdk_drawable_set_colormap(GDK_DRAWABLE(pixmap), gtk_widget_get_colormap(widget));
+
+	window = gtk_widget_get_window(widget);
+
+	gdk_window_redirect_to_drawable(window, pixmap, 0, 0, 0, 0, width, height);
+	gdk_window_set_override_redirect(window, TRUE);
+	gtk_window_move(GTK_WINDOW(widget), gdk_screen_get_width(screen), gdk_screen_get_height(screen));
+	gtk_widget_show(widget);
+
+	gdk_window_process_updates(window, TRUE);
+
+	gtk_widget_hide(widget);
+
+	return pixmap;
+}
+#endif
+
 static void pixbuf_apply_mask_region(GdkPixbuf* pixbuf, GdkRegion* region)
 {
   gint nchannels, rowstride, w, h;
@@ -151,48 +192,22 @@ create_folder_icon (char *icon_theme_name)
   if (folder_icon_info != NULL)
   {
     folder_icon = gtk_icon_info_load_icon (folder_icon_info, NULL);
-#if GTK_CHECK_VERSION (3, 0, 0)
+#if GTK_CHECK_VERSION (3, 8, 0)
     g_object_unref (folder_icon_info);
 #else
     gtk_icon_info_free (folder_icon_info);
 #endif
   }
 
-  g_object_unref (icon_theme);
-  g_free (example_icon_name);
-
-  /* render the icon to the thumbnail */
   if (folder_icon == NULL)
   {
-#if GTK_CHECK_VERSION (3, 10, 0)
-    GtkIconTheme *icon_theme;
-    gint size = 0;
-#else
-    GtkWidget *dummy;
-    dummy = gtk_label_new ("");
-#endif
-
-#if GTK_CHECK_VERSION (3, 10, 0)
-    icon_theme = gtk_icon_theme_get_default ();
-    gtk_icon_size_lookup (GTK_ICON_SIZE_DIALOG, &size, &size);
     folder_icon = gtk_icon_theme_load_icon (icon_theme,
-                                          "image-missing",
-                                          size, 0, NULL);
-#elif GTK_CHECK_VERSION (3, 0, 0)
-    folder_icon = gtk_widget_render_icon_pixbuf (dummy,
-                                          GTK_STOCK_MISSING_IMAGE,
-                                          GTK_ICON_SIZE_DIALOG);
-#else
-    folder_icon = gtk_widget_render_icon (dummy,
-                                          GTK_STOCK_MISSING_IMAGE,
-                                          GTK_ICON_SIZE_DIALOG,
-                                          NULL);
-#endif
-
-#if !GTK_CHECK_VERSION (3, 10, 0)
-    gtk_widget_destroy (dummy);
-#endif
+                                            "image-missing",
+                                            48, 0, NULL);
   }
+
+  g_object_unref (icon_theme);
+  g_free (example_icon_name);
 
   return folder_icon;
 }

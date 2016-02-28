@@ -690,7 +690,11 @@ create_header (const gchar *name)
 
 	header = gtk_label_new (name);
 	gtk_label_set_ellipsize (GTK_LABEL (header), PANGO_ELLIPSIZE_END);
+#if GTK_CHECK_VERSION (3, 16, 0)
+	gtk_label_set_xalign (GTK_LABEL (header), 0.0);
+#else
 	gtk_misc_set_alignment (GTK_MISC (header), 0.0, 0.5);
+#endif
 
 	header_bin = gtk_alignment_new (0.0, 0.5, 1.0, 0.0);
 	gtk_container_add (GTK_CONTAINER (header_bin), header);
@@ -708,18 +712,13 @@ create_subheader (const gchar *desc)
 
 	subheader = gtk_label_new (desc);
 	gtk_label_set_ellipsize (GTK_LABEL (subheader), PANGO_ELLIPSIZE_END);
-	gtk_misc_set_alignment (GTK_MISC (subheader), 0.0, 0.5);
-#if GTK_CHECK_VERSION (3, 0, 0)
-	GdkRGBA *color = NULL;
-	gtk_style_context_get (gtk_widget_get_style_context (subheader), GTK_STATE_FLAG_INSENSITIVE,
-	                       GTK_STYLE_PROPERTY_COLOR, &color,
-	                       NULL);
-	gtk_widget_override_color (subheader, GTK_STATE_FLAG_NORMAL, color);
-	gdk_rgba_free (color);
+#if GTK_CHECK_VERSION (3, 16, 0)
+	gtk_label_set_xalign (GTK_LABEL (subheader), 0.0);
 #else
+	gtk_misc_set_alignment (GTK_MISC (subheader), 0.0, 0.5);
+#endif
 	gtk_widget_modify_fg (subheader, GTK_STATE_NORMAL,
 		&gtk_widget_get_style (subheader)->fg[GTK_STATE_INSENSITIVE]);
-#endif
 
 	return subheader;
 }
@@ -809,7 +808,11 @@ rename_entry_activate_cb (GtkEntry *entry, gpointer user_data)
 	}
 
 	header = gtk_label_new (priv->basename);
+#if GTK_CHECK_VERSION (3, 16, 0)
+	gtk_label_set_xalign (GTK_LABEL (header), 0.0);
+#else
 	gtk_misc_set_alignment (GTK_MISC (header), 0.0, 0.5);
+#endif
 
 	child = gtk_bin_get_child (priv->header_bin);
 

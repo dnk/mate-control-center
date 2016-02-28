@@ -278,13 +278,12 @@ app_resizer_size_allocate (GtkWidget * widget, GtkAllocation * allocation)
 }
 
 GtkWidget *
-app_resizer_new (GtkVBox * child, gint initial_num_columns, gboolean homogeneous,
+app_resizer_new (GtkBox * child, gint initial_num_columns, gboolean homogeneous,
 	AppShellData * app_data)
 {
 	AppResizer *widget;
 
 	g_assert (child != NULL);
-	g_assert (GTK_IS_VBOX (child));
 
 	widget = g_object_new (APP_RESIZER_TYPE, NULL);
 	widget->cached_element_width = -1;
@@ -308,7 +307,14 @@ app_resizer_new (GtkVBox * child, gint initial_num_columns, gboolean homogeneous
 void
 app_resizer_set_vadjustment_value (GtkWidget * widget, gdouble value)
 {
-	GtkAdjustment *adjust = gtk_layout_get_vadjustment (GTK_LAYOUT (widget));
+	GtkAdjustment *adjust;
+
+#if GTK_CHECK_VERSION (3, 0, 0)
+	adjust = gtk_scrollable_get_vadjustment (GTK_SCROLLABLE (widget));
+#else
+	adjust = gtk_layout_get_vadjustment (GTK_LAYOUT (widget));
+#endif
+
 	gdouble upper = gtk_adjustment_get_upper (adjust);
 	gdouble page_size = gtk_adjustment_get_page_size (adjust);
 	if (value > upper - page_size)

@@ -265,6 +265,7 @@ synaptics_check_capabilities (GtkBuilder *dialog)
 
 			XFree (data);
 		}
+
 #if GTK_CHECK_VERSION (3, 0, 0)
 		gdk_error_trap_pop_ignored ();
 #else
@@ -320,6 +321,7 @@ find_synaptics (void)
 			XFree (data);
 			ret = TRUE;
 		}
+
 #if GTK_CHECK_VERSION (3, 0, 0)
 		gdk_error_trap_pop_ignored ();
 #else

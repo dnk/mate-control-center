@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MATE Desktop Environment\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-03 16:59+0300\n"
-"PO-Revision-Date: 2015-11-16 22:45+0000\n"
-"Last-Translator: samson <sambelet@yahoo.com>\n"
+"POT-Creation-Date: 2016-01-06 20:54+0300\n"
+"PO-Revision-Date: 2016-01-06 17:58+0000\n"
+"Last-Translator: Vlad Orlov <monsta@inbox.ru>\n"
 "Language-Team: Amharic (http://www.transifex.com/mate/MATE/language/am/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,7 +27,7 @@ msgstr ""
 
 #: ../org.mate.control-center.gschema.xml.in.h:2
 msgid "Task names and associated .desktop files"
-msgstr ""
+msgstr "የ ስራ ስም እና የተዛመዱ የ ዴስክቶፕ ፋይሎች"
 
 #: ../org.mate.control-center.gschema.xml.in.h:3
 msgid ""
@@ -38,12 +38,12 @@ msgstr ""
 
 #: ../org.mate.control-center.gschema.xml.in.h:4
 msgid "Close the control-center when a task is activated"
-msgstr ""
+msgstr "ስራ በሚጀምር ጊዜ መቆጣጠሪያ-ማእከሉን መዝጊያ"
 
 #: ../org.mate.control-center.gschema.xml.in.h:5
 msgid ""
 "if true, the control-center will close when a \"Common Task\" is activated."
-msgstr ""
+msgstr "እውነት ከሆነ መቆጣጠሪያ-ማእከሉ ይዘጋል \" ስራ በሚጀምር ጊዜ\""
 
 #: ../org.mate.control-center.gschema.xml.in.h:6
 msgid "Exit shell on start action performed"
@@ -107,7 +107,7 @@ msgstr "ቁልፍ ማጣመሪያ"
 
 #: ../org.mate.control-center.keybinding.gschema.xml.in.h:2
 msgid "Keybinding associated with a custom shortcut."
-msgstr ""
+msgstr "ቁልፍ ማጣመሪያ የተዛመደ ከ አቋራጭ ማስተካከያ ጋር"
 
 #: ../org.mate.control-center.keybinding.gschema.xml.in.h:3
 msgid "Command"
@@ -123,27 +123,55 @@ msgstr "ስም "
 
 #: ../org.mate.control-center.keybinding.gschema.xml.in.h:6
 msgid "Description associated with a custom keybinding."
+msgstr "መግለጫ የተዛመደ ከ ቁልፍ ማጣመሪያ ማስተካከያ ጋር"
+
+#: ../capplets/about-me/eel-alert-dialog.c:110
+msgid "Image/label border"
+msgstr "የ ምስል/የ ምልክት ድንበር"
+
+#: ../capplets/about-me/eel-alert-dialog.c:111
+msgid "Width of border around the label and image in the alert dialog"
 msgstr ""
 
-#: ../capplets/about-me/mate-about-me.c:288
+#: ../capplets/about-me/eel-alert-dialog.c:120
+msgid "Alert Type"
+msgstr "የማስጠንቀቂያ አይነት"
+
+#: ../capplets/about-me/eel-alert-dialog.c:121
+msgid "The type of alert"
+msgstr "የማስጠንቀቂያው አይነት"
+
+#: ../capplets/about-me/eel-alert-dialog.c:129
+msgid "Alert Buttons"
+msgstr "የማስጠንቀቂያ ቁልፎች"
+
+#: ../capplets/about-me/eel-alert-dialog.c:130
+msgid "The buttons shown in the alert dialog"
+msgstr "በማስጠንቀቂያ ንግግር ውስጥ የሚታዩት ቁልፎች"
+
+#: ../capplets/about-me/eel-alert-dialog.c:194
+msgid "Show more _details"
+msgstr "ተጨማሪ _ዝርዝሮች ማሳያ "
+
+#: ../capplets/about-me/mate-about-me.c:287
 msgid "Select Image"
 msgstr "ምስል ይምረጡ"
 
-#: ../capplets/about-me/mate-about-me.c:290
+#: ../capplets/about-me/mate-about-me.c:289
 msgid "No Image"
 msgstr "ምስል የለም "
 
-#: ../capplets/about-me/mate-about-me.c:318
+#: ../capplets/about-me/mate-about-me.c:317
 #: ../capplets/appearance/appearance-desktop.c:650
 msgid "Images"
 msgstr "ምስሎች"
 
-#: ../capplets/about-me/mate-about-me.c:322
+#: ../capplets/about-me/mate-about-me.c:321
 #: ../capplets/appearance/theme-installer.c:783
 msgid "All Files"
 msgstr "ሁሉንም ፋይሎች "
 
-#: ../capplets/about-me/mate-about-me.c:473
+#: ../capplets/about-me/mate-about-me.c:466
 #, c-format
 msgid "About %s"
 msgstr "ስለ %s"
@@ -191,8 +219,8 @@ msgid "The device is already in use."
 msgstr "አካሉ በስራ ላይ ነው "
 
 #: ../capplets/about-me/mate-about-me-fingerprint.c:104
-msgid "An internal error occured"
-msgstr "የውስጥ ስህተት ተፈጥሯል"
+msgid "An internal error occurred"
+msgstr ""
 
 #: ../capplets/about-me/mate-about-me-fingerprint.c:221
 msgid "Delete registered fingerprints?"
@@ -549,7 +577,7 @@ msgstr ""
 
 #: ../capplets/appearance/appearance-main.c:167
 #: ../capplets/default-applications/mate-da-capplet.c:694
-#: ../capplets/mouse/mate-mouse-properties.c:535
+#: ../capplets/mouse/mate-mouse-properties.c:539
 msgid "page"
 msgstr "ገጽ"
 
@@ -624,7 +652,7 @@ msgstr ""
 
 #: ../capplets/appearance/appearance-themes.c:1016
 msgid "Custom"
-msgstr ""
+msgstr "ማስተካከያ:"
 
 #: ../capplets/appearance/data/appearance.ui.h:1
 msgid "Font Rendering Details"
@@ -709,7 +737,7 @@ msgstr "ማስቀመጫ _እንደ..."
 
 #: ../capplets/appearance/data/appearance.ui.h:25
 msgid "C_ustomize..."
-msgstr ""
+msgstr "ማ_ስተካከያ..."
 
 #: ../capplets/appearance/data/appearance.ui.h:26
 msgid "_Install..."
@@ -810,7 +838,7 @@ msgstr ""
 
 #: ../capplets/appearance/data/appearance.ui.h:50
 msgid "Toolbar _button labels:"
-msgstr ""
+msgstr "የ እቃ መደርደሪያ _ቁልፍ ምልክት:"
 
 #: ../capplets/appearance/data/appearance.ui.h:51
 msgid "Preview"
@@ -1506,13 +1534,13 @@ msgstr "መደበኛ "
 
 #: ../capplets/display/display-capplet.ui.h:18
 #: ../capplets/display/xrandr-capplet.c:311
-#: ../capplets/windows/mate-window-properties.c:468
+#: ../capplets/windows/mate-window-properties.c:493
 msgid "Left"
 msgstr "በግራ "
 
 #: ../capplets/display/display-capplet.ui.h:19
 #: ../capplets/display/xrandr-capplet.c:312
-#: ../capplets/windows/mate-window-properties.c:467
+#: ../capplets/windows/mate-window-properties.c:492
 msgid "Right"
 msgstr "በቀኝ"
 
@@ -1633,6 +1661,7 @@ msgstr "%d Hz"
 #. * translation could be "Pantallas en Espejo", *not* "Espejar Pantallas".
 #: ../capplets/display/xrandr-capplet.c:492
 #: ../capplets/display/xrandr-capplet.c:1668
+#, c-format
 msgid "Mirror Screens"
 msgstr ""
 
@@ -1709,7 +1738,7 @@ msgstr "የአፍጣኙ አይነት"
 
 #: ../capplets/keybindings/eggcellrendererkeys.c:231
 #: ../capplets/keybindings/mate-keybinding-properties.c:134
-#: ../capplets/mouse/mate-mouse-properties.c:435
+#: ../capplets/mouse/mate-mouse-properties.c:439
 #: ../typing-break/drwright.c:501
 msgid "Disabled"
 msgstr "የተሰናከለ "
@@ -1811,7 +1840,7 @@ msgstr ""
 #: ../capplets/keyboard/mate-keyboard-properties-a11y-notifications.ui.h:2
 #: ../capplets/keyboard/mate-keyboard-properties-dialog.ui.h:15
 #: ../capplets/mouse/mate-mouse-properties.ui.h:30
-#: ../capplets/windows/mate-window-properties.c:348
+#: ../capplets/windows/mate-window-properties.c:368
 msgid "General"
 msgstr "ባጠቃላይ"
 
@@ -2166,24 +2195,24 @@ msgstr "የፊደል ገበታ"
 msgid "Set your keyboard preferences"
 msgstr "የፊደል ገበታ ምርጫ ማሰናጃ "
 
-#: ../capplets/mouse/mate-mouse-properties.c:435
+#: ../capplets/mouse/mate-mouse-properties.c:439
 msgid "Left button"
 msgstr "የ ግራ ቁልፍ"
 
-#: ../capplets/mouse/mate-mouse-properties.c:435
+#: ../capplets/mouse/mate-mouse-properties.c:439
 msgid "Middle button"
 msgstr "የ መሀል ቁልፍ"
 
-#: ../capplets/mouse/mate-mouse-properties.c:435
+#: ../capplets/mouse/mate-mouse-properties.c:439
 msgid "Right button"
 msgstr "የ ቀኝ ቁልፍ"
 
 #. TRANSLATORS: don't translate the terms in brackets
-#: ../capplets/mouse/mate-mouse-properties.c:534
+#: ../capplets/mouse/mate-mouse-properties.c:538
 msgid "Specify the name of the page to show (general)"
 msgstr ""
 
-#: ../capplets/mouse/mate-mouse-properties.c:539
+#: ../capplets/mouse/mate-mouse-properties.c:543
 msgid "- MATE Mouse Preferences"
 msgstr ""
 
@@ -2392,145 +2421,149 @@ msgstr ""
 
 #. Compositing manager
 #: ../capplets/windows/mate-metacity-support.c:51
-#: ../capplets/windows/mate-window-properties.c:362
+#: ../capplets/windows/mate-window-properties.c:382
 msgid "Compositing Manager"
 msgstr ""
 
 #: ../capplets/windows/mate-metacity-support.c:58
-#: ../capplets/windows/mate-window-properties.c:368
+#: ../capplets/windows/mate-window-properties.c:388
 msgid "Enable software _compositing window manager"
 msgstr ""
 
-#: ../capplets/windows/mate-window-properties.c:245
+#: ../capplets/windows/mate-window-properties.c:264
 msgid "The current window manager is unsupported"
 msgstr ""
 
 #. Window
-#: ../capplets/windows/mate-window-properties.c:332
+#: ../capplets/windows/mate-window-properties.c:352
 msgid "Window Preferences"
 msgstr "የመስኮት ምርጫዎች"
 
-#: ../capplets/windows/mate-window-properties.c:352
+#: ../capplets/windows/mate-window-properties.c:372
 msgid "Behaviour"
 msgstr ""
 
-#: ../capplets/windows/mate-window-properties.c:356
+#: ../capplets/windows/mate-window-properties.c:376
 msgid "Placement"
 msgstr ""
 
-#: ../capplets/windows/mate-window-properties.c:369
+#: ../capplets/windows/mate-window-properties.c:389
 msgid "Disable _thumbnails in Alt-Tab"
 msgstr ""
 
 #. Titlebar buttons
-#: ../capplets/windows/mate-window-properties.c:377
+#: ../capplets/windows/mate-window-properties.c:397
 msgid "Titlebar Buttons"
 msgstr ""
 
-#: ../capplets/windows/mate-window-properties.c:381
+#: ../capplets/windows/mate-window-properties.c:401
 msgid "Position:"
 msgstr "አካባቢ:"
 
 #. New Windows
-#: ../capplets/windows/mate-window-properties.c:388
+#: ../capplets/windows/mate-window-properties.c:408
 msgid "New Windows"
 msgstr "አዲስ መስኮትች"
 
-#: ../capplets/windows/mate-window-properties.c:392
+#: ../capplets/windows/mate-window-properties.c:412
 msgid "Center _new windows"
 msgstr ""
 
 #. Window Snapping
-#: ../capplets/windows/mate-window-properties.c:397
+#: ../capplets/windows/mate-window-properties.c:417
 msgid "Window Snapping"
 msgstr ""
 
-#: ../capplets/windows/mate-window-properties.c:401
+#: ../capplets/windows/mate-window-properties.c:421
 msgid "Enable side by side _tiling"
 msgstr ""
 
 #. Window Selection
-#: ../capplets/windows/mate-window-properties.c:406
+#: ../capplets/windows/mate-window-properties.c:426
 msgid "Window Selection"
 msgstr "መስኮት መምረጫ "
 
-#: ../capplets/windows/mate-window-properties.c:415
+#: ../capplets/windows/mate-window-properties.c:436
 msgid "_Select windows when the mouse moves over them"
 msgstr ""
 
-#: ../capplets/windows/mate-window-properties.c:418
+#: ../capplets/windows/mate-window-properties.c:439
+msgid "U_nselect windows when the mouse leaves them"
+msgstr ""
+
+#: ../capplets/windows/mate-window-properties.c:443
 msgid "_Raise selected windows after an interval"
 msgstr ""
 
-#: ../capplets/windows/mate-window-properties.c:424
+#: ../capplets/windows/mate-window-properties.c:449
 msgid "_Interval before raising:"
 msgstr ""
 
-#: ../capplets/windows/mate-window-properties.c:428
+#: ../capplets/windows/mate-window-properties.c:453
 msgid "seconds"
 msgstr "ሰኮንዶች"
 
 #. Titlebar Action
-#: ../capplets/windows/mate-window-properties.c:439
+#: ../capplets/windows/mate-window-properties.c:464
 msgid "Titlebar Action"
 msgstr ""
 
-#: ../capplets/windows/mate-window-properties.c:443
+#: ../capplets/windows/mate-window-properties.c:468
 msgid "_Double-click titlebar to perform this action:"
 msgstr ""
 
 #. Movement Key
-#: ../capplets/windows/mate-window-properties.c:451
+#: ../capplets/windows/mate-window-properties.c:476
 msgid "Movement Key"
 msgstr ""
 
-#: ../capplets/windows/mate-window-properties.c:456
+#: ../capplets/windows/mate-window-properties.c:481
 msgid "To move a window, press-and-hold this key then grab the window:"
 msgstr ""
 
-#: ../capplets/windows/mate-window-properties.c:474
+#: ../capplets/windows/mate-window-properties.c:499
 #: ../libwindow-settings/marco-window-manager.c:394
 msgid "Roll up"
 msgstr "ወደ ላይ መጠቅለያ "
 
-#: ../capplets/windows/mate-window-properties.c:475
+#: ../capplets/windows/mate-window-properties.c:500
 #: ../libwindow-settings/marco-window-manager.c:395
 msgid "Maximize"
 msgstr "ማሳደጊያ "
 
-#: ../capplets/windows/mate-window-properties.c:476
+#: ../capplets/windows/mate-window-properties.c:501
 #: ../libwindow-settings/marco-window-manager.c:396
 msgid "Maximize Horizontally"
 msgstr "በአግድም ማሳደጊያ "
 
-#: ../capplets/windows/mate-window-properties.c:477
+#: ../capplets/windows/mate-window-properties.c:502
 #: ../libwindow-settings/marco-window-manager.c:397
 msgid "Maximize Vertically"
 msgstr "በቁመት ማሳደጊያ "
 
-#: ../capplets/windows/mate-window-properties.c:478
+#: ../capplets/windows/mate-window-properties.c:503
 #: ../libwindow-settings/marco-window-manager.c:398
 msgid "Minimize"
 msgstr "ማሳነሻ"
 
-#: ../capplets/windows/mate-window-properties.c:479
+#: ../capplets/windows/mate-window-properties.c:504
 #: ../libwindow-settings/marco-window-manager.c:399
 msgid "None"
 msgstr "ምንም "
 
-#: ../capplets/windows/mate-window-properties.c:676
+#: ../capplets/windows/mate-window-properties.c:704
 msgid "_Alt"
 msgstr "_Alt"
 
-#: ../capplets/windows/mate-window-properties.c:682
+#: ../capplets/windows/mate-window-properties.c:710
 msgid "H_yper"
 msgstr ""
 
-#: ../capplets/windows/mate-window-properties.c:689
+#: ../capplets/windows/mate-window-properties.c:717
 msgid "S_uper (or \"Windows logo\")"
 msgstr "S_uper (ወይንም \"የመስኮት ምልክት\")"
 
-#: ../capplets/windows/mate-window-properties.c:696
+#: ../capplets/windows/mate-window-properties.c:724
 msgid "_Meta"
 msgstr ""
 

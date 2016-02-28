@@ -66,21 +66,6 @@ typedef struct {
 
 static MateAboutMe *me = NULL;
 
-/*** Utility functions ***/
-static void
-about_me_error (GtkWindow *parent, gchar *str)
-{
-	GtkWidget *dialog;
-
-	dialog = gtk_message_dialog_new (parent,
-				         GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR,
-				         GTK_BUTTONS_OK, "%s", str);
-
-	gtk_dialog_run (GTK_DIALOG (dialog));
-	gtk_widget_destroy (dialog);
-}
-
-/********************/
 static void
 about_me_destroy (void)
 {
@@ -100,35 +85,31 @@ static void
 about_me_load_photo (MateAboutMe *me)
 {
 	gchar         *file;
-        GError        *error = NULL;
+	GError        *error = NULL;
 
 	file = g_build_filename (g_get_home_dir (), ".face", NULL);
-        me->image = gdk_pixbuf_new_from_file(file, &error);
+	me->image = gdk_pixbuf_new_from_file(file, &error);
 
-        if (me->image != NULL) {
+	if (me->image != NULL) {
 		e_image_chooser_set_from_file (E_IMAGE_CHOOSER (me->image_chooser), file);
-                me->have_image = TRUE;
-        } else {
-                me->have_image = FALSE;
-                g_warning ("Could not load %s: %s", file, error->message);
-                g_error_free (error);
-        }
+		me->have_image = TRUE;
+	} else {
+		me->have_image = FALSE;
+		g_warning ("Could not load %s: %s", file, error->message);
+		g_error_free (error);
+	}
 
-        g_free (file);
+	g_free (file);
 }
 
 static void
 about_me_update_photo (MateAboutMe *me)
 {
-	GtkBuilder    *dialog;
 	gchar         *file;
 	GError        *error;
-        gboolean       result;
 
 	guchar 	      *data;
 	gsize 	       length;
-
-	dialog = me->dialog;
 
 	if (me->image_changed && me->have_image) {
 		GdkPixbufLoader *loader = gdk_pixbuf_loader_new ();
@@ -136,7 +117,7 @@ about_me_update_photo (MateAboutMe *me)
 		int height, width;
 		gboolean do_scale = FALSE;
 		float scale = 1.0;
-                float scalex = 1.0, scaley = 1.0;
+		float scalex = 1.0, scaley = 1.0;
 
 		e_image_chooser_get_image_data (E_IMAGE_CHOOSER (me->image_chooser), (char **) &data, &length);
 
@@ -157,7 +138,7 @@ about_me_update_photo (MateAboutMe *me)
 		width = gdk_pixbuf_get_width (pixbuf);
 
 		if (width > MAX_WIDTH) {
-                        scalex = (float)MAX_WIDTH/width;
+			scalex = (float)MAX_WIDTH/width;
 			if (scalex < scale) {
 				scale = scalex;
 			}
@@ -189,7 +170,7 @@ about_me_update_photo (MateAboutMe *me)
 		/* FIXME: I would have to read the default used by the mdmgreeter program */
 		error = NULL;
 		file = g_build_filename (g_get_home_dir (), ".face", NULL);
-                if (g_file_set_contents (file, (gchar *)data, length, &error) == TRUE) {
+		if (g_file_set_contents (file, (gchar *)data, length, &error) == TRUE) {
 			g_chmod (file, 0644);
 		} else {
 			g_warning ("Could not create %s: %s", file, error->message);
@@ -197,7 +178,7 @@ about_me_update_photo (MateAboutMe *me)
 		}
 
 		g_free (file);
-                g_object_unref (pixbuf);
+		g_object_unref (pixbuf);
 	} else if (me->image_changed && !me->have_image) {
 		/* Update the image in the card */
 		file = g_build_filename (g_get_home_dir (), ".face", NULL);
@@ -375,7 +356,7 @@ about_me_icon_theme_changed (GtkWindow    *window,
 	if (icon != NULL) {
 		g_free (me->person);
 		me->person = g_strdup (gtk_icon_info_get_filename (icon));
-#if GTK_CHECK_VERSION (3, 0, 0)
+#if GTK_CHECK_VERSION (3, 8, 0)
 		g_object_unref (icon);
 #else
 		gtk_icon_info_free (icon);
@@ -424,7 +405,7 @@ about_me_setup_dialog (void)
 	gchar        *str;
 
 	me = g_new0 (MateAboutMe, 1);
-        me->image = NULL;
+	me->image = NULL;
 
 	dialog = gtk_builder_new ();
 	gtk_builder_add_from_file (dialog, MATECC_UI_DIR "/mate-about-me-dialog.ui", NULL);
@@ -454,7 +435,7 @@ about_me_setup_dialog (void)
 	icon = gtk_icon_theme_lookup_icon (me->theme, "stock_person", 80, 0);
 	if (icon != NULL) {
 		me->person = g_strdup (gtk_icon_info_get_filename (icon));
-#if GTK_CHECK_VERSION (3, 0, 0)
+#if GTK_CHECK_VERSION (3, 8, 0)
 		g_object_unref (icon);
 #else
 		gtk_icon_info_free (icon);

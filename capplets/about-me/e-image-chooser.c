@@ -67,7 +67,7 @@ static void image_drag_data_received_cb (GtkWidget *widget,
 					 guint info, guint time, EImageChooser *chooser);
 
 static GObjectClass *parent_class = NULL;
-#define PARENT_TYPE GTK_TYPE_VBOX
+#define PARENT_TYPE GTK_TYPE_BOX
 
 enum DndTargetType {
 	DND_TARGET_TYPE_URI_LIST
@@ -82,7 +82,7 @@ static const int num_image_drag_types = sizeof (image_drag_types) / sizeof (imag
 GtkWidget *
 e_image_chooser_new (void)
 {
-	return g_object_new (E_TYPE_IMAGE_CHOOSER, NULL);
+	return g_object_new (E_TYPE_IMAGE_CHOOSER, "orientation", GTK_ORIENTATION_VERTICAL, NULL);
 }
 
 GType
@@ -189,7 +189,7 @@ set_image_from_data (EImageChooser *chooser,
 	GdkPixbufLoader *loader = gdk_pixbuf_loader_new ();
 	GdkPixbuf *pixbuf;
 
-	gdk_pixbuf_loader_write (loader, data, length, NULL);
+	gdk_pixbuf_loader_write (loader, (guchar *) data, length, NULL);
 	gdk_pixbuf_loader_close (loader, NULL);
 
 	pixbuf = gdk_pixbuf_loader_get_pixbuf (loader);
@@ -338,7 +338,7 @@ image_drag_data_received_cb (GtkWidget *widget,
 	target_type = gdk_atom_name (gtk_selection_data_get_target (selection_data));
 
 	if (!strcmp (target_type, URI_LIST_TYPE)) {
-		const char *data = gtk_selection_data_get_data (selection_data);
+		const char *data = (const char *) gtk_selection_data_get_data (selection_data);
 		char *uri;
 		GFile *file;
 		GInputStream *istream;

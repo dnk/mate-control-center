@@ -46,10 +46,15 @@ draw_string (cairo_t *cr,
 	     const gchar *text,
 	     gint *pos_y)
 {
-    GdkColor black = { 0, 0, 0, 0 };
     cairo_text_extents_t extents;
 
+#if GTK_CHECK_VERSION (3, 0, 0)
+    GdkRGBA black = { 0.0, 0.0, 0.0, 1.0 };
+    gdk_cairo_set_source_rgba (cr, &black);
+#else
+    GdkColor black = { 0, 0, 0, 0 };
     gdk_cairo_set_source_color (cr, &black);
+#endif
 
     cairo_text_extents (cr, text, &extents);
     cairo_move_to (cr, 4, *pos_y);
@@ -81,7 +86,7 @@ get_sample_string (FT_Face face)
     text = pango_language_get_sample_string (NULL);
 
     if (!check_font_contain_text (face, text)) {
-	text = pango_language_get_sample_string (pango_language_from_string ("en_US"));
+        text = pango_language_get_sample_string (pango_language_from_string ("en_US"));
     }
 
     return text;
@@ -97,30 +102,30 @@ build_sizes_table (FT_Face face,
 
     /* work out what sizes to render */
     if (FT_IS_SCALABLE (face)) {
-	*n_sizes = 8;
-	sizes = g_new (gint, *n_sizes);
-	sizes[0] = 8;
-	sizes[1] = 10;
-	sizes[2] = 12;
-	sizes[3] = 18;
-	sizes[4] = 24;
-	sizes[5] = 36;
-	sizes[6] = 48;
-	sizes[7] = 72;
-	*alpha_size = 24;
+        *n_sizes = 8;
+        sizes = g_new (gint, *n_sizes);
+        sizes[0] = 8;
+        sizes[1] = 10;
+        sizes[2] = 12;
+        sizes[3] = 18;
+        sizes[4] = 24;
+        sizes[5] = 36;
+        sizes[6] = 48;
+        sizes[7] = 72;
+        *alpha_size = 24;
     } else {
-	/* use fixed sizes */
-	*n_sizes = face->num_fixed_sizes;
-	sizes = g_new (gint, *n_sizes);
-	*alpha_size = 0;
+        /* use fixed sizes */
+        *n_sizes = face->num_fixed_sizes;
+        sizes = g_new (gint, *n_sizes);
+        *alpha_size = 0;
 
-	for (i = 0; i < face->num_fixed_sizes; i++) {
-	    sizes[i] = face->available_sizes[i].height;
+        for (i = 0; i < face->num_fixed_sizes; i++) {
+            sizes[i] = face->available_sizes[i].height;
 
-	    /* work out which font size to render */
-	    if (face->available_sizes[i].height <= 24)
-		*alpha_size = face->available_sizes[i].height;
-	}
+            /* work out which font size to render */
+            if (face->available_sizes[i].height <= 24)
+	        *alpha_size = face->available_sizes[i].height;
+        }
     }
 
     return sizes;
@@ -166,10 +171,10 @@ realize_callback (GtkWidget *drawing_area,
     pixmap_height += 8;
 
     for (i = 0; i < n_sizes; i++) {
-	cairo_set_font_size (cr, sizes[i]);
-	cairo_text_extents (cr, text, &extents);
-	pixmap_height += extents.height + 4;
-	pixmap_width = MAX (pixmap_width, 8 + extents.width);
+        cairo_set_font_size (cr, sizes[i]);
+        cairo_text_extents (cr, text, &extents);
+        pixmap_height += extents.height + 4;
+        pixmap_width = MAX (pixmap_width, 8 + extents.width);
     }
 
     gtk_widget_set_size_request (drawing_area, pixmap_width, pixmap_height);
@@ -205,8 +210,8 @@ draw (GtkWidget *drawing_area,
 
     pos_y += 8;
     for (i = 0; i < n_sizes; i++) {
-	cairo_set_font_size (cr, sizes[i]);
-	draw_string (cr, text, &pos_y);
+        cairo_set_font_size (cr, sizes[i]);
+        draw_string (cr, text, &pos_y);
     }
 
     g_free (sizes);
@@ -250,7 +255,12 @@ add_row (GtkWidget *table,
     bold_name = g_strconcat ("<b>", name, "</b>", NULL);
     name_w = gtk_label_new (bold_name);
     g_free (bold_name);
+#if GTK_CHECK_VERSION (3, 16, 0)
+    gtk_label_set_xalign (GTK_LABEL (name_w), 0.0);
+    gtk_label_set_yalign (GTK_LABEL (name_w), 0.0);
+#else
     gtk_misc_set_alignment (GTK_MISC (name_w), 0.0, 0.0);
+#endif
     gtk_label_set_use_markup (GTK_LABEL (name_w), TRUE);
 
 #if GTK_CHECK_VERSION (3, 4, 0)
@@ -261,15 +271,20 @@ add_row (GtkWidget *table,
 #endif
 
     if (multiline) {
-	GtkWidget *label, *viewport;
-	GtkScrolledWindow *swin;
+        GtkWidget *label, *viewport;
+        GtkScrolledWindow *swin;
         guint flags;
 
         label = gtk_label_new (value);
         gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
         gtk_label_set_selectable (GTK_LABEL (label), TRUE);
         gtk_widget_set_size_request (label, 200, -1);
+#if GTK_CHECK_VERSION (3, 16, 0)
+        gtk_label_set_xalign (GTK_LABEL (label), 0.0);
+        gtk_label_set_yalign (GTK_LABEL (label), 0.0);
+#else
         gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.0);
+#endif
 
         swin = GTK_SCROLLED_WINDOW (gtk_scrolled_window_new (NULL, NULL));
         gtk_scrolled_window_set_policy (swin,
@@ -305,7 +320,11 @@ add_row (GtkWidget *table,
         gtk_container_add (GTK_CONTAINER (viewport), label);
     } else {
         GtkWidget *label = gtk_label_new (value);
+#if GTK_CHECK_VERSION (3, 16, 0)
+        gtk_label_set_xalign (GTK_LABEL (label), 0.0);
+#else
         gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+#endif
         gtk_label_set_selectable (GTK_LABEL(label), TRUE);
 #if GTK_CHECK_VERSION (3, 4, 0)
         gtk_grid_attach_next_to (GTK_GRID (grid), label,
@@ -379,78 +398,79 @@ add_face_info (GtkWidget *table,
     }
 
     if (FT_IS_SFNT (face)) {
-	gint i, len;
-	gchar *version = NULL, *copyright = NULL, *description = NULL;
+        gint i, len;
+        gchar *version = NULL, *copyright = NULL, *description = NULL;
 
-	len = FT_Get_Sfnt_Name_Count (face);
-	for (i = 0; i < len; i++) {
-	    FT_SfntName sname;
+        len = FT_Get_Sfnt_Name_Count (face);
+        for (i = 0; i < len; i++) {
+            FT_SfntName sname;
 
-	    if (FT_Get_Sfnt_Name (face, i, &sname) != 0)
-		continue;
+            if (FT_Get_Sfnt_Name (face, i, &sname) != 0)
+                continue;
 
-	    /* only handle the unicode names for US langid */
-	    if (!(sname.platform_id == TT_PLATFORM_MICROSOFT &&
-		  sname.encoding_id == TT_MS_ID_UNICODE_CS &&
-		  sname.language_id == TT_MS_LANGID_ENGLISH_UNITED_STATES))
-		continue;
+            /* only handle the unicode names for US langid */
+            if (!(sname.platform_id == TT_PLATFORM_MICROSOFT &&
+                  sname.encoding_id == TT_MS_ID_UNICODE_CS &&
+                  sname.language_id == TT_MS_LANGID_ENGLISH_UNITED_STATES))
+                continue;
 
-	    switch (sname.name_id) {
-	    case TT_NAME_ID_COPYRIGHT:
-		g_free (copyright);
-		copyright = g_convert ((gchar *)sname.string, sname.string_len,
-				       "UTF-8", "UTF-16BE", NULL, NULL, NULL);
-		break;
-	    case TT_NAME_ID_VERSION_STRING:
-		g_free (version);
-		version = g_convert ((gchar *)sname.string, sname.string_len,
-				     "UTF-8", "UTF-16BE", NULL, NULL, NULL);
-		break;
-	    case TT_NAME_ID_DESCRIPTION:
-		g_free (description);
-		description = g_convert ((gchar *)sname.string, sname.string_len,
-					 "UTF-8", "UTF-16BE", NULL, NULL, NULL);
-		break;
-	    default:
-		break;
-	    }
-	}
-	if (version) {
+            switch (sname.name_id) {
+            case TT_NAME_ID_COPYRIGHT:
+                g_free (copyright);
+                copyright = g_convert ((gchar *)sname.string, sname.string_len,
+                                       "UTF-8", "UTF-16BE", NULL, NULL, NULL);
+                break;
+            case TT_NAME_ID_VERSION_STRING:
+            g_free (version);
+            version = g_convert ((gchar *)sname.string, sname.string_len,
+                                 "UTF-8", "UTF-16BE", NULL, NULL, NULL);
+                break;
+            case TT_NAME_ID_DESCRIPTION:
+                g_free (description);
+                description = g_convert ((gchar *)sname.string, sname.string_len,
+                                         "UTF-8", "UTF-16BE", NULL, NULL, NULL);
+                break;
+            default:
+                break;
+            }
+        }
+
+        if (version) {
 #if GTK_CHECK_VERSION (3, 4, 0)
-	    add_row (grid, _("Version:"), version, FALSE, FALSE);
+            add_row (grid, _("Version:"), version, FALSE, FALSE);
 #else
-	    add_row (table, row_p, _("Version:"), version, FALSE, FALSE);
+            add_row (table, row_p, _("Version:"), version, FALSE, FALSE);
 #endif
-	    g_free (version);
-	}
-	if (copyright) {
+            g_free (version);
+        }
+        if (copyright) {
 #if GTK_CHECK_VERSION (3, 4, 0)
-	    add_row (grid, _("Copyright:"), copyright, TRUE, TRUE);
+            add_row (grid, _("Copyright:"), copyright, TRUE, TRUE);
 #else
-	    add_row (table, row_p, _("Copyright:"), copyright, TRUE, TRUE);
+            add_row (table, row_p, _("Copyright:"), copyright, TRUE, TRUE);
 #endif
-	    g_free (copyright);
-	}
-	if (description) {
+            g_free (copyright);
+        }
+        if (description) {
 #if GTK_CHECK_VERSION (3, 4, 0)
-	    add_row (grid, _("Description:"), description, TRUE, TRUE);
+            add_row (grid, _("Description:"), description, TRUE, TRUE);
 #else
-	    add_row (table, row_p, _("Description:"), description, TRUE, TRUE);
+            add_row (table, row_p, _("Description:"), description, TRUE, TRUE);
 #endif
-	    g_free (description);
-	}
+            g_free (description);
+        }
     } else if (FT_Get_PS_Font_Info (face, &ps_info) == 0) {
-	if (ps_info.version && g_utf8_validate (ps_info.version, -1, NULL))
+        if (ps_info.version && g_utf8_validate (ps_info.version, -1, NULL))
 #if GTK_CHECK_VERSION (3, 4, 0)
-	    add_row (grid, _("Version:"), ps_info.version, FALSE, FALSE);
+            add_row (grid, _("Version:"), ps_info.version, FALSE, FALSE);
 #else
-	    add_row (table, row_p, _("Version:"), ps_info.version, FALSE, FALSE);
+            add_row (table, row_p, _("Version:"), ps_info.version, FALSE, FALSE);
 #endif
-	if (ps_info.notice && g_utf8_validate (ps_info.notice, -1, NULL))
+        if (ps_info.notice && g_utf8_validate (ps_info.notice, -1, NULL))
 #if GTK_CHECK_VERSION (3, 4, 0)
-	    add_row (grid, _("Copyright:"), ps_info.notice, TRUE, FALSE);
+            add_row (grid, _("Copyright:"), ps_info.notice, TRUE, FALSE);
 #else
-	    add_row (table, row_p, _("Copyright:"), ps_info.notice, TRUE, FALSE);
+            add_row (table, row_p, _("Copyright:"), ps_info.notice, TRUE, FALSE);
 #endif
     }
 }
@@ -475,7 +495,7 @@ set_icon (GtkWindow *window,
     g_object_unref (file);
 
     if (info == NULL)
-	return;
+        return;
 
     content_type = g_file_info_get_content_type (info);
     icon = g_content_type_get_icon (content_type);
@@ -487,10 +507,10 @@ set_icon (GtkWindow *window,
        if (names) {
           gint i;
           for (i = 0; names[i]; i++) {
-	      if (gtk_icon_theme_has_icon (icon_theme, names[i])) {
-		  icon_name = names[i];
-		  break;
-	      }
+              if (gtk_icon_theme_has_icon (icon_theme, names[i])) {
+                  icon_name = names[i];
+                  break;
+              }
           }
        }
     }
@@ -574,10 +594,10 @@ main (int argc,
     FT_Face face;
     GFile *file;
     gchar *font_file, *title;
-    gint row;
 #if GTK_CHECK_VERSION (3, 4, 0)
     GtkWidget *window, *hbox, *grid, *swin, *drawing_area;
 #else
+    gint row;
     GtkWidget *window, *hbox, *table, *swin, *drawing_area;
 #endif
     GdkColor white = { 0, 0xffff, 0xffff, 0xffff };
@@ -590,14 +610,14 @@ main (int argc,
     gtk_init (&argc, &argv);
 
     if (argc != 2) {
-	g_printerr (_("Usage: %s fontfile\n"), argv[0]);
-	return 1;
+        g_printerr (_("Usage: %s fontfile\n"), argv[0]);
+        return 1;
     }
 
     error = FT_Init_FreeType (&library);
     if (error) {
-	g_printerr("Could not initialise freetype\n");
-	return 1;
+        g_printerr("Could not initialise freetype\n");
+        return 1;
     }
 
     file = g_file_new_for_commandline_arg (argv[1]);
@@ -605,14 +625,14 @@ main (int argc,
     g_object_unref (file);
 
     if (!font_file) {
-	g_printerr("Could not parse argument into a URI\n");
-	return 1;
+        g_printerr("Could not parse argument into a URI\n");
+        return 1;
     }
 
     error = FT_New_Face_From_URI (library, font_file, 0, &face);
     if (error) {
-	g_printerr("Could not load face '%s'\n", font_file);
-	return 1;
+        g_printerr("Could not load face '%s'\n", font_file);
+        return 1;
     }
 
     window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
