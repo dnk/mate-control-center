@@ -1,4 +1,4 @@
-AC_INIT([mate-control-center], [1.13.2], [htts://www.mate-desktop.org/])
+AC_INIT([mate-control-center], [1.14.0], [htts://www.mate-desktop.org/])
 
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_SRCDIR([shell])
@@ -162,7 +162,7 @@ PKG_CHECK_MODULES(MATE_DESKTOP, mate-desktop-$GTK_API_VERSION >= MATE_DESKTOP_RE
 PKG_CHECK_MODULES(DEFAULT_APPLICATIONS_CAPPLET, libxml-2.0)
 PKG_CHECK_MODULES(MARCO, libmarco-private >= 1.9.1)
 PKG_CHECK_MODULES(TYPING, $GMODULE_ADD glib-2.0 > 2.36 gio-2.0 gtk+-$GTK_API_VERSION)
-PKG_CHECK_MODULES(GSD_DBUS, mate-settings-daemon >= 1.11.0)
+PKG_CHECK_MODULES(GSD_DBUS, mate-settings-daemon >= 1.13.1)
 PKG_CHECK_MODULES(GIO, gio-2.0)
 
 PKG_CHECK_MODULES([DCONF], [dconf >= 0.13.4],
