@@ -134,7 +134,6 @@ static gboolean
 nld_search_entry_draw (GtkWidget * widget, cairo_t * cr)
 {
 	NldSearchEntryPrivate *priv = NLD_SEARCH_ENTRY_GET_PRIVATE (widget);
-#if GTK_CHECK_VERSION (3, 0, 0)
 	GdkRectangle text_area;
 
 	gtk_entry_get_text_area (GTK_ENTRY (widget), &text_area);
