@@ -275,7 +275,11 @@ static void mate_wp_xml_load_xml(AppearanceData* data, const char* filename)
 				continue;
 			}
 
+#if GTK_CHECK_VERSION (3, 0, 0)
+			/* Verify the colors and alloc some GdkRGBA here */
+#else
 			/* Verify the colors and alloc some GdkColors here */
+#endif
 			if (!have_scale)
 			{
 				wp->options = g_settings_get_enum(data->wp_settings, WP_OPTIONS_KEY);
@@ -304,17 +308,17 @@ static void mate_wp_xml_load_xml(AppearanceData* data, const char* filename)
 #if GTK_CHECK_VERSION (3, 0, 0)
 			gdk_rgba_parse(&color1, pcolor);
 			gdk_rgba_parse(&color2, scolor);
-#else
-			gdk_color_parse(pcolor, &color1);
-			gdk_color_parse(scolor, &color2);
-#endif
 			g_free(pcolor);
 			g_free(scolor);
 
-#if GTK_CHECK_VERSION (3, 0, 0)
 			wp->pcolor = gdk_rgba_copy(&color1);
 			wp->scolor = gdk_rgba_copy(&color2);
 #else
+			gdk_color_parse(pcolor, &color1);
+			gdk_color_parse(scolor, &color2);
+			g_free(pcolor);
+			g_free(scolor);
+
 			wp->pcolor = gdk_color_copy(&color1);
 			wp->scolor = gdk_color_copy(&color2);
 #endif

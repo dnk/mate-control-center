@@ -354,7 +354,7 @@ egg_cell_renderer_keys_get_size (GtkCellRenderer *cell,
   if (keys->sizing_label == NULL)
     keys->sizing_label = gtk_label_new (TOOLTIP_TEXT);
 
-  gtk_widget_size_request (keys->sizing_label, &requisition);
+  gtk_widget_get_preferred_size (keys->sizing_label, &requisition, NULL);
   (* GTK_CELL_RENDERER_CLASS (parent_class)->get_size) (cell, widget, cell_area, x_offset, y_offset, width, height);
   /* FIXME: need to take the cell_area et al. into account */
   if (width)

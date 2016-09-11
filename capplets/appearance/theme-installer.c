@@ -440,15 +440,9 @@ mate_theme_install_real (GtkWindow *parent,
 						       GTK_RESPONSE_CLOSE);
 
 				apply_button = gtk_button_new_with_label (_("Apply New Theme"));
-#if GTK_CHECK_VERSION (3, 10, 0)
-				gtk_button_set_image (GTK_BUTTON (apply_button),
-						      gtk_image_new_from_icon_name ("gtk-apply",
-										GTK_ICON_SIZE_BUTTON));
-#else
 				gtk_button_set_image (GTK_BUTTON (apply_button),
 						      gtk_image_new_from_stock (GTK_STOCK_APPLY,
 										GTK_ICON_SIZE_BUTTON));
-#endif
 				gtk_dialog_add_action_widget (GTK_DIALOG (dialog), apply_button, GTK_RESPONSE_APPLY);
 				gtk_widget_set_can_default (apply_button, TRUE);
 				gtk_widget_show (apply_button);
@@ -647,7 +641,7 @@ static void
 transfer_done_cb (GtkWidget *dialog,
 		  TransferData *tdata)
 {
-#if !GTK_CHECK_VERSION (3, 6, 0)
+#if !GTK_CHECK_VERSION (3, 0, 0)
 	gdk_threads_enter ();
 #endif
 	/* XXX: path should be on the local filesystem by now? */
@@ -661,7 +655,7 @@ transfer_done_cb (GtkWidget *dialog,
 	g_free (tdata->path);
 	g_free (tdata);
 
-#if !GTK_CHECK_VERSION (3, 6, 0)
+#if !GTK_CHECK_VERSION (3, 0, 0)
 	gdk_threads_leave ();
 #endif
 }
@@ -788,17 +782,9 @@ mate_theme_installer_run (GtkWindow *parent,
 	dialog = gtk_file_chooser_dialog_new (_("Select Theme"),
 					      parent,
 					      GTK_FILE_CHOOSER_ACTION_OPEN,
-#if GTK_CHECK_VERSION (3, 10, 0)
-					      _("_Cancel"),
-#else
 					      GTK_STOCK_CANCEL,
-#endif
 					      GTK_RESPONSE_REJECT,
-#if GTK_CHECK_VERSION (3, 10, 0)
-					      _("_Open"),
-#else
 					      GTK_STOCK_OPEN,
-#endif
 					      GTK_RESPONSE_ACCEPT,
 					      NULL);
 	gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_ACCEPT);

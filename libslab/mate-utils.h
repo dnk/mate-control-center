@@ -22,7 +22,6 @@
 #define __MATE_UTILS_H__
 
 #include <gtk/gtk.h>
-#include <libmate-desktop/mate-desktop-item.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -30,9 +29,7 @@ extern "C" {
 
 gboolean load_image_by_id (GtkImage * image, GtkIconSize size,
 	const gchar * image_id);
-MateDesktopItem *load_desktop_item_by_unknown_id (const gchar * id);
 void handle_g_error (GError ** error, const gchar * user_format, ...);
-GtkWidget *get_main_menu_section_header (const gchar * markup);
 
 #ifdef __cplusplus
 }

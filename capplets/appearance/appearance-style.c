@@ -245,12 +245,7 @@ static void update_message_area(AppearanceData* data)
 #else
 		hbox = gtk_hbox_new (FALSE, 9);
 #endif
-
-#if GTK_CHECK_VERSION (3, 10, 0)
 		icon = gtk_image_new_from_icon_name ("dialog-warning", GTK_ICON_SIZE_DIALOG);
-#else
-		icon = gtk_image_new_from_stock (GTK_STOCK_DIALOG_WARNING, GTK_ICON_SIZE_DIALOG);
-#endif
 #if GTK_CHECK_VERSION (3, 0, 0)
 		gtk_widget_set_halign (icon, GTK_ALIGN_CENTER);
 		gtk_widget_set_valign (icon, GTK_ALIGN_START);
@@ -314,10 +309,8 @@ update_color_buttons_from_string (const gchar *color_scheme, AppearanceData *dat
   /* now set all the buttons to the correct settings */
   for (i = 0; i < NUM_SYMBOLIC_COLORS; ++i) {
     widget = appearance_capplet_get_widget (data, symbolic_names[i]);
-#if GTK_CHECK_VERSION (3, 4, 0)
+#if GTK_CHECK_VERSION (3, 0, 0)
     gtk_color_chooser_set_rgba (GTK_COLOR_CHOOSER (widget), &colors[i]);
-#elif GTK_CHECK_VERSION (3, 0, 0)
-    gtk_color_button_set_rgba (GTK_COLOR_BUTTON (widget), &colors[i]);
 #else
     gtk_color_button_set_color (GTK_COLOR_BUTTON (widget), &colors[i]);
 #endif
@@ -403,10 +396,8 @@ color_button_clicked_cb (GtkWidget *colorbutton, AppearanceData *data)
 
   for (i = 0; i < NUM_SYMBOLIC_COLORS; ++i) {
     widget = appearance_capplet_get_widget (data, symbolic_names[i]);
-#if GTK_CHECK_VERSION (3, 4, 0)
+#if GTK_CHECK_VERSION (3, 0, 0)
     gtk_color_chooser_get_rgba (GTK_COLOR_CHOOSER (widget), &color);
-#elif GTK_CHECK_VERSION (3, 0, 0)
-    gtk_color_button_get_rgba (GTK_COLOR_BUTTON (widget), &color);
 #else
     gtk_color_button_get_color (GTK_COLOR_BUTTON (widget), &color);
 #endif
@@ -1083,19 +1074,18 @@ style_init (AppearanceData *data)
   icon_theme_changed (data->interface_settings, ICON_THEME_KEY, data);
   cursor_theme_changed (data->mouse_settings, CURSOR_THEME_KEY, data);
 
+#if GTK_CHECK_VERSION (3, 0, 0)
+  GtkNotebook *style_nb = GTK_NOTEBOOK (appearance_capplet_get_widget (data, "notebook2"));
+  gtk_notebook_remove_page (style_nb, 1);
+#endif
+
   w = appearance_capplet_get_widget (data, "color_scheme_message_hbox");
   gtk_widget_set_no_show_all (w, TRUE);
 
   w = appearance_capplet_get_widget (data, "color_scheme_defaults_button");
-#if GTK_CHECK_VERSION (3, 10, 0)
   gtk_button_set_image (GTK_BUTTON (w),
                         gtk_image_new_from_icon_name ("document-revert",
-                                                  GTK_ICON_SIZE_BUTTON));
-#else
-  gtk_button_set_image (GTK_BUTTON (w),
-                        gtk_image_new_from_stock (GTK_STOCK_REVERT_TO_SAVED,
-                                                  GTK_ICON_SIZE_BUTTON));
-#endif
+                                                      GTK_ICON_SIZE_BUTTON));
 
   settings = gtk_settings_get_default ();
   g_signal_connect (settings, "notify::gtk-color-scheme", (GCallback) color_scheme_changed, data);

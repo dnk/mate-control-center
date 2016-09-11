@@ -204,8 +204,8 @@ set_image_from_data (EImageChooser *chooser,
 		float scale;
 		int new_height, new_width;
 
-		gtk_widget_size_request (gtk_widget_get_parent (GTK_WIDGET (chooser)),
-		                         &chooser_size);
+		gtk_widget_get_preferred_size (gtk_widget_get_parent (GTK_WIDGET (chooser)),
+		                         &chooser_size, NULL);
 		chooser_size.width -= 5;
 		chooser_size.height -= 5;
 

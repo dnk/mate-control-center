@@ -167,14 +167,12 @@ void mate_wp_item_update (MateWPItem *item) {
   if (item->scolor != NULL)
 #if GTK_CHECK_VERSION (3, 0, 0)
     gdk_rgba_free (item->scolor);
-#else
-    gdk_color_free (item->scolor);
-#endif
 
-#if GTK_CHECK_VERSION (3, 0, 0)
   item->pcolor = gdk_rgba_copy (&color1);
   item->scolor = gdk_rgba_copy (&color2);
 #else
+    gdk_color_free (item->scolor);
+
   item->pcolor = gdk_color_copy (&color1);
   item->scolor = gdk_color_copy (&color2);
 #endif
@@ -223,14 +221,13 @@ void mate_wp_item_free (MateWPItem * item) {
   if (item->pcolor != NULL)
 #if GTK_CHECK_VERSION (3, 0, 0)
     gdk_rgba_free (item->pcolor);
-#else
-    gdk_color_free (item->pcolor);
-#endif
 
   if (item->scolor != NULL)
-#if GTK_CHECK_VERSION (3, 0, 0)
     gdk_rgba_free (item->scolor);
 #else
+    gdk_color_free (item->pcolor);
+
+  if (item->scolor != NULL)
     gdk_color_free (item->scolor);
 #endif
 

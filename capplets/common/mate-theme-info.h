@@ -25,6 +25,7 @@
 
 #include <glib.h>
 #include <gio/gio.h>
+#include <gtk/gtk.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gdk/gdk.h>
 
@@ -182,9 +183,9 @@ void                mate_theme_init                       (void);
 void                mate_theme_info_register_theme_change (ThemeChangedCallback func,
 							    gpointer             data);
 
-#ifdef GDK_VERSION_3_0
+#if GTK_CHECK_VERSION (3, 0, 0)
 gboolean            mate_theme_color_scheme_parse         (const gchar         *scheme,
-							    GdkRGBA            *colors);
+							    GdkRGBA             *colors);
 #else
 gboolean            mate_theme_color_scheme_parse         (const gchar         *scheme,
 							    GdkColor            *colors);
