@@ -23,8 +23,6 @@
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 #include <gio/gio.h>
-#include <unique/unique.h>
-
 #include <libslab/slab.h>
 
 void handle_static_action_clicked(Tile* tile, TileEvent* event, gpointer data);
@@ -93,6 +91,7 @@ void handle_static_action_clicked(Tile* tile, TileEvent* event, gpointer data)
 	AppShellData* app_data = (AppShellData*) data;
 	MateDesktopItem* item = (MateDesktopItem*) g_object_get_data(G_OBJECT(tile), APP_ACTION_KEY);
 	GSettings *settings;
+	GApplication *app;
 
 	if (event->type == TILE_EVENT_ACTIVATED_DOUBLE_CLICK)
 	{
@@ -107,7 +106,8 @@ void handle_static_action_clicked(Tile* tile, TileEvent* event, gpointer data)
 	{
 		if (app_data->exit_on_close)
 		{
-			gtk_main_quit();
+			app=g_application_get_default();
+			g_application_quit(app);
 		}
 		else
 		{
@@ -118,54 +118,56 @@ void handle_static_action_clicked(Tile* tile, TileEvent* event, gpointer data)
 	g_object_unref(settings);
 }
 
-static UniqueResponse message_received_cb(UniqueApp* app, UniqueCommand command, UniqueMessageData* message, guint time, gpointer user_data)
+static void
+activate (GtkApplication *app)
 {
-	UniqueResponse res;
-	AppShellData* app_data = user_data;
+	GList *list;
+	GSList* actions;
+	gboolean hidden = FALSE;
 
-	switch (command)
+	list = gtk_application_get_windows (app);
+
+	AppShellData* app_data = appshelldata_new("matecc.menu", GTK_ICON_SIZE_DND, FALSE, TRUE, 0);
+
+	generate_categories(app_data);
+
+	actions = get_actions_list();
+	layout_shell(app_data, _("Filter"), _("Groups"), _("Common Tasks"), actions, handle_static_action_clicked);
+
+	if (list)
 	{
-		case UNIQUE_ACTIVATE:
-			/* move the main window to the screen that sent us the command */
-			gtk_window_set_screen(GTK_WINDOW(app_data->main_app), unique_message_data_get_screen(message));
-
-			if (!app_data->main_app_window_shown_once)
-			{
-				show_shell(app_data);
-			}
-
-			gtk_window_present_with_time(GTK_WINDOW(app_data->main_app), time);
-
-			gtk_widget_grab_focus(SLAB_SECTION(app_data->filter_section)->contents);
-
-			res = UNIQUE_RESPONSE_OK;
-
-			break;
-		default:
-			res = UNIQUE_RESPONSE_PASSTHROUGH;
-			break;
+		gtk_window_present (GTK_WINDOW (list->data));
 	}
+	else
+	{
+		create_main_window(app_data, "MyControlCenter", _("Control Center"), "preferences-desktop", 975, 600, hidden);
+		gtk_application_add_window (app, GTK_WINDOW(app_data->main_app));
+	}
+}
 
-	return res;
+static void
+quit (GApplication *app)
+{
+	g_application_quit(app);
 }
 
 int main(int argc, char* argv[])
 {
 	gboolean hidden = FALSE;
-	UniqueApp* unique_app;
-	AppShellData* app_data;
-	GSList* actions;
+	GtkApplication *app;
+	gint retval;
+	app = gtk_application_new ("org.mate.mate-control-center.shell", 0);
 	GError* error;
 	GOptionEntry options[] = {
 		{"hide", 0, 0, G_OPTION_ARG_NONE, &hidden, N_("Hide on start (useful to preload the shell)"), NULL},
 		{NULL}
 	};
 
-	#ifdef ENABLE_NLS
-		bindtextdomain(GETTEXT_PACKAGE, MATELOCALEDIR);
-		bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
-		textdomain(GETTEXT_PACKAGE);
-	#endif
+#ifdef ENABLE_NLS
+	bindtextdomain(GETTEXT_PACKAGE, MATELOCALEDIR);
+	bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
+	textdomain(GETTEXT_PACKAGE);
+#endif
 
 	error = NULL;
 
@@ -176,37 +178,8 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
-	unique_app = unique_app_new("org.mate.mate-control-center.shell", NULL);
-
-	if (unique_app_is_running(unique_app))
-	{
-		int retval = 0;
-
-		if (!hidden)
-		{
-			UniqueResponse response;
-			response = unique_app_send_message(unique_app, UNIQUE_ACTIVATE, NULL);
-			retval = (response != UNIQUE_RESPONSE_OK);
-		}
-
-		g_object_unref(unique_app);
-		return retval;
-	}
-
-	app_data = appshelldata_new("matecc.menu", GTK_ICON_SIZE_DND, FALSE, TRUE, 0);
-	generate_categories(app_data);
-
-	actions = get_actions_list();
-	layout_shell(app_data, _("Filter"), _("Groups"), _("Common Tasks"), actions, handle_static_action_clicked);
-
-	create_main_window(app_data, "MyControlCenter", _("Control Center"), "preferences-desktop", 975, 600, hidden);
-
-	unique_app_watch_window(unique_app, GTK_WINDOW(app_data->main_app));
-	g_signal_connect(unique_app, "message-received", G_CALLBACK(message_received_cb), app_data);
-
-	gtk_main();
-
-	g_object_unref(unique_app);
-
-	return 0;
+	g_signal_connect (app, "activate", G_CALLBACK (activate), NULL);
+	g_signal_connect (app, "window-removed", G_CALLBACK (quit), NULL);
+	retval = g_application_run (G_APPLICATION (app), argc, argv);
+	return retval;
 }

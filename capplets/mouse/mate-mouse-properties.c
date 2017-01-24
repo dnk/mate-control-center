@@ -34,18 +34,14 @@
 #include "capplet-util.h"
 #include "activate-settings-daemon.h"
 #include "capplet-stock-icons.h"
+#include "msd-input-helper.h"
 
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <dirent.h>
-#ifdef HAVE_XINPUT
+
 #include <X11/Xatom.h>
 #include <X11/extensions/XInput.h>
-#endif
-
-#ifdef HAVE_XCURSOR
-#include <X11/Xcursor/Xcursor.h>
-#endif
 
 enum
 {
@@ -179,7 +175,6 @@ orientation_radio_button_toggled (GtkToggleButton *togglebutton,
 static void
 synaptics_check_capabilities (GtkBuilder *dialog)
 {
-#ifdef HAVE_XINPUT
 	int numdevices, i;
 	XDeviceInfo *devicelist;
 	Atom realtype, prop;
@@ -216,86 +211,19 @@ synaptics_check_capabilities (GtkBuilder *dialog)
 			XFree (data);
 		}
 
-#if GTK_CHECK_VERSION (3, 0, 0)
 		gdk_error_trap_pop_ignored ();
-#else
-		gdk_error_trap_pop ();
-#endif
 
 		XCloseDevice (GDK_DISPLAY_XDISPLAY(gdk_display_get_default()), device);
 	}
 	XFreeDeviceList (devicelist);
-#endif
-}
-
-static gboolean
-find_synaptics (void)
-{
-	gboolean ret = FALSE;
-#ifdef HAVE_XINPUT
-	int numdevices, i;
-	XDeviceInfo *devicelist;
-	Atom realtype, prop;
-	int realformat;
-	unsigned long nitems, bytes_after;
-	unsigned char *data;
-	XExtensionVersion *version;
-
-	/* Input device properties require version 1.5 or higher */
-	version = XGetExtensionVersion (GDK_DISPLAY_XDISPLAY(gdk_display_get_default()), "XInputExtension");
-	if (!version->present ||
-		(version->major_version * 1000 + version->minor_version) < 1005) {
-		XFree (version);
-		return False;
-	}
-
-	prop = XInternAtom (GDK_DISPLAY_XDISPLAY(gdk_display_get_default()), "Synaptics Off", True);
-	if (!prop)
-		return False;
-
-	devicelist = XListInputDevices (GDK_DISPLAY_XDISPLAY(gdk_display_get_default()), &numdevices);
-	for (i = 0; i < numdevices; i++) {
-		if (devicelist[i].use != IsXExtensionPointer)
-			continue;
-
-		gdk_error_trap_push();
-		XDevice *device = XOpenDevice (GDK_DISPLAY_XDISPLAY(gdk_display_get_default()),
-					       devicelist[i].id);
-		if (gdk_error_trap_pop ())
-			continue;
-
-		gdk_error_trap_push ();
-		if ((XGetDeviceProperty (GDK_DISPLAY_XDISPLAY(gdk_display_get_default()), device, prop, 0, 1, False,
-					 XA_INTEGER, &realtype, &realformat, &nitems,
-					 &bytes_after, &data) == Success) && (realtype != None)) {
-			XFree (data);
-			ret = TRUE;
-		}
-
-#if GTK_CHECK_VERSION (3, 0, 0)
-		gdk_error_trap_pop_ignored ();
-#else
-		gdk_error_trap_pop ();
-#endif
-
-		XCloseDevice (GDK_DISPLAY_XDISPLAY(gdk_display_get_default()), device);
-
-		if (ret)
-			break;
-	}
-
-	XFree (version);
-	XFreeDeviceList (devicelist);
-#endif
-	return ret;
 }
 
 static void
 comboxbox_changed_callback (GtkWidget *combobox, void *data)
 {
-    gint value = gtk_combo_box_get_active (GTK_COMBO_BOX (combobox));
-    gchar *key = (char *) data;
-    g_settings_set_int (touchpad_settings, key, value);
+	gint value = gtk_combo_box_get_active (GTK_COMBO_BOX (combobox));
+	gchar *key = (char *) data;
+	g_settings_set_int (touchpad_settings, key, value);
 }
 
 /* Set up the property editors in the dialog. */
@@ -344,7 +272,7 @@ setup_dialog (GtkBuilder *dialog)
 		G_SETTINGS_BIND_DEFAULT);
 
 	/* Trackpad page */
-	if (find_synaptics () == FALSE)
+	if (touchpad_is_present () == FALSE)
 		gtk_notebook_remove_page (GTK_NOTEBOOK (WID ("prefs_widget")), -1);
 	else {
 		g_settings_bind (touchpad_settings, "touchpad-enabled",
@@ -355,6 +283,9 @@ setup_dialog (GtkBuilder *dialog)
 			G_SETTINGS_BIND_DEFAULT);
 		g_settings_bind (touchpad_settings, "touchpad-enabled",
 			WID ("vbox_touchpad_scrolling"), "sensitive",
+			G_SETTINGS_BIND_DEFAULT);
+		g_settings_bind (touchpad_settings, "touchpad-enabled",
+			WID ("vbox_touchpad_pointer_speed"), "sensitive",
 			G_SETTINGS_BIND_DEFAULT);
 		g_settings_bind (touchpad_settings, "disable-while-typing",
 			WID ("disable_w_typing_toggle"), "active",
@@ -386,6 +317,14 @@ setup_dialog (GtkBuilder *dialog)
 		gtk_widget_show (three_click_comboxbox);
 		g_signal_connect (two_click_comboxbox, "changed", G_CALLBACK (comboxbox_changed_callback), "two-finger-click");
 		g_signal_connect (three_click_comboxbox, "changed", G_CALLBACK (comboxbox_changed_callback), "three-finger-click");
+
+		/* speed */
+		g_settings_bind (touchpad_settings, "motion-acceleration",
+			gtk_range_get_adjustment (GTK_RANGE (WID ("touchpad_accel_scale"))), "value",
+			G_SETTINGS_BIND_DEFAULT);
+		g_settings_bind (touchpad_settings, "motion-threshold",
+			gtk_range_get_adjustment (GTK_RANGE (WID ("touchpad_sensitivity_scale"))), "value",
+			G_SETTINGS_BIND_DEFAULT);
 
 		synaptics_check_capabilities (dialog);
 	}
